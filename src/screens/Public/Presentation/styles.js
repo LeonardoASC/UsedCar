@@ -1,4 +1,5 @@
 import styled from 'styled-components/native';
+import { LinearGradient } from 'expo-linear-gradient';
 
 export const PresentationContainer = styled.View`
   flex: 1;
@@ -21,3 +22,14 @@ export const ButtonText = styled.Text`
   text-decoration: underline; /* Adicionando sublinhado aos botões */
 `;
 
+export const ButtonLinear = styled(LinearGradient).attrs({
+  colors: ['#fff7ad', '#ffa9f9'],
+  start: { x: 0, y: 0 },
+  end: { x: 1, y: 1 },
+})`
+  width: 90%;
+  height: 7%;
+  border-radius: 10px;
+  align-items: center;
+  justify-content: center;
+  `;
