@@ -2,15 +2,13 @@ import styled from 'styled-components/native';
 
 export const Container = styled.SafeAreaView`
   flex: 1;
-  background-color: #1a1a1a;
+  background-color: #FAFAFA;
 `;
 
 export const Header =  styled.View`
-  background-color: white;
   height: 25%;
   justify-content: center;
   align-items: center;
-  border-bottom-left-radius: 100px;
 `;
 
 export const HeaderText = styled.Text`
@@ -27,16 +25,18 @@ export const MainContent =  styled.View`
 `;
 
 export const Title = styled.Text`
-  color: white;
-  font-size: 24px;
+  color: black;
+  font-size: 30px;
   font-weight: 800;
   align-self: center;
+  font-weight: bold;
 `;
 
 export const Subtitle = styled.Text`
-  color: white;
+  color: black;
   text-align: center;
   margin-top: 4px;
+  font-size: 16px;
 `;
 
 export const InputField = styled.View`
@@ -99,11 +99,11 @@ export const Footer =  styled.View`
 `;
 
 export const FooterText = styled.Text`
-  color: white;
+  color: black;
 `;
 
 export const LinkText = styled.Text`
-  color: white;
+  color: black;
   text-decoration-line: underline;
   margin-left: 8px;
 `;

@@ -29,16 +29,15 @@ export function Login({ navigation }) {
   return (
     <Container>
       <Header>
-        {/* <HeaderText>Logo Aqui</HeaderText> */}
-        <LogoGym source={labex} />
+        <Title>Entrar</Title>
+        <Subtitle>Informe suas credenciais para continuar.</Subtitle>
       </Header>
   
       <MainContent>
-        <Title>Entrar...</Title>
-        <Subtitle>Informe suas credenciais.</Subtitle>
+       
   
         <InputField>
-          <Ionicons name="at" size={19} color="white" />
+          <Ionicons name="at" size={19} color="black" />
           <Input
             value={email}
             onChangeText={setEmail}
@@ -48,7 +47,7 @@ export function Login({ navigation }) {
         </InputField>
   
         <InputField>
-          <EvilIcons name="lock" size={26} color="white" />
+          <EvilIcons name="lock" size={26} color="black" />
           <Input
             value={password}
             onChangeText={setPassword}
