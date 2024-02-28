@@ -27,9 +27,10 @@ export const ButtonLinear = styled(LinearGradient).attrs({
   start: { x: 0, y: 0 },
   end: { x: 1, y: 1 },
 })`
-  width: 90%;
-  height: 7%;
+  width: 100%;
+  height: 100%;
   border-radius: 10px;
   align-items: center;
   justify-content: center;
+  
   `;
