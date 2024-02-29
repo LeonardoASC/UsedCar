@@ -6,14 +6,14 @@ import { Public } from "./public";
 import { AuthContext } from "../context/AuthContext";
 
 export function Routes() {
-  // const { isAuthenticated } = useAuth();
-  const { userToken } = useContext(AuthContext);
+  // const { userToken } = useContext(AuthContext);
   const { userInfo } = useContext(AuthContext);
+  const userToken = 1;
   return (
     <NavigationContainer>
       {/* <StatusBar/> */}
       {
-        userToken ? (userInfo && userInfo.email === 'admin@adm.com' ? <Private />
+        userToken ? (userInfo && userInfo.email === 'admin@adm.br' ? <Private />
           :
           <Private />
         )

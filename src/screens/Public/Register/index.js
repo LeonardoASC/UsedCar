@@ -27,6 +27,7 @@ export function Register({ navigation }) {
                             onChangeText={setUsername}
                             placeholder="Nome de usuário"
                             placeholderTextColor="#a3a3a3"
+                            color="black"
                         />
                     </InputRow>
 
@@ -37,6 +38,7 @@ export function Register({ navigation }) {
                             onChangeText={setEmail}
                             placeholder="Email"
                             placeholderTextColor="#a3a3a3"
+                            color="black"
                         />
                     </InputRow>
 
@@ -48,6 +50,7 @@ export function Register({ navigation }) {
                             placeholder="Senha"
                             placeholderTextColor="#a3a3a3"
                             secureTextEntry={true}
+                            color="black"
                         />
                     </InputRow>
 
@@ -59,6 +62,7 @@ export function Register({ navigation }) {
                             placeholder="Confirme a Senha"
                             placeholderTextColor="#a3a3a3"
                             secureTextEntry={true}
+                            color="black"
                         />
                     </InputRow>
                 </View>

@@ -41,6 +41,7 @@ export function Login({ navigation }) {
             onChangeText={setEmail}
             placeholder="Email ID"
             placeholderTextColor="#a3a3a3"
+            color="black"
           />
         </InputField>
 
@@ -52,12 +53,15 @@ export function Login({ navigation }) {
             placeholder="Senha"
             placeholderTextColor="#a3a3a3"
             secureTextEntry={true}
+            color="black"
           />
           <MaterialCommunityIcons name="eye-outline" size={24} color="#A9A9A9" />
         </InputField>
 
-        <ButtonContainer>
-          <ButtonLinear>
+        <ButtonContainer
+          onPress={() => login(email, password)}
+        >
+          <ButtonLinear >
             <ButtonText>Entrar</ButtonText>
           </ButtonLinear>
         </ButtonContainer>
