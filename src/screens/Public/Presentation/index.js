@@ -1,57 +1,38 @@
 import React, { useEffect } from 'react';
-import { Image, Text, StyleSheet, View, ScrollView, TouchableOpacity, TextInput, Button, Alert, SafeAreaView } from 'react-native';
-import { PresentationContainer, Title, ButtonLinear } from './styles'; // Importe os estilos necessários
+import { Text, StyleSheet } from 'react-native';
+import {
+  Container,
+  BackgroundImage,
+  ButtonLinear,
+  LoginView,
+  LogoImage,
+  ButtonContainer,
+  ButtonText,
+  TermsText,
+  PrivacyTermsLink
+} from './styles';
 import { BlurView } from 'expo-blur';
 import bakc from '../../../../assets/mecanics1.png';
 import logoUsedCar from '../../../../assets/logocar.png';
-import CGT from '../../../components/TextGradient';
+
 export function Presentation({ navigation }) {
   return (
-
-    <SafeAreaView style={styles.container}>
-      <Image source={bakc} style={[styles.image, StyleSheet.absoluteFill]} />
+    <Container>
+      <BackgroundImage source={bakc} style={StyleSheet.absoluteFill} />
       <BlurView intensity={20} tint="dark" style={{ width: '100%', height: '100%' }}>
-        <View style={styles.login}>
-          <Image source={logoUsedCar} style={[styles.logo]} />
-          <TouchableOpacity style={{ width: '90%', height: '7%', top: '20%', justifyContent: 'center', alignItems: 'center' }} onPress={() => navigation.navigate('Login')}>
-            <ButtonLinear >
-              <Text style={{ fontSize: 17, fontWeight: 'bold', color: 'white' }}>Começar!</Text>
-              {/* <CGT>Entrar</CGT> */}
+        <LoginView>
+          <LogoImage source={logoUsedCar} />
+          <ButtonContainer onPress={() => navigation.navigate('Login')}>
+            <ButtonLinear>
+              <ButtonText>Começar!</ButtonText>
             </ButtonLinear>
-          </TouchableOpacity>
-          <Text style={{ color: 'white', top: '23%' }}>Ao Clicar em entrar voce aceita os termos de uso de nosso aplicativo. Para ler mais, veja em:  </Text>
-          <TouchableOpacity style={{ top: '25%' }}>
+          </ButtonContainer>
+          <TermsText>Ao Clicar em começar voce aceita os termos de uso de nosso aplicativo. Para ler mais, veja em:  </TermsText>
+          <PrivacyTermsLink>
             <Text style={{ color: 'blue', textDecorationLine: 'underline' }}>Termos de Uso e Politica de privacidade.</Text>
-          </TouchableOpacity>
-        </View>
+          </PrivacyTermsLink>
+        </LoginView>
       </BlurView>
-    </SafeAreaView>
+    </Container>
   );
 }
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#000',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  image: {
-    width: '100%',
-    height: '100%',
-    resizeMode: 'cover',
-  },
-  logo: {
-    width: '50%',
-    height: '30%',
-    resizeMode: 'cover',
-  },
-  login: {
-    width: '100%',
-    height: '100%',
-    padding: 10,
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-
-
-});

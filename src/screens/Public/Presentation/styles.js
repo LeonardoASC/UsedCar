@@ -1,25 +1,11 @@
 import styled from 'styled-components/native';
 import { LinearGradient } from 'expo-linear-gradient';
 
-export const PresentationContainer = styled.View`
+export const Container = styled.SafeAreaView`
   flex: 1;
-  justify-content: center;
+  background-color: #000;
   align-items: center;
-  background-color: #1a1a1a;
-`;
-
-export const Title = styled.Text`
-  color: white;
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 20px;
-`;
-
-export const ButtonText = styled.Text`
-  color: white;
-  font-size: 18px;
-  margin-bottom: 10px;
-  text-decoration: underline; /* Adicionando sublinhado aos botões */
+  justify-content: center;
 `;
 
 export const ButtonLinear = styled(LinearGradient).attrs({
@@ -32,5 +18,46 @@ export const ButtonLinear = styled(LinearGradient).attrs({
   border-radius: 10px;
   align-items: center;
   justify-content: center;
-  
   `;
+
+export const BackgroundImage = styled.Image`
+  width: 100%;
+  height: 100%;
+
+`;
+
+export const LoginView = styled.View`
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const LogoImage = styled.Image`
+  width: 50%;
+  height: 30%;
+`;
+
+export const ButtonContainer = styled.TouchableOpacity`
+  width: 90%;
+  height: 7%;
+  top: 20%;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const ButtonText = styled.Text`
+  font-size: 17px;
+  font-weight: bold;
+  color: white;
+`;
+
+export const TermsText = styled.Text`
+  color: white;
+  top: 23%;
+`;
+
+export const PrivacyTermsLink = styled.TouchableOpacity`
+  top: 25%;
+`;
