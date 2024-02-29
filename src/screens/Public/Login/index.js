@@ -4,11 +4,9 @@ import {
   Container,
   Header,
   MainContent,
-  Title,
   Subtitle,
   InputField,
   Input,
-  StyledButton,
   SocialLoginContainer,
   SocialButton,
   Footer,
@@ -21,7 +19,7 @@ import { CGT } from '../../../components/TextGradient';
 import { AuthContext } from '../../../context/AuthContext';
 import { Text, View } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-// import { AntDesign } from '@expo/vector-icons';
+
 export function Login({ navigation }) {
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
@@ -32,7 +30,6 @@ export function Login({ navigation }) {
     <Container>
       <Header>
         <CGT style={{fontSize: 30, fontWeight: 'bold'}}>Entrar</CGT >
-        {/* <Title>Entrar</Title> */}
         <Subtitle>Informe suas credenciais para continuar.</Subtitle>
       </Header>
 
@@ -67,7 +64,6 @@ export function Login({ navigation }) {
 
         <View
           style={{
-            // backgroundColor: '#000',
             justifyContent: 'center',
             alignItems: 'center',
             marginTop: '1%',
