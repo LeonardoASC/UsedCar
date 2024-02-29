@@ -8,17 +8,7 @@ export const Container = styled.SafeAreaView`
   justify-content: center;
 `;
 
-export const ButtonLinear = styled(LinearGradient).attrs({
-  colors: ['#fff7ad', '#ffa9f9'],
-  start: { x: 0, y: 0 },
-  end: { x: 1, y: 1 },
-})`
-  width: 100%;
-  height: 100%;
-  border-radius: 10px;
-  align-items: center;
-  justify-content: center;
-  `;
+
 
 export const BackgroundImage = styled.Image`
   width: 100%;
@@ -52,6 +42,18 @@ export const ButtonText = styled.Text`
   font-weight: bold;
   color: white;
 `;
+
+export const ButtonLinear = styled(LinearGradient).attrs({
+  colors: ['#fff7ad', '#ffa9f9'],
+  start: { x: 0, y: 0 },
+  end: { x: 1, y: 1 },
+})`
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  align-items: center;
+  justify-content: center;
+  `;
 
 export const TermsText = styled.Text`
   color: white;

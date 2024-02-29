@@ -12,30 +12,31 @@ import {
   SocialLoginContainer,
   SocialButton,
   Footer,
-  FooterText,
+  ButtonText,
   LinkText,
-  LogoGym
-} from './styles'; 
+  ButtonLinear,
+  ButtonContainer
+} from './styles';
 import { CGT } from '../../../components/TextGradient';
-import labex from '../../../../assets/LabexRosa.png';
 import { AuthContext } from '../../../context/AuthContext';
-
+import { Text, View } from 'react-native';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+// import { AntDesign } from '@expo/vector-icons';
 export function Login({ navigation }) {
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
   const { login } = useContext(AuthContext);
- 
-  
+
+
   return (
     <Container>
       <Header>
-        <Title>Entrar</Title>
+        <CGT style={{fontSize: 30, fontWeight: 'bold'}}>Entrar</CGT >
+        {/* <Title>Entrar</Title> */}
         <Subtitle>Informe suas credenciais para continuar.</Subtitle>
       </Header>
-  
+
       <MainContent>
-       
-  
         <InputField>
           <Ionicons name="at" size={19} color="black" />
           <Input
@@ -45,7 +46,7 @@ export function Login({ navigation }) {
             placeholderTextColor="#a3a3a3"
           />
         </InputField>
-  
+
         <InputField>
           <EvilIcons name="lock" size={26} color="black" />
           <Input
@@ -55,28 +56,46 @@ export function Login({ navigation }) {
             placeholderTextColor="#a3a3a3"
             secureTextEntry={true}
           />
-          <FooterText>Esqueceu?</FooterText>
+          <MaterialCommunityIcons name="eye-outline" size={24} color="#A9A9A9" />
         </InputField>
-  
-        
-        <StyledButton onPress={() => {login(email, password)}}>
-          <CGT style={{textAlign: 'center', fontWeight: 'bold', fontSize: 18}}>Entrar</CGT>
-        </StyledButton>
-  
-        <CGT style={{textAlign: 'center', marginTop: 15}}>Ou, Logar com...?</CGT>
-  
+
+        <ButtonContainer>
+          <ButtonLinear>
+            <ButtonText>Entrar</ButtonText>
+          </ButtonLinear>
+        </ButtonContainer>
+
+        <View
+          style={{
+            // backgroundColor: '#000',
+            justifyContent: 'center',
+            alignItems: 'center',
+            marginTop: '1%',
+            marginBottom: '1%',
+            height: '15%',
+            width: '100%',
+          }}
+        >
+          <CGT style={{ textAlign: 'center', marginTop: '20%', }}>Esqueceu a senha ?</CGT>
+        </View>
+
         <SocialLoginContainer>
           <SocialButton>
-            <AntDesign name="rightcircleo" size={24} color="black" />
+            <AntDesign name="google" size={15} color="black" />
+            <Text>Continue com Google</Text>
           </SocialButton>
-          <SocialButton>
-            <AntDesign name="rightcircleo" size={24} color="black" />
+
+          <SocialButton style={{ backgroundColor: '#1877F2' }}>
+            <AntDesign name="facebook-square" size={15} color="white" />
+            <Text style={{ color: 'white' }}>Continue com Facebook</Text>
           </SocialButton>
-          <SocialButton>
-            <AntDesign name="rightcircleo" size={24} color="black" />
+
+          <SocialButton style={{ backgroundColor: '#E3E3E3' }}>
+            <AntDesign name="apple1" size={15} color="black" />
+            <Text>Continue com Apple</Text>
           </SocialButton>
         </SocialLoginContainer>
-  
+
         <Footer>
           <CGT>Novo no aplicativo?</CGT>
           <LinkText onPress={() => navigation.navigate('Register')}>Registre-se</LinkText>
@@ -84,5 +103,5 @@ export function Login({ navigation }) {
       </MainContent>
     </Container>
   );
-  
+
 }

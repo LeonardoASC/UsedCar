@@ -14,7 +14,7 @@ export const CGT = (props) => {
       }
     >
       <LinearGradient
-        colors={['#e91e63', '#673ab7']}
+        colors={['#DED971', '#ffa9f9']}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 0 }}
       >
