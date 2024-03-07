@@ -37,6 +37,6 @@ api.interceptors.request.use(
 
 export default api;
 
-
+// https://newsapi.org/v2/everything?q=carros&apiKey=7a4ed333c3df43dca5a43f092f836a73
 
 
