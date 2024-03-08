@@ -15,9 +15,10 @@ export function Home({ navigation }) {
 
     async function getNews() {
         try {
-            const response = await axios.get('https://newsapi.org/v2/everything?q=carros&apiKey=7a4ed333c3df43dca5a43f092f836a73');
-            const filteredNews = response.data.articles.filter(article => article.source.name === "BBC News");
-            setNews(filteredNews);
+            const response = await axios.get('https://pokeapi.co/api/v2/pokemon/ditto');
+            // const filteredNews = response.data.articles.filter(article => article.source.name === "BBC News");
+            console.log(response.json());
+            setNews(response.data);
         } catch (error) {
             console.error("Error fetching news:", error);
             // Optionally display an error message to the user
@@ -43,7 +44,7 @@ export function Home({ navigation }) {
                             )}
                         />
                     ) : (
-                        <Text>Failed to load news. Please check your internet connection.</Text>
+                        <Text>Falha ao carregar as noticias. Por favor check sua conexão.</Text>
                     )}
                 </>
             </ContentHome>
