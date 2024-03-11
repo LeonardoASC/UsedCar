@@ -6,6 +6,7 @@ import {
 
 import { SafeAreaView, FlatList, Text, Image } from 'react-native'
 import axios from 'axios';
+
 export function Home({ navigation }) {
     const [news, setNews] = useState([]); // This is a comment
 
@@ -13,14 +14,16 @@ export function Home({ navigation }) {
         getNews();
     }, []);
 
+    
+
     async function getNews() {
         try {
             const response = await axios.get('https://pokeapi.co/api/v2/pokemon/ditto');
             // const filteredNews = response.data.articles.filter(article => article.source.name === "BBC News");
-            console.log(response.json());
+            console.log(response);
             setNews(response.data);
         } catch (error) {
-            console.error("Error fetching news:", error);
+            console.log("Error fetching news:", error);
             // Optionally display an error message to the user
         }
     }
