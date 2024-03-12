@@ -4,7 +4,7 @@ import {
     ContentHome,
 } from './styles'
 
-import { SafeAreaView, FlatList, Text, Image } from 'react-native'
+import { SafeAreaView, FlatList, Text, Image, View } from 'react-native'
 import axios from 'axios';
 
 export function Home({ navigation }) {
@@ -14,17 +14,23 @@ export function Home({ navigation }) {
         getNews();
     }, []);
 
-    
 
     async function getNews() {
+        // try {
+        //     const response = await axios.get('https://newsapi.org/v2/everything?q=carros&apiKey=7a4ed333c3df43dca5a43f092f836a73');
+        //     const filteredNews = response.data.articles.filter(article => article.source.name === "BBC News");
+        //     console.log(response);
+        //     setNews(response.data);
+        // } catch (error) {
+        //     console.log("Error fetching news:", error);
+        //     // Optionally display an error message to the user
+        // }
         try {
-            const response = await axios.get('https://pokeapi.co/api/v2/pokemon/ditto');
-            // const filteredNews = response.data.articles.filter(article => article.source.name === "BBC News");
-            console.log(response);
-            setNews(response.data);
+            const response = await axios.get('https://newsapi.org/v2/everything?q="carros"&apiKey=7a4ed333c3df43dca5a43f092f836a73');
+            console.log(response.data.articles);
+            setNews(response.data.articles);
         } catch (error) {
-            console.log("Error fetching news:", error);
-            // Optionally display an error message to the user
+            console.error('Erro ao buscar fontes de notícias:', error);
         }
     }
 
@@ -39,10 +45,11 @@ export function Home({ navigation }) {
                         <FlatList
                             data={news}
                             renderItem={({ item }) => (
-                                <View style={{ flex: 1, padding: 10 }}>
-                                    <Text style={{ fontSize: 18 }}>{item.title}</Text>
+                                <View style={{ padding: 10, backgroundColor: 'white', marginBottom: '2%', width: '90%', borderRadius: 10 }}>
+                                    <Text >{item.title}</Text>
                                     <Text style={{ fontSize: 14 }}>{item.source.name}</Text>
-                                    <Image source={{ uri: item.urlToImage }} style={{ width: 100, height: 100 }} />
+                                    <Text>{item.author}</Text>
+                                    <Image source={{ uri: item.urlToImage }} style={{ width: 100, height: 100, borderRadius: 100 }} />
                                 </View>
                             )}
                         />

@@ -16,7 +16,7 @@ export const Title = styled.Text`
 export const Header = styled.View`
     background-color: #1a1a1a;
     width: 100%;
-    height: 18%;
+    height: 15%;
     display: flex;
     align-items:flex-end;
     justify-content: space-between;
@@ -64,11 +64,12 @@ export const ExpirationDate = styled.Text`
 `;
 
 export const ContentHome = styled.View`
-    margin-top: 13%;
+    margin-top: 5%;
     width: 100%;
-    height: 100%;
+    height: 75%;
     display: flex;
     align-items:center;
+    justify-content: center;
     
     `;
 
