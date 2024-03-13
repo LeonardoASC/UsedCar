@@ -26,7 +26,7 @@ export function Private() {
   return (
     <View style={{ flex: 1, backgroundColor: '#f2f2f2' }}>
       <Tab.Navigator
-        initialRouteName="Home"
+        initialRouteName="CarList"
         screenOptions={{
           tabBarActiveTintColor: '#e91e63',
           tabBarIconSize: 20,
