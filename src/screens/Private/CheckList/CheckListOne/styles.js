@@ -3,7 +3,7 @@ import { Platform } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 
 export const Header = styled.View`
-    background-color: #fff;
+    background-color: #1a1a1a;
     width: 100%;
     height: 20%;
     flex-direction: row;

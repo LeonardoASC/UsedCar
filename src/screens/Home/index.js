@@ -16,16 +16,8 @@ export function Home({ navigation }) {
 
 
     async function getNews() {
-        // try {
-        //     const response = await axios.get('https://newsapi.org/v2/everything?q=carros&apiKey=7a4ed333c3df43dca5a43f092f836a73');
-        //     const filteredNews = response.data.articles.filter(article => article.source.name === "BBC News");
-        //     console.log(response);
-        //     setNews(response.data);
-        // } catch (error) {
-        //     console.log("Error fetching news:", error);
-        //     // Optionally display an error message to the user
-        // }
-        try {
+        try 
+        {
             const response = await axios.get('https://newsapi.org/v2/everything?q="carros"&apiKey=7a4ed333c3df43dca5a43f092f836a73');
             console.log(response.data.articles);
             setNews(response.data.articles);

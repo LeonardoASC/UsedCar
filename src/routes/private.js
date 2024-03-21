@@ -7,20 +7,32 @@ import { AntDesign } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
-
-
 //screens
 import { Home } from '../screens/Home';
 import { CarList } from '../screens/Private/CarList';
 import { CheckList } from '../screens/Private/CheckList';
+import { CheckListOne } from '../screens/Private/CheckList/CheckListOne';
 import { Fuel } from '../screens/Private/Fuel';
 import { Profile } from '../screens/Private/Profile';
 
 const Tab = createBottomTabNavigator();
-
+const Stack = createStackNavigator();
 
 const iconSize = 20;
 
+function MyStack() {
+  return (
+    <Stack.Navigator
+    initialRouteName="CheckList"
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
+      <Stack.Screen name="CheckList2" component={CheckList} />
+      <Stack.Screen name="CheckListOne" component={CheckListOne} />
+    </Stack.Navigator>
+  );
+}
 
 export function Private() {
   return (
@@ -32,18 +44,18 @@ export function Private() {
           tabBarIconSize: 20,
           headerShown: false,
           tabBarStyle: {
-            height: 65,
-            borderTopStartRadius: 15,
-            borderTopEndRadius: 15,
-            backgroundColor: '#1a1a1a'
+            backgroundColor: '#1a1a1a',
+            // padding: 15,
           },
           tabBarLabelStyle: {
             fontSize: 12,
-            marginBottom: 10,
           },
           tabBarIconStyle: {
-            marginTop: 5,
+            // marginTop: 5,
+            alignSelf: 'center',
+
           },
+          
         }}
       >
         <Tab.Screen
@@ -51,7 +63,7 @@ export function Private() {
           component={Home}
           options={{
             tabBarLabel: 'Inicio',
-            tabBarIcon: ({ color }) => (
+            tabBarIcon: ({ color, size  }) => (
               <FontAwesome name="newspaper-o" size={iconSize} color={color} />
             ),
           }}
@@ -68,11 +80,11 @@ export function Private() {
         />
         <Tab.Screen
           name="CheckList"
-          component={CheckList}
+          component={MyStack}
           options={{
-            tabBarLabel: 'CheckList',
+            tabBarLabel: '',
             tabBarIcon: ({ color }) => (
-              <Entypo name="circle-with-plus" size={iconSize} color={color} />
+              <Entypo name="circle-with-plus" size={35} color={color} />
             ),
           }}
         />
