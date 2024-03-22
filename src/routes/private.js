@@ -23,7 +23,7 @@ const iconSize = 20;
 function MyStack() {
   return (
     <Stack.Navigator
-    initialRouteName="CheckList"
+    initialRouteName="CheckList2"
       screenOptions={{
         headerShown: false,
       }}
@@ -38,7 +38,7 @@ export function Private() {
   return (
     <View style={{ flex: 1, backgroundColor: '#f2f2f2' }}>
       <Tab.Navigator
-        initialRouteName="CarList"
+        initialRouteName="CheckList"
         screenOptions={{
           tabBarActiveTintColor: '#e91e63',
           tabBarIconSize: 20,

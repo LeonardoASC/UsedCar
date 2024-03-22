@@ -11,7 +11,7 @@ export function Routes() {
   const userToken = 1;
   return (
     <NavigationContainer>
-      {/* <StatusBar/> */}
+      <StatusBar/>
       {
         userToken ? (userInfo && userInfo.email === 'admin@adm.br' ? <Private />
           :

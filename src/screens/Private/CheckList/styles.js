@@ -5,9 +5,9 @@ import { LinearGradient } from 'expo-linear-gradient';
 export const Header = styled.View`
     background-color: #fff;
     width: 100%;
-    height: 20%;
+    height: 50%;
     flex-direction: row;
-    align-items: center;
+    align-items: flex-end;
     justify-content:center;
 `;
 
@@ -16,5 +16,12 @@ export const Container = styled.View`
   width: 100%;
   align-items: center;
   justify-content: center;
+
+`;
+
+
+export const ImageHeader = styled.Image`
+  width: 100%;
+  height: 100%;
 
 `;
