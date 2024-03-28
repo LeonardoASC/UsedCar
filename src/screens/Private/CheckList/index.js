@@ -7,6 +7,7 @@ import capoabertoestrada from '../../../../assets/capoabertoestrada.png';
 import mecanicomaos from '../../../../assets/mecanicomaos.png';
 import { Ionicons } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import HorizontalList from '../../../components/HorizontalList';
 
 export function CheckList({ navigation }) {
     const dicas = [
@@ -30,24 +31,22 @@ export function CheckList({ navigation }) {
         },
     ];
 
-    const renderItem = ({ item }) => (
-        <StyledItemContainer>
-            <StyledItemText>{item.title}</StyledItemText>
-            <StyledItemText>{item.description}</StyledItemText>
-            <Image
-                source={item.imagem}
-                style={{
-                    width: '100%',
-                    height: '100%',
-                    position: 'absolute',
-                    zIndex: -1,
-                    // aspectRatio: 1, 
-                    // resizeMode: 'cover' 
-                }}
-            />
-        </StyledItemContainer>
-
-    );
+    // const renderItem = ({ item }) => (
+    //     <StyledItemContainer>
+    //         <Image
+    //             source={item.imagem}
+    //             style={{
+    //                 // width: '100%',
+    //                 // height: '100%',
+    //                 resizeMode: 'cover',
+    //                 position: 'absolute',
+    //                 borderRadius: 10
+    //             }}
+    //         />
+    //         <StyledItemText>{item.title}</StyledItemText>
+    //         <StyledItemText>{item.description}</StyledItemText>
+    //     </StyledItemContainer>
+    // );
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
@@ -95,12 +94,13 @@ export function CheckList({ navigation }) {
                         <Text style={{ fontWeight: 'bold', fontSize: 24 }}>Dicas</Text>
                         <Text style={{ marginTop: 5, color: 'gray' }}>Pontos importantes</Text>
                     </View>
-                    <FlatList
+                    <HorizontalList dicas={dicas}/>
+                    {/* <FlatList
                         data={dicas}
                         renderItem={renderItem}
                         keyExtractor={item => item.id.toString()}
                         horizontal
-                    />
+                    /> */}
                 </View>
             </Container>
         </SafeAreaView>

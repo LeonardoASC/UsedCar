@@ -26,9 +26,9 @@ export const ImageHeader = styled.Image`
 
 export const StyledItemContainer = styled.View`
     background-color: #ffffff;
-    padding: 20px;
     border-radius: 10px;
     height: 80%;
+    width: 50%;
     margin: 10px;
     ${Platform.select({
   ios: `

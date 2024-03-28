@@ -19,7 +19,7 @@ export function Home({ navigation }) {
         try 
         {
             const response = await axios.get('https://newsapi.org/v2/everything?q="carros"&apiKey=7a4ed333c3df43dca5a43f092f836a73');
-            console.log(response.data.articles);
+            // console.log(response.data.articles);
             setNews(response.data.articles);
         } catch (error) {
             console.error('Erro ao buscar fontes de notícias:', error);
