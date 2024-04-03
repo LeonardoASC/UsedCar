@@ -5,16 +5,17 @@ import { LinearGradient } from 'expo-linear-gradient';
 export const Header = styled.View`
     background-color: #fff;
     width: 100%;
-    height: 50%;
+    flex:1;
     flex-direction: row;
     align-items: center;
     justify-content:center;
 `;
 
 export const Container = styled.View`
-  height: 45%;
+  flex:1;
   width: 100%;
   margin-top: 10%;
+  background-color: #fff;
 `;
 
 

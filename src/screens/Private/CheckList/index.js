@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, SafeAreaView, Text, TouchableOpacity, StyleSheet, View, FlatList } from "react-native";
+import { Text, TouchableOpacity, StyleSheet, View, Dimensions, Platform } from "react-native";
 import { Header, Container, ImageHeader, StyledItemContainer, StyledItemText } from "./styles.js";
 import startChecklist from '../../../../assets/startChecklist2.png';
 import capoAberto from '../../../../assets/capoAberto.png';
@@ -10,6 +10,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import HorizontalList from '../../../components/HorizontalList';
 
 export function CheckList({ navigation }) {
+    const { height } = Dimensions.get('window');
     const dicas = [
         {
             id: '1',
@@ -31,25 +32,8 @@ export function CheckList({ navigation }) {
         },
     ];
 
-    // const renderItem = ({ item }) => (
-    //     <StyledItemContainer>
-    //         <Image
-    //             source={item.imagem}
-    //             style={{
-    //                 // width: '100%',
-    //                 // height: '100%',
-    //                 resizeMode: 'cover',
-    //                 position: 'absolute',
-    //                 borderRadius: 10
-    //             }}
-    //         />
-    //         <StyledItemText>{item.title}</StyledItemText>
-    //         <StyledItemText>{item.description}</StyledItemText>
-    //     </StyledItemContainer>
-    // );
-
     return (
-        <SafeAreaView style={{ flex: 1 }}>
+        <View style={{ flex: 1, backgroundColor: 'white' }}>
             <Header>
                 <ImageHeader source={startChecklist} style={StyleSheet.absoluteFill} />
                 <View style={{ width: '90%', height: '25%', alignItems: 'center', justifyContent: 'center' }}>
@@ -65,27 +49,6 @@ export function CheckList({ navigation }) {
                         textAlign: 'center',
                         textShadowColor: 'rgba(0, 0, 0, 1)', textShadowOffset: { width: 8, height: 4 }, textShadowRadius: 15
                     }}>aqui você poderá realizar um checklist do carro escolhido!</Text>
-
-                    <TouchableOpacity style={{
-                        width: '100%',
-                        height: '100%',
-                        backgroundColor: '#39BF61',
-                        borderRadius: 20,
-                        alignItems: 'center',
-                        flexDirection: 'row',
-                        top: '40%'
-                    }} onPress={() => navigation.navigate('CheckListOne')}>
-                        <View style={{ width: '20%', alignItems: 'center', justifyContent: 'center' }}>
-                            <Ionicons name="car" size={24} color="white" />
-                        </View>
-                        <View style={{ width: '60%', justifyContent: 'center' }}>
-                            <Text style={{ color: 'white', fontSize: 24, fontWeight: 'bold' }}>Iniciar Check List</Text>
-                            <Text style={{ color: 'white' }}>Checklist para auxiliar na analise dos veiculos</Text>
-                        </View>
-                        <View style={{ width: '20%', alignItems: 'center', justifyContent: 'center' }}>
-                            <Ionicons name="arrow-forward" size={24} color="white" />
-                        </View>
-                    </TouchableOpacity>
                 </View>
             </Header>
             <Container>
@@ -94,15 +57,31 @@ export function CheckList({ navigation }) {
                         <Text style={{ fontWeight: 'bold', fontSize: 24 }}>Dicas</Text>
                         <Text style={{ marginTop: 5, color: 'gray' }}>Pontos importantes</Text>
                     </View>
-                    <HorizontalList dicas={dicas}/>
-                    {/* <FlatList
-                        data={dicas}
-                        renderItem={renderItem}
-                        keyExtractor={item => item.id.toString()}
-                        horizontal
-                    /> */}
+                    <HorizontalList dicas={dicas} />
                 </View>
             </Container>
-        </SafeAreaView>
+            <TouchableOpacity style={{
+                width: '90%',
+                height: '10%',
+                backgroundColor: '#39BF61',
+                borderRadius: 20,
+                alignItems: 'center',
+                flexDirection: 'row',
+                position: 'absolute',
+                alignSelf: 'center',
+                top: height / (Platform.OS === 'ios' ? 2.6 : 2.5),
+            }} onPress={() => navigation.navigate('CheckListOne')}>
+                <View style={{ width: '20%', alignItems: 'center', justifyContent: 'center' }}>
+                    <Ionicons name="car" size={24} color="white" />
+                </View>
+                <View style={{ width: '60%', justifyContent: 'center' }}>
+                    <Text style={{ color: 'white', fontSize: 24, fontWeight: 'bold' }}>Iniciar Check List</Text>
+                    <Text style={{ color: 'white' }}>Checklist para auxiliar na analise dos veiculos</Text>
+                </View>
+                <View style={{ width: '20%', alignItems: 'center', justifyContent: 'center' }}>
+                    <Ionicons name="arrow-forward" size={24} color="white" />
+                </View>
+            </TouchableOpacity>
+        </View>
     )
 }
