@@ -5,61 +5,43 @@ import api from "../../../../services/api.js";
 
 
 
-export function CheckListTwo({ navigation, route }) {
-    const { carro } = route?.params;
-    const [carroPart, setCarroPart] = useState([]);
+export function CheckListSix({ navigation, route }) {
+    const { carroPart } = route?.params;
+  
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
-    
-    useEffect(() => {
-        const fetchCarro = async () => {
-            try {
-                setLoading(true);
-                // const response = await api.get('/carros/1');
-                const response = await api.get(`/carros/${carro.id}`);
-                setCarroPart(response.data);
-                // console.log(response);
-            } catch (error) {
-                setError(error.message);
-            } finally {
-                setLoading(false);
-            }
-        };
-        fetchCarro();
-    }, []);
-
-
+   
 
     if (loading) return <CenteredView><MessageText>Carregando...</MessageText></CenteredView>;
     if (error) return <CenteredView><MessageText>Erro: {error}</MessageText></CenteredView>;
-    const motor = carroPart.motor && carroPart.motor.length > 0 ? carroPart.motor[0] : null;
-
+    const freio = carroPart.freio && carroPart.freio.length > 0 ? carroPart.freio[0] : null;
+    
     return (
         <SafeAreaView style={{ flex: 1 }}>
             <Header>
-            <Text>CheckListTwo</Text>
+
             </Header>
             <Container>
                 <Text>id:{carroPart.id}</Text>
                 <Text>{carroPart.marca} {carroPart.modelo} - {carroPart.ano}</Text>
                 <Text>Carroceria: {carroPart.tipo_carroceria}</Text>
                 <Text>Portas: {carroPart.numero_portas}</Text>
-                {motor && (
+                {freio && (
                     <View>
                         <Image
-                            source={{ uri: motor.foto }}
-                            style={{ width: 150, height: 150, backgroundColor: 'black' }}
+                            source={{ uri: freio.foto }}
+                            style={{ width: 150, height: 150,backgroundColor: 'black' }}
                         />
-                        <Text>Descrição: {motor.descricao}</Text>
+                        <Text>Descrição: {freio.descricao}</Text>
                     </View>
                 )}
-                {!motor && <Text>Nenhum dado do motor disponível.</Text>}
-
+                {!freio && <Text>Nenhum dado do freio disponível.</Text>}
                 <TouchableOpacity
-                    onPress={() => navigation.navigate('CheckListThree', { carroPart })}
+                    onPress={() => navigation.navigate('CheckListSeven', { carroPart })}
                 >
                     <Text>Proxima Pagina</Text>
                 </TouchableOpacity>
+
             </Container>
         </SafeAreaView>
     )

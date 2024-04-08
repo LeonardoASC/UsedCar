@@ -31,3 +31,13 @@ export const ItemSearch = styled.Text`
   background-color: #f9f9f9;
   border-radius: 5px;
 `;
+
+export const CenteredView = styled.View`
+flex: 1;
+align-items: center;
+justify-content: center;
+`;
+
+export const MessageText = styled.Text`
+font-size: 16px;
+`;

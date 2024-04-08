@@ -11,8 +11,21 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Home } from '../screens/Home';
 import { CarList } from '../screens/Private/CarList';
 import { CheckList } from '../screens/Private/CheckList';
+
 import { CheckListOne } from '../screens/Private/CheckList/CheckListOne';
 import { CheckListTwo } from '../screens/Private/CheckList/CheckListTwo';
+import { CheckListThree } from '../screens/Private/CheckList/CheckListThree';
+import { CheckListFour } from '../screens/Private/CheckList/CheckListFour';
+import { CheckListFive } from '../screens/Private/CheckList/CheckListFive';
+import { CheckListSix } from '../screens/Private/CheckList/CheckListSix';
+import { CheckListSeven } from '../screens/Private/CheckList/CheckListSeven';
+import { CheckListEight } from '../screens/Private/CheckList/CheckListEight';
+import { CheckListNine } from '../screens/Private/CheckList/CheckListNine';
+import { CheckListTen } from '../screens/Private/CheckList/CheckListTen';
+import { CheckListEleven } from '../screens/Private/CheckList/CheckListEleven';
+import { CheckListTwelve } from '../screens/Private/CheckList/CheckListTwelve';
+
+
 import { Fuel } from '../screens/Private/Fuel';
 import { Profile } from '../screens/Private/Profile';
 
@@ -24,7 +37,7 @@ const iconSize = 20;
 function MyStack() {
   return (
     <Stack.Navigator
-    initialRouteName="CheckListOne"
+      initialRouteName="CheckListOne"
       screenOptions={{
         headerShown: false,
       }}
@@ -32,6 +45,17 @@ function MyStack() {
       <Stack.Screen name="CheckList2" component={CheckList} />
       <Stack.Screen name="CheckListOne" component={CheckListOne} />
       <Stack.Screen name="CheckListTwo" component={CheckListTwo} />
+      <Stack.Screen name="CheckListThree" component={CheckListThree} />
+      <Stack.Screen name="CheckListFour" component={CheckListFour} />
+      <Stack.Screen name="CheckListFive" component={CheckListFive} />
+      <Stack.Screen name="CheckListSix" component={CheckListSix} />
+      <Stack.Screen name="CheckListSeven" component={CheckListSeven} />
+      <Stack.Screen name="CheckListEight" component={CheckListEight} />
+      <Stack.Screen name="CheckListNine" component={CheckListNine} />
+      <Stack.Screen name="CheckListTen" component={CheckListTen} />
+      <Stack.Screen name="CheckListEleven" component={CheckListEleven} />
+      <Stack.Screen name="CheckListTwelve" component={CheckListTwelve} />
+
     </Stack.Navigator>
   );
 }
@@ -57,7 +81,7 @@ export function Private() {
             alignSelf: 'center',
 
           },
-          
+
         }}
       >
         <Tab.Screen
@@ -65,7 +89,7 @@ export function Private() {
           component={Home}
           options={{
             tabBarLabel: 'Inicio',
-            tabBarIcon: ({ color, size  }) => (
+            tabBarIcon: ({ color, size }) => (
               <FontAwesome name="newspaper-o" size={iconSize} color={color} />
             ),
           }}
