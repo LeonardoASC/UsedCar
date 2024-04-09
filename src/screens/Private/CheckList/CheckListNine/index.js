@@ -37,9 +37,10 @@ export function CheckListNine({ navigation, route }) {
                 )}
                 {!sistema_eletrico && <Text>Nenhum dado do sistema_eletrico disponível.</Text>}
                 <TouchableOpacity
+                style={{ backgroundColor: 'green', padding: 10, borderRadius: 5, marginTop: 10 }}
                     onPress={() => navigation.navigate('CheckListTen', { carroPart })}
                 >
-                    <Text>Proxima Pagina</Text>
+                    <Text style={{color: 'white'}}>Proxima Pagina</Text>
                 </TouchableOpacity>
 
             </Container>

@@ -56,9 +56,11 @@ export function CheckListTwo({ navigation, route }) {
                 {!motor && <Text>Nenhum dado do motor disponível.</Text>}
 
                 <TouchableOpacity
-                    onPress={() => navigation.navigate('CheckListThree', { carroPart })}
+                    style={{ backgroundColor: 'green', padding: 10, borderRadius: 5, marginTop: 10 }}
+                    onPress={() => navigation.navigate('ChooseCheck', { carroPart })}
                 >
-                    <Text>Proxima Pagina</Text>
+                    <Text style={{color: 'white'}}>Check</Text>
+                    
                 </TouchableOpacity>
             </Container>
         </SafeAreaView>

@@ -38,8 +38,9 @@ export function CheckListTwelve({ navigation, route }) {
                 {!vidro && <Text>Nenhum dado do vidro disponível.</Text>}
                 <TouchableOpacity
                     onPress={() => navigation.navigate('CheckList2', { carroPart })}
+                    style={{ backgroundColor: 'blue', padding: 10, borderRadius: 5, marginTop: 10 }}
                 >
-                    <Text>Proxima Pagina</Text>
+                    <Text style={{color: 'white'}}>Proxima Pagina</Text>
                 </TouchableOpacity>
 
             </Container>

@@ -38,8 +38,8 @@ export function CheckListOne({ navigation }) {
         setFilteredData(filteredData);
     };
 
-    const handlePressItem = (carro) => {
-        navigation.navigate('CheckListTwo', { carro });
+    const handlePressItem = (carroPart) => {
+        navigation.navigate('ChooseCheck', { carroPart });
     };
 
     return (

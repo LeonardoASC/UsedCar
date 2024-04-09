@@ -38,9 +38,10 @@ export function CheckListFour({ navigation, route }) {
                 {!pneu && <Text>Nenhum dado do pneu disponível.</Text>}
 
                 <TouchableOpacity
+                style={{ backgroundColor: 'green', padding: 10, borderRadius: 5, marginTop: 10 }}
                     onPress={() => navigation.navigate('CheckListFive', { carroPart })}
                 >
-                    <Text>Proxima Pagina</Text>
+                    <Text style={{color: 'white'}}>Proxima Pagina</Text>
                 </TouchableOpacity>
             </Container>
         </SafeAreaView>

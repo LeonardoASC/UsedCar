@@ -13,6 +13,7 @@ import { CarList } from '../screens/Private/CarList';
 import { CheckList } from '../screens/Private/CheckList';
 
 import { CheckListOne } from '../screens/Private/CheckList/CheckListOne';
+import { ChooseCheck } from '../screens/Private/CheckList/ChooseCheck';
 import { CheckListTwo } from '../screens/Private/CheckList/CheckListTwo';
 import { CheckListThree } from '../screens/Private/CheckList/CheckListThree';
 import { CheckListFour } from '../screens/Private/CheckList/CheckListFour';
@@ -43,18 +44,19 @@ function MyStack() {
       }}
     >
       <Stack.Screen name="CheckList2" component={CheckList} />
+      <Stack.Screen name="ChooseCheck" component={ChooseCheck} />
       <Stack.Screen name="CheckListOne" component={CheckListOne} />
-      <Stack.Screen name="CheckListTwo" component={CheckListTwo} />
-      <Stack.Screen name="CheckListThree" component={CheckListThree} />
-      <Stack.Screen name="CheckListFour" component={CheckListFour} />
-      <Stack.Screen name="CheckListFive" component={CheckListFive} />
-      <Stack.Screen name="CheckListSix" component={CheckListSix} />
-      <Stack.Screen name="CheckListSeven" component={CheckListSeven} />
-      <Stack.Screen name="CheckListEight" component={CheckListEight} />
-      <Stack.Screen name="CheckListNine" component={CheckListNine} />
-      <Stack.Screen name="CheckListTen" component={CheckListTen} />
-      <Stack.Screen name="CheckListEleven" component={CheckListEleven} />
-      <Stack.Screen name="CheckListTwelve" component={CheckListTwelve} />
+      <Stack.Screen name="Motor" component={CheckListTwo} />
+      <Stack.Screen name="Lataria" component={CheckListThree} />
+      <Stack.Screen name="Pneu" component={CheckListFour} />
+      <Stack.Screen name="Documento" component={CheckListFive} />
+      <Stack.Screen name="Freio" component={CheckListSix} />
+      <Stack.Screen name="Suspensao" component={CheckListSeven} />
+      <Stack.Screen name="Embreagem" component={CheckListEight} />
+      <Stack.Screen name="SistemaEletrico" component={CheckListNine} />
+      <Stack.Screen name="Pedal" component={CheckListTen} />
+      <Stack.Screen name="Cambio" component={CheckListEleven} />
+      <Stack.Screen name="Vidro" component={CheckListTwelve} />
 
     </Stack.Navigator>
   );
