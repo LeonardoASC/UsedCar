@@ -12,6 +12,7 @@ import { Home } from '../screens/Home';
 import { CarList } from '../screens/Private/CarList';
 import { CheckList } from '../screens/Private/CheckList';
 
+import { CheckListPart } from '../screens/Private/CheckList/CheckListPart';
 import { CheckListOne } from '../screens/Private/CheckList/CheckListOne';
 import { ChooseCheck } from '../screens/Private/CheckList/ChooseCheck';
 import { CheckListTwo } from '../screens/Private/CheckList/CheckListTwo';
@@ -46,6 +47,10 @@ function MyStack() {
       <Stack.Screen name="CheckList2" component={CheckList} />
       <Stack.Screen name="ChooseCheck" component={ChooseCheck} />
       <Stack.Screen name="CheckListOne" component={CheckListOne} />
+      <Stack.Screen name="CheckListPart" component={CheckListPart} />
+
+      
+
       <Stack.Screen name="Motor" component={CheckListTwo} />
       <Stack.Screen name="Lataria" component={CheckListThree} />
       <Stack.Screen name="Pneu" component={CheckListFour} />

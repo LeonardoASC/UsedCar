@@ -1,12 +1,14 @@
 import React, { useContext, useState, useEffect } from 'react'
-import { SafeAreaView, Text, Alert, TouchableOpacity } from 'react-native'
+import { SafeAreaView, Text, Alert, TouchableOpacity, View } from 'react-native'
 import { Header, Container, ViewWrapper, ProfileImage, ConfigFlat, RenderFlat, IconWrapper, CenteredView, MessageText } from "./styles.js"
-import { Ionicons, MaterialIcons, FontAwesome, Entypo, MaterialCommunityIcons, AntDesign, Fontisto } from '@expo/vector-icons';
+import { MaterialIcons } from '@expo/vector-icons';
 import api from '../../../../services/api';
 
 export function ChooseCheck({ navigation, route }) {
     const { carro } = route?.params;
     const [carroPart, setCarroPart] = useState([]);
+    const [dadosBrutos, setDadosBrutos] = useState([]);
+    const [routeApi, setrouteApi] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
 
@@ -14,10 +16,24 @@ export function ChooseCheck({ navigation, route }) {
         const fetchCarro = async () => {
             try {
                 setLoading(true);
-                // const response = await api.get('/carros/1');
                 const response = await api.get(`/carros/${carro.id}`);
                 setCarroPart(response.data);
-                // console.log(response);
+                const data = response.data;
+                // Supondo que você queira listar todas as categorias disponíveis no objeto
+                const routesApi = Object.keys(data).filter(key => Array.isArray(data[key])).map(key => ({
+                    nome: key.charAt(0).toUpperCase() + key.slice(1),
+                }));
+                setrouteApi(routesApi);
+                const dadosPrincipais = {
+                    id: response.data.id,
+                    marca: response.data.marca,
+                    modelo: response.data.modelo,
+                    ano: response.data.ano,
+                    tipo_carroceria: response.data.tipo_carroceria,
+                    numero_portas: response.data.numero_portas,
+                };
+                setDadosBrutos(dadosPrincipais);
+
             } catch (error) {
                 setError(error.message);
                 alert(`Erro: ${error.message}`);
@@ -26,75 +42,27 @@ export function ChooseCheck({ navigation, route }) {
             }
         };
         fetchCarro();
-    }, []);
-
-    const data = [
-        { id: 1, routes: 'Motor' },
-        { id: 2, routes: 'Lataria' },
-        { id: 3, routes: 'Pneu' },
-        { id: 4, routes: 'Documento' },
-        { id: 5, routes: 'Freio' },
-        { id: 6, routes: 'Suspensao' },
-        { id: 7, routes: 'Embreagem' },
-        { id: 8, routes: 'SistemaEletrico' },
-        { id: 9, routes: 'Pedal' },
-        { id: 10, routes: 'Cambio' },
-        { id: 11, routes: 'Vidro' },
-    ];
-
-    
-
-    const IconsMore = {
-        Motor: <Fontisto name="checkbox-passive" size={24} color="black" />,
-        Lataria: <Fontisto name="checkbox-passive" size={24} color="black" />,
-        Pneu: <Fontisto name="checkbox-passive" size={24} color="black" />,
-        Documento: <Fontisto name="checkbox-passive" size={24} color="black" />,
-        Freio: <Fontisto name="checkbox-passive" size={24} color="black" />,
-        Suspensao: <Fontisto name="checkbox-passive" size={24} color="black" />,
-        Embreagem: <Fontisto name="checkbox-passive" size={24} color="black" />,
-        SistemaEletrico: <Fontisto name="checkbox-passive" size={24} color="black" />,
-        Pedal: <Fontisto name="checkbox-passive" size={24} color="black" />,
-        Cambio: <Fontisto name="checkbox-passive" size={24} color="black" />,
-        Vidro: <Fontisto name="checkbox-passive" size={24} color="black" />,
-    };
+    }, [carro.id]);
 
     const renderItem = ({ item }) => {
         return (
             <RenderFlat
                 onPress={() => handlePress(item)}
             >
-                <IconWrapper style={{ marginRight: '5%' }}>{IconsMore[item.routes]}</IconWrapper>
-                <Text style={{ color: 'gray' }}>{item.routes}</Text>
+                <IconWrapper style={{ marginRight: '5%' }}>
+                    <MaterialIcons name="check-box-outline-blank" size={24} color="gray" />
+                </IconWrapper>
+                <Text style={{ color: 'gray' }}>{item.nome}</Text>
             </RenderFlat>
+
         )
     };
 
-    const handlePress = (item) => {
-        const pages = {
-            Motor: 'Motor',
-            Lataria: 'Lataria',
-            Pneu: 'Pneu',
-            Documento: 'Documento',
-            Freio: 'Freio',
-            Suspensao: 'Suspensao',
-            Embreagem: 'Embreagem',
-            SistemaEletrico: 'Sistema Eletrico',
-            Pedal: 'Pedal',
-            Cambio: 'Cambio',
-            Vidro: 'Vidro',
-        };
-        if (pages[item.routes]) {
-            navigation.navigate(pages[item.routes], { carroPart });
-        } else {
-            Alert.alert(
-                "Funcionalidade Indisponível",
-                `A funcionalidade '${item.routes}' ainda não está disponível.`,
-                [{ text: "OK" }],
-                { cancelable: false }
-            );
-        }
+    const handlePress = async (item) => {
+        const categoriaNome = item.nome.toLowerCase();
+        const dadosPart = carroPart[categoriaNome];
+        navigation.navigate('CheckListPart', { dadosPart, dadosBrutos});
     };
-
 
 
     if (loading) return <CenteredView><MessageText>Carregando...</MessageText></CenteredView>;
@@ -107,10 +75,9 @@ export function ChooseCheck({ navigation, route }) {
             </Header>
             <Container>
                 <ConfigFlat
-                    data={data}
+                    data={routeApi}
+                    keyExtractor={(item, index) => index.toString()}
                     renderItem={renderItem}
-                    keyExtractor={item => item.id}
-                    contentContainerStyle={{ paddingBottom: 50 }}
                 />
             </Container>
 
