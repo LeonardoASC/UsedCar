@@ -1,10 +1,33 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import { SafeAreaView, Text, Alert, TouchableOpacity } from 'react-native'
-import { Header, Container, ViewWrapper, ProfileImage, ConfigFlat, RenderFlat, IconWrapper } from "./styles.js"
-import { Ionicons, MaterialIcons, FontAwesome, Entypo, MaterialCommunityIcons, AntDesign } from '@expo/vector-icons';
+import { Header, Container, ViewWrapper, ProfileImage, ConfigFlat, RenderFlat, IconWrapper, CenteredView, MessageText } from "./styles.js"
+import { Ionicons, MaterialIcons, FontAwesome, Entypo, MaterialCommunityIcons, AntDesign, Fontisto } from '@expo/vector-icons';
+import api from '../../../../services/api';
 
 export function ChooseCheck({ navigation, route }) {
-    const { carroPart } = route?.params;
+    const { carro } = route?.params;
+    const [carroPart, setCarroPart] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState('');
+
+    useEffect(() => {
+        const fetchCarro = async () => {
+            try {
+                setLoading(true);
+                // const response = await api.get('/carros/1');
+                const response = await api.get(`/carros/${carro.id}`);
+                setCarroPart(response.data);
+                // console.log(response);
+            } catch (error) {
+                setError(error.message);
+                alert(`Erro: ${error.message}`);
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchCarro();
+    }, []);
+
     const data = [
         { id: 1, routes: 'Motor' },
         { id: 2, routes: 'Lataria' },
@@ -17,23 +40,23 @@ export function ChooseCheck({ navigation, route }) {
         { id: 9, routes: 'Pedal' },
         { id: 10, routes: 'Cambio' },
         { id: 11, routes: 'Vidro' },
-
     ];
 
-    const IconsMore = {
-        Motor: <Ionicons name="md-person" size={20} color="gray" />,
-        Lataria: <MaterialIcons name="fitness-center" size={20} color="gray" />,
-        Pneu: <MaterialIcons name="assessment" size={20} color="gray" />,
-        Documento: <FontAwesome name="money" size={20} color="gray" />,
-        Freio: <Entypo name="book" size={20} color="gray" />,
-        Suspensao: <MaterialCommunityIcons name="bullhorn" size={20} color="gray" />,
-        Embreagem: <AntDesign name="checkcircleo" size={20} color="gray" />,
-        SistemaEletrico: <AntDesign name="checkcircleo" size={20} color="gray" />,
-        Pedal: <Ionicons name="md-calendar" size={20} color="gray" />,
-        Cambio: <AntDesign name="staro" size={20} color="gray" />,
-        Vidro: <Ionicons name="md-share" size={20} color="gray" />,
-    };
+    
 
+    const IconsMore = {
+        Motor: <Fontisto name="checkbox-passive" size={24} color="black" />,
+        Lataria: <Fontisto name="checkbox-passive" size={24} color="black" />,
+        Pneu: <Fontisto name="checkbox-passive" size={24} color="black" />,
+        Documento: <Fontisto name="checkbox-passive" size={24} color="black" />,
+        Freio: <Fontisto name="checkbox-passive" size={24} color="black" />,
+        Suspensao: <Fontisto name="checkbox-passive" size={24} color="black" />,
+        Embreagem: <Fontisto name="checkbox-passive" size={24} color="black" />,
+        SistemaEletrico: <Fontisto name="checkbox-passive" size={24} color="black" />,
+        Pedal: <Fontisto name="checkbox-passive" size={24} color="black" />,
+        Cambio: <Fontisto name="checkbox-passive" size={24} color="black" />,
+        Vidro: <Fontisto name="checkbox-passive" size={24} color="black" />,
+    };
 
     const renderItem = ({ item }) => {
         return (
@@ -72,8 +95,10 @@ export function ChooseCheck({ navigation, route }) {
         }
     };
 
-    
 
+
+    if (loading) return <CenteredView><MessageText>Carregando...</MessageText></CenteredView>;
+    if (error) return <CenteredView><MessageText>Erro: {error}</MessageText></CenteredView>;
 
     return (
         <SafeAreaView style={{ flex: 1 }}>

@@ -4,7 +4,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 
 export const Header = styled.View`
     width: 100%;
-    height: 15%;
+    height: 10%;
     justify-content: flex-end;
     align-items: center;
     
@@ -27,7 +27,7 @@ export const ProfileImage = styled.Image`
 `;
 export const Container = styled.View`
     width: 100%;
-    height: 85%;
+    height: 90%;
 `;
 export const RenderFlat = styled.TouchableOpacity`
   background-color: white;
@@ -60,9 +60,18 @@ export const RenderFlat = styled.TouchableOpacity`
 export const ConfigFlat = styled.FlatList`
   /* padding-top:2%; */
   padding-bottom:150px;
-  margin-top: 25%;
 `;
 
 export const IconWrapper = styled.View`
 /* margin-right: 2%; */
+`;
+
+export const CenteredView = styled.View`
+flex: 1;
+align-items: center;
+justify-content: center;
+`;
+
+export const MessageText = styled.Text`
+font-size: 16px;
 `;

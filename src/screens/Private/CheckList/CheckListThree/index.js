@@ -4,7 +4,6 @@ import { Header, Container, CenteredView, MessageText, Section, CarImage } from 
 import api from "../../../../services/api.js";
 
 
-
 export function CheckListThree({ navigation, route }) {
     const { carroPart } = route?.params;
 
@@ -36,11 +35,12 @@ export function CheckListThree({ navigation, route }) {
                     </View>
                 )}
                 {!lataria && <Text>Nenhum dado do lataria disponível.</Text>}
+                
                 <TouchableOpacity
-                style={{ backgroundColor: 'green', padding: 10, borderRadius: 5, marginTop: 10 }}
-                    onPress={() => navigation.navigate('CheckListFour', { carroPart })}
+                    style={{ backgroundColor: 'green', padding: 10, borderRadius: 5, marginTop: 10 }}
+                    onPress={() => navigation.navigate('ChooseCheck', { carroPart })}
                 >
-                    <Text style={{color: 'white'}}>Proxima Pagina</Text>
+                    <Text style={{color: 'white'}}>Check</Text>
                 </TouchableOpacity>
 
             </Container>

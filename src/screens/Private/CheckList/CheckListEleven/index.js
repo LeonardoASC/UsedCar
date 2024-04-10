@@ -36,11 +36,12 @@ export function CheckListEleven({ navigation, route }) {
                     </View>
                 )}
                 {!cambio && <Text>Nenhum dado do cambio disponível.</Text>}
+                
                 <TouchableOpacity
                     style={{ backgroundColor: 'green', padding: 10, borderRadius: 5, marginTop: 10 }}
-                    onPress={() => navigation.navigate('CheckListTwelve', { carroPart })}
+                    onPress={() => navigation.navigate('ChooseCheck', { carroPart })}
                 >
-                    <Text style={{ color: 'white' }}>Proxima Pagina</Text>
+                    <Text style={{ color: 'white' }}>Check</Text>
                 </TouchableOpacity>
 
             </Container>
