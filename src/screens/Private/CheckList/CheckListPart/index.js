@@ -30,16 +30,18 @@ export function CheckListPart({ navigation, route }) {
                     </View>
                 ))}
 
-
                 <TouchableOpacity
                     style={{ backgroundColor: 'green', padding: 10, borderRadius: 5, marginTop: 10 }}
-                    onPress={() => navigation.goBack()}
+                    onPress={() => {
+                        // Chama o callback antes de voltar
+                        if (route.params.onGoBack) {
+                            route.params.onGoBack();
+                        }
+                        navigation.goBack();
+                    }}
                 >
                     <Text style={{ color: 'white' }}>Checar</Text>
                 </TouchableOpacity>
-
-
-
             </Container>
         </SafeAreaView>
     )

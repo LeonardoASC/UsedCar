@@ -54,6 +54,8 @@ export function CheckListOne({ navigation }) {
                     placeholder="Pesquise o veiculo..."
                     placeholderTextColor="#999"
                 />
+                {/* //se o usuário não digitar nada, exibe todos os carros */}
+
                 <FlatList
                     data={filteredData}
                     ItemSeparatorComponent={() => (

@@ -11,23 +11,9 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Home } from '../screens/Home';
 import { CarList } from '../screens/Private/CarList';
 import { CheckList } from '../screens/Private/CheckList';
-
 import { CheckListPart } from '../screens/Private/CheckList/CheckListPart';
 import { CheckListOne } from '../screens/Private/CheckList/CheckListOne';
 import { ChooseCheck } from '../screens/Private/CheckList/ChooseCheck';
-import { CheckListTwo } from '../screens/Private/CheckList/CheckListTwo';
-import { CheckListThree } from '../screens/Private/CheckList/CheckListThree';
-import { CheckListFour } from '../screens/Private/CheckList/CheckListFour';
-import { CheckListFive } from '../screens/Private/CheckList/CheckListFive';
-import { CheckListSix } from '../screens/Private/CheckList/CheckListSix';
-import { CheckListSeven } from '../screens/Private/CheckList/CheckListSeven';
-import { CheckListEight } from '../screens/Private/CheckList/CheckListEight';
-import { CheckListNine } from '../screens/Private/CheckList/CheckListNine';
-import { CheckListTen } from '../screens/Private/CheckList/CheckListTen';
-import { CheckListEleven } from '../screens/Private/CheckList/CheckListEleven';
-import { CheckListTwelve } from '../screens/Private/CheckList/CheckListTwelve';
-
-
 import { Fuel } from '../screens/Private/Fuel';
 import { Profile } from '../screens/Private/Profile';
 
@@ -48,21 +34,6 @@ function MyStack() {
       <Stack.Screen name="ChooseCheck" component={ChooseCheck} />
       <Stack.Screen name="CheckListOne" component={CheckListOne} />
       <Stack.Screen name="CheckListPart" component={CheckListPart} />
-
-      
-
-      <Stack.Screen name="Motor" component={CheckListTwo} />
-      <Stack.Screen name="Lataria" component={CheckListThree} />
-      <Stack.Screen name="Pneu" component={CheckListFour} />
-      <Stack.Screen name="Documento" component={CheckListFive} />
-      <Stack.Screen name="Freio" component={CheckListSix} />
-      <Stack.Screen name="Suspensao" component={CheckListSeven} />
-      <Stack.Screen name="Embreagem" component={CheckListEight} />
-      <Stack.Screen name="SistemaEletrico" component={CheckListNine} />
-      <Stack.Screen name="Pedal" component={CheckListTen} />
-      <Stack.Screen name="Cambio" component={CheckListEleven} />
-      <Stack.Screen name="Vidro" component={CheckListTwelve} />
-
     </Stack.Navigator>
   );
 }

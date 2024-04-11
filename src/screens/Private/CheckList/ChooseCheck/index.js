@@ -1,9 +1,8 @@
-import React, { useContext, useState, useEffect } from 'react'
-import { SafeAreaView, Text, Alert, TouchableOpacity, View } from 'react-native'
-import { Header, Container, ViewWrapper, ProfileImage, ConfigFlat, RenderFlat, IconWrapper, CenteredView, MessageText } from "./styles.js"
+import React, { useState, useEffect } from 'react'
+import { SafeAreaView, Text, } from 'react-native'
+import { Header, Container, ConfigFlat, RenderFlat, IconWrapper, CenteredView, MessageText } from "./styles.js"
 import { MaterialIcons } from '@expo/vector-icons';
 import api from '../../../../services/api';
-
 
 export function ChooseCheck({ navigation, route }) {
     const { carro } = route?.params;
@@ -22,6 +21,7 @@ export function ChooseCheck({ navigation, route }) {
                 const data = response.data;
                 const routesApi = Object.keys(data).filter(key => Array.isArray(data[key])).map(key => ({
                     nome: key.charAt(0).toUpperCase() + key.slice(1),
+                    checked: false,
                 }));
                 setrouteApi(routesApi);
                 const dadosPrincipais = {
@@ -43,16 +43,31 @@ export function ChooseCheck({ navigation, route }) {
         fetchCarro();
     }, [carro.id]);
 
-   
+    useEffect(() => {
+        const unsubscribe = navigation.addListener('focus', () => { });
+        return unsubscribe;
+    }, [navigation]);
+
+
+    const toggleItemState = (nome) => {
+        const newRouteApi = routeApi.map(item => {
+            if (item.nome === nome) {
+                return { ...item, checked: !item.checked };
+            }
+            return item;
+        });
+        setrouteApi(newRouteApi);
+    };
 
     const renderItem = ({ item }) => {
         return (
             <RenderFlat onPress={() => handlePress(item)}>
                 <IconWrapper style={{ marginRight: '5%' }}>
-                    <MaterialIcons
-                        name={item.checked ? "check-box" : "check-box-outline-blank"}
-                        size={24} color="gray"
-                    />
+                    {item.checked ? (
+                        <MaterialIcons name="check-box" size={24} color="green" />
+                    ) : (
+                        <MaterialIcons name="check-box-outline-blank" size={24} color="gray" />
+                    )}
                 </IconWrapper>
                 <Text style={{ color: 'gray' }}>{item.nome}</Text>
             </RenderFlat>
@@ -62,8 +77,13 @@ export function ChooseCheck({ navigation, route }) {
     const handlePress = async (item) => {
         const categoriaNome = item.nome.toLowerCase();
         const dadosPart = carroPart[categoriaNome];
-        navigation.navigate('CheckListPart', { dadosPart, dadosBrutos });
+        navigation.navigate('CheckListPart', {
+            dadosPart,
+            dadosBrutos,
+            onGoBack: () => toggleItemState(item.nome),
+        });
     };
+
 
     if (loading) return <CenteredView><MessageText>Carregando...</MessageText></CenteredView>;
     if (error) return <CenteredView><MessageText>Erro: {error}</MessageText></CenteredView>;
@@ -80,7 +100,6 @@ export function ChooseCheck({ navigation, route }) {
                     renderItem={renderItem}
                 />
             </Container>
-
 
         </SafeAreaView>
     )
