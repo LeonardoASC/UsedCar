@@ -4,6 +4,7 @@ import { Header, Container, ViewWrapper, ProfileImage, ConfigFlat, RenderFlat, I
 import { MaterialIcons } from '@expo/vector-icons';
 import api from '../../../../services/api';
 
+
 export function ChooseCheck({ navigation, route }) {
     const { carro } = route?.params;
     const [carroPart, setCarroPart] = useState([]);
@@ -19,7 +20,6 @@ export function ChooseCheck({ navigation, route }) {
                 const response = await api.get(`/carros/${carro.id}`);
                 setCarroPart(response.data);
                 const data = response.data;
-                // Supondo que você queira listar todas as categorias disponíveis no objeto
                 const routesApi = Object.keys(data).filter(key => Array.isArray(data[key])).map(key => ({
                     nome: key.charAt(0).toUpperCase() + key.slice(1),
                 }));
@@ -33,7 +33,6 @@ export function ChooseCheck({ navigation, route }) {
                     numero_portas: response.data.numero_portas,
                 };
                 setDadosBrutos(dadosPrincipais);
-
             } catch (error) {
                 setError(error.message);
                 alert(`Erro: ${error.message}`);
@@ -44,26 +43,27 @@ export function ChooseCheck({ navigation, route }) {
         fetchCarro();
     }, [carro.id]);
 
+   
+
     const renderItem = ({ item }) => {
         return (
-            <RenderFlat
-                onPress={() => handlePress(item)}
-            >
+            <RenderFlat onPress={() => handlePress(item)}>
                 <IconWrapper style={{ marginRight: '5%' }}>
-                    <MaterialIcons name="check-box-outline-blank" size={24} color="gray" />
+                    <MaterialIcons
+                        name={item.checked ? "check-box" : "check-box-outline-blank"}
+                        size={24} color="gray"
+                    />
                 </IconWrapper>
                 <Text style={{ color: 'gray' }}>{item.nome}</Text>
             </RenderFlat>
-
-        )
+        );
     };
 
     const handlePress = async (item) => {
         const categoriaNome = item.nome.toLowerCase();
         const dadosPart = carroPart[categoriaNome];
-        navigation.navigate('CheckListPart', { dadosPart, dadosBrutos});
+        navigation.navigate('CheckListPart', { dadosPart, dadosBrutos });
     };
-
 
     if (loading) return <CenteredView><MessageText>Carregando...</MessageText></CenteredView>;
     if (error) return <CenteredView><MessageText>Erro: {error}</MessageText></CenteredView>;
