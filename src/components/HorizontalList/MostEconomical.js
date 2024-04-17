@@ -3,7 +3,7 @@ import { FlatList, Dimensions, ImageBackground, Text } from "react-native";
 
 const { width } = Dimensions.get("window");
 
-const HorizontalList = ({ dicas }) => {
+const MostEconomical = ({ dicas }) => {
     return (
         <FlatList
             data={dicas}
@@ -39,11 +39,14 @@ const HorizontalList = ({ dicas }) => {
                     }}
                 // imageStyle={{ borderRadius: 10 }}
                 >
-                    <Text style={{ color: 'white' }}>{item.title}</Text>
+                    <Text style={{ color: 'black' }}>{item.marca}</Text>
+                    <Text style={{ color: 'black' }}>{item.modelo}</Text>
+                    <Text style={{ color: 'black' }}>{item.ano}</Text>
+                    <Text style={{ color: 'black' }}>{item.km_litro} km/l</Text>
                 </ImageBackground>
             )}
         />
     )
 };
 
-export default HorizontalList;
+export default MostEconomical;
