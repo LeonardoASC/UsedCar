@@ -26,6 +26,12 @@ export function CheckListOne({ navigation }) {
         fetchCarros();
     }, []);
 
+    useEffect(() => {
+        if (!query) {
+            setFilteredData(carros);
+        }
+    }, [carros, query]);
+
     if (loading) return <CenteredView><MessageText>Carregando...</MessageText></CenteredView>;
     if (error) return <CenteredView><MessageText>Erro: {error}</MessageText></CenteredView>;
 
@@ -54,7 +60,6 @@ export function CheckListOne({ navigation }) {
                     placeholder="Pesquise o veiculo..."
                     placeholderTextColor="#999"
                 />
-                {/* //se o usuário não digitar nada, exibe todos os carros */}
 
                 <FlatList
                     data={filteredData}
