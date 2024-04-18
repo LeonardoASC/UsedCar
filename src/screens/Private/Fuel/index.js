@@ -3,6 +3,7 @@ import { FlatList, SafeAreaView, Text, TouchableOpacity, View } from "react-nati
 import { Header, Container, CenteredView, MessageText, ItemSearch } from "./styles.js";
 import api from '../../../services/api.js'
 import MostEconomical from '../../../components/HorizontalList/MostEconomical.js'
+
 export function Fuel() {
     const [topCarros, setTopCarros] = useState([]);
     const [carros, setCarros] = useState([]);
