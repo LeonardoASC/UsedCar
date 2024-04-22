@@ -46,3 +46,5 @@ export function CheckListPart({ navigation, route }) {
         </SafeAreaView>
     )
 }
+
+

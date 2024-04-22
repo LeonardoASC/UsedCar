@@ -49,15 +49,7 @@ export function ChooseCheck({ navigation, route }) {
     }, [navigation]);
 
 
-    const toggleItemState = (nome) => {
-        const newRouteApi = routeApi.map(item => {
-            if (item.nome === nome) {
-                return { ...item, checked: !item.checked };
-            }
-            return item;
-        });
-        setrouteApi(newRouteApi);
-    };
+   
 
     const renderItem = ({ item }) => {
         return (
@@ -84,6 +76,16 @@ export function ChooseCheck({ navigation, route }) {
         });
     };
 
+    const toggleItemState = (nome) => {
+        const newRouteApi = routeApi.map(item => {
+            if (item.nome === nome) {
+                return { ...item, checked: !item.checked };
+            }
+            return item;
+        });
+        setrouteApi(newRouteApi);
+    };
+
 
     if (loading) return <CenteredView><MessageText>Carregando...</MessageText></CenteredView>;
     if (error) return <CenteredView><MessageText>Erro: {error}</MessageText></CenteredView>;
@@ -91,11 +93,14 @@ export function ChooseCheck({ navigation, route }) {
     return (
         <SafeAreaView style={{ flex: 1 }}>
             <Header>
-
+                <Text>{carro.marca}</Text>
+                <Text>{carro.modelo}</Text>
+                <Text>Progresso do checklist...</Text>
             </Header>
             <Container>
                 <ConfigFlat
                     data={routeApi}
+                    numColumns={2}
                     keyExtractor={(item, index) => index.toString()}
                     renderItem={renderItem}
                 />
