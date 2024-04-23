@@ -93,6 +93,7 @@ export function ChooseCheck({ navigation, route }) {
     return (
         <SafeAreaView style={{ flex: 1 }}>
             <Header>
+            <Text>ChooseChecklist</Text>
                 <Text>{carro.marca}</Text>
                 <Text>{carro.modelo}</Text>
                 <Text>Progresso do checklist...</Text>

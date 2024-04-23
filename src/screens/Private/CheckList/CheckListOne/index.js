@@ -59,7 +59,7 @@ export function CheckListOne({ navigation }) {
     return (
         <SafeAreaView style={{ flex: 1 }}>
             <Header>
-
+        <Text>ChecklistOne</Text>
             </Header>
             <Container>
                 <InputSearch
