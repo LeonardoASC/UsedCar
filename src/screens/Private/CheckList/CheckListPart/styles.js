@@ -6,7 +6,6 @@ export const Header = styled.View`
     
     width: 100%;
     height: 20%;
-    flex-direction: row;
     align-items: center;
     justify-content:center;
 `;

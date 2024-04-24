@@ -42,7 +42,7 @@ export function Private() {
   return (
     <View style={{ flex: 1, backgroundColor: '#f2f2f2' }}>
       <Tab.Navigator
-        initialRouteName="Fuel"
+        initialRouteName="CheckList"
         screenOptions={{
           tabBarActiveTintColor: '#e91e63',
           tabBarIconSize: 20,

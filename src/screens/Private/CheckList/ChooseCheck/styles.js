@@ -1,6 +1,7 @@
 import styled from "styled-components/native";
-import { Platform } from 'react-native';
+import { Dimensions, Platform } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
+const { width } = Dimensions.get('window');
 
 export const Header = styled.View`
     width: 100%;
@@ -30,15 +31,11 @@ export const Container = styled.View`
     height: 90%;
 `;
 export const RenderFlat = styled.TouchableOpacity`
-  background-color: white;
-  border-radius: 10px;
-  margin-left:5%;
-  margin-right:5%;
-  margin-top:2%;
-  display: flex;
   flex-direction: row;
   align-items: center;
- 
+  background-color: #f9c2ff;
+  padding: 20px;
+  width: ${(width / 2) - 16}px;
   padding-top: 4%;
   padding-left: 4%;
   padding-right: 4%;
@@ -63,7 +60,10 @@ export const ConfigFlat = styled.FlatList`
 `;
 
 export const IconWrapper = styled.View`
-/* margin-right: 2%; */
+  flex: 1;
+  flex-direction: row;
+  align-items: center;
+  margin-right: 5%;
 `;
 
 export const CenteredView = styled.View`

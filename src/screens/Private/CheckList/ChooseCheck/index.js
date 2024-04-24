@@ -1,91 +1,58 @@
 import React, { useState, useEffect } from 'react'
-import { SafeAreaView, Text, } from 'react-native'
+import { Dimensions, FlatList, SafeAreaView, Text, TouchableOpacity, View, } from 'react-native'
 import { Header, Container, ConfigFlat, RenderFlat, IconWrapper, CenteredView, MessageText } from "./styles.js"
 import { MaterialIcons } from '@expo/vector-icons';
 import api from '../../../../services/api';
 
 export function ChooseCheck({ navigation, route }) {
-    const { carro } = route?.params;
-    const [carroPart, setCarroPart] = useState([]);
-    const [dadosBrutos, setDadosBrutos] = useState([]);
-    const [routeApi, setrouteApi] = useState([]);
+    const { carro, dadosCarro } = route?.params;
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
+    const [columns, setColumns] = useState([]);
+    const { width } = Dimensions.get('window');
 
+console.log(dadosCarro);
     useEffect(() => {
-        const fetchCarro = async () => {
+        const fetchData = async () => {
             try {
-                setLoading(true);
-                const response = await api.get(`/carros/${carro.id}`);
-                setCarroPart(response.data);
-                const data = response.data;
-                const routesApi = Object.keys(data).filter(key => Array.isArray(data[key])).map(key => ({
-                    nome: key.charAt(0).toUpperCase() + key.slice(1),
-                    checked: false,
-                }));
-                setrouteApi(routesApi);
-                const dadosPrincipais = {
-                    id: response.data.id,
-                    marca: response.data.marca,
-                    modelo: response.data.modelo,
-                    ano: response.data.ano,
-                    tipo_carroceria: response.data.tipo_carroceria,
-                    numero_portas: response.data.numero_portas,
-                };
-                setDadosBrutos(dadosPrincipais);
+                const response = await api.get('/checklist');
+                if (response.data.length > 0) {
+                    const firstItem = response.data[0];
+                    const excludedKeys = ['id', 'carro_id', 'created_at', 'updated_at'];
+                    const columnNames = Object.keys(firstItem).filter(key => !excludedKeys.includes(key));
+                    setColumns(columnNames);
+                }
             } catch (error) {
-                setError(error.message);
-                alert(`Erro: ${error.message}`);
-            } finally {
-                setLoading(false);
+                console.error('Erro ao buscar dados:', error);
             }
         };
-        fetchCarro();
-    }, [carro.id]);
+        fetchData();
+    }, []);
 
-    useEffect(() => {
-        const unsubscribe = navigation.addListener('focus', () => { });
-        return unsubscribe;
-    }, [navigation]);
+    const handlePress = async (item) => {
+        navigation.navigate('CheckListPart', {
+            selectedItem: item,
+            carro: carro
+        });
+    };
 
-
-   
 
     const renderItem = ({ item }) => {
         return (
-            <RenderFlat onPress={() => handlePress(item)}>
-                <IconWrapper style={{ marginRight: '5%' }}>
-                    {item.checked ? (
-                        <MaterialIcons name="check-box" size={24} color="green" />
-                    ) : (
-                        <MaterialIcons name="check-box-outline-blank" size={24} color="gray" />
-                    )}
-                </IconWrapper>
-                <Text style={{ color: 'gray' }}>{item.nome}</Text>
-            </RenderFlat>
+            <TouchableOpacity
+                onPress={() => handlePress(item)}
+                style={{
+                    backgroundColor: '#f9c2ff',
+                    padding: 20,
+                    marginVertical: 8,
+                    marginHorizontal: 12,
+                    borderRadius: 5,
+                    width: width / 2 - 24
+                }}>
+                <Text>{item}</Text>
+            </TouchableOpacity>
         );
     };
-
-    const handlePress = async (item) => {
-        const categoriaNome = item.nome.toLowerCase();
-        const dadosPart = carroPart[categoriaNome];
-        navigation.navigate('CheckListPart', {
-            dadosPart,
-            dadosBrutos,
-            onGoBack: () => toggleItemState(item.nome),
-        });
-    };
-
-    const toggleItemState = (nome) => {
-        const newRouteApi = routeApi.map(item => {
-            if (item.nome === nome) {
-                return { ...item, checked: !item.checked };
-            }
-            return item;
-        });
-        setrouteApi(newRouteApi);
-    };
-
 
     if (loading) return <CenteredView><MessageText>Carregando...</MessageText></CenteredView>;
     if (error) return <CenteredView><MessageText>Erro: {error}</MessageText></CenteredView>;
@@ -93,16 +60,17 @@ export function ChooseCheck({ navigation, route }) {
     return (
         <SafeAreaView style={{ flex: 1 }}>
             <Header>
-            <Text>ChooseChecklist</Text>
+                <Text>ChooseChecklist</Text>
+                <Text>{carro.id}</Text>
                 <Text>{carro.marca}</Text>
                 <Text>{carro.modelo}</Text>
                 <Text>Progresso do checklist...</Text>
             </Header>
             <Container>
-                <ConfigFlat
-                    data={routeApi}
+                <FlatList
+                    data={columns}
                     numColumns={2}
-                    keyExtractor={(item, index) => index.toString()}
+                    keyExtractor={item => item}
                     renderItem={renderItem}
                 />
             </Container>

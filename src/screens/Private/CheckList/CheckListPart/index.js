@@ -1,50 +1,51 @@
-import react, { useEffect, useState } from "react";
-import { Image, SafeAreaView, Text, TouchableOpacity, View } from "react-native";
+import React, { useEffect, useState } from "react";
+import { Alert, Text, SafeAreaView, Image, ScrollView } from "react-native";
 import { Header, Container, CenteredView, MessageText, Section, CarImage } from "./styles.js";
+import api from '../../../../services/api';
+import { ca } from "date-fns/locale";
 
 export function CheckListPart({ navigation, route }) {
-    const { dadosPart, dadosBrutos } = route?.params;
+    const { selectedItem, carro } = route.params;
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
+    const [items, setItems] = useState([]);
 
+    useEffect(() => {
+        const fetchCarro = async () => {
+            try {
+                setLoading(true);
+                const response = await api.get(`/carros/${carro.id}`);
+                setItems(response.data[selectedItem] || []);
+            } catch (error) {
+                setError(error.message);
+                // Alert.alert("Erro", error.message);
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchCarro();
+    }, [carro.id, selectedItem]);
 
     if (loading) return <CenteredView><MessageText>Carregando...</MessageText></CenteredView>;
     if (error) return <CenteredView><MessageText>Erro: {error}</MessageText></CenteredView>;
+    if (!items.length) return <CenteredView><MessageText>Nenhum item encontrado para a categoria selecionada.</MessageText></CenteredView>;
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
             <Header>
                 <Text>CheckList Part</Text>
+                <Text>Marca do Carro: {carro.marca}</Text>
+                <Text>Modelo do Carro: {carro.modelo}</Text>
+                <Text>Categoria: {selectedItem}</Text>
             </Header>
-            <Container>
-                <Text>id:{dadosBrutos.id}</Text>
-                <Text>{dadosBrutos.marca} {dadosBrutos.modelo} - {dadosBrutos.ano}</Text>
-                <Text>Carroceria: {dadosBrutos.tipo_carroceria}</Text>
-                <Text>Portas: {dadosBrutos.numero_portas}</Text>
-
-                {dadosPart.map((item, index) => (
-                    <View key={index}>
-                        <Text>Carro ID: {item.carro_id}</Text>
+            <ScrollView>
+                {items.map((item, index) => (
+                    <Container key={index}>
+                        <Image source={{ uri: item.foto }} style={{backgroundColor:'black', width: 150, height: 150 }} />
                         <Text>Descrição: {item.descricao}</Text>
-                        <Image source={{ uri: item.foto }} style={{ width: 150, height: 150, backgroundColor: 'black' }} />
-                    </View>
+                    </Container>
                 ))}
-
-                <TouchableOpacity
-                    style={{ backgroundColor: 'green', padding: 10, borderRadius: 5, marginTop: 10 }}
-                    onPress={() => {
-                        // Chama o callback antes de voltar
-                        if (route.params.onGoBack) {
-                            route.params.onGoBack();
-                        }
-                        navigation.goBack();
-                    }}
-                >
-                    <Text style={{ color: 'white' }}>Checar</Text>
-                </TouchableOpacity>
-            </Container>
+            </ScrollView>
         </SafeAreaView>
-    )
+    );
 }
-
-

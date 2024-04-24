@@ -49,8 +49,39 @@ export function CheckListOne({ navigation }) {
     };
 
     const confirmSelection = () => {
-        navigation.navigate('ChooseCheck', { carro: selectedCarro });
-        setModalVisible(false);
+        // Dados do carro para enviar
+        const carroData = {
+            carro_id: selectedCarro.id,
+            acessorio: 0,
+            arcondicionado: 0,
+            assento: 0,
+            cambio: 0,
+            documento: 0,
+            embreagem: 0,
+            espelho: 0,
+            farol: 0,
+            freio: 0,
+            lataria: 0,
+            motor: 0,
+            pedal: 0,
+            pneu: 0,
+            radio: 0,
+            sistema_eletrico: 0,
+            suspensao: 0,
+            vidro: 0
+        };
+        api.post('/checklist', carroData)
+            .then(response => {
+                const dadosCarro ={
+                id: response.data.id,
+                ...response.data 
+                }
+                navigation.navigate('ChooseCheck', { carro: selectedCarro, dadosCarro: dadosCarro });
+                setModalVisible(false);
+            })
+            .catch(error => {
+                console.error('Erro ao salvar o carro:', error);
+            });
     };
 
     if (loading) return <CenteredView><MessageText>Carregando...</MessageText></CenteredView>;
@@ -59,7 +90,7 @@ export function CheckListOne({ navigation }) {
     return (
         <SafeAreaView style={{ flex: 1 }}>
             <Header>
-        <Text>ChecklistOne</Text>
+                <Text>ChecklistOne</Text>
             </Header>
             <Container>
                 <InputSearch
@@ -104,11 +135,21 @@ export function CheckListOne({ navigation }) {
                             },
                             shadowOpacity: 0.25,
                             shadowRadius: 4,
-                            elevation: 5
+                            elevation: 5,
+                            gap: '5%'
                         }}>
-                            <Text>Você deseja escolher este veículo: {selectedCarro?.marca} {selectedCarro?.modelo}?</Text>
-                            <Button title="Confirmar" onPress={confirmSelection} />
-                            <Button title="Cancelar" onPress={() => setModalVisible(false)} />
+                            <Text style={{ fontSize: 22 }}>{selectedCarro?.marca} {selectedCarro?.modelo} - {selectedCarro?.ano}</Text>
+                            <Text style={{ textAlign: 'center' }}>Você deseja escolher este veículo para iniciar o checklist?</Text>
+
+                            <View style={{ flexDirection: 'row', gap: '15%', marginTop: '5%', justifyContent: 'center', alignItems: 'center' }}>
+                                <TouchableOpacity onPress={confirmSelection}>
+                                    <Text style={{ color: 'green', fontSize: 20 }}>Iniciar</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity onPress={() => setModalVisible(false)}>
+                                    <Text style={{ color: 'red', fontSize: 14 }}>Cancelar</Text>
+                                </TouchableOpacity>
+
+                            </View>
                         </View>
                     </CenteredViewModal>
                 </Modal>
