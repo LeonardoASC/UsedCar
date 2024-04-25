@@ -72,11 +72,8 @@ export function CheckListOne({ navigation }) {
         };
         api.post('/checklist', carroData)
             .then(response => {
-                const dadosCarro ={
-                id: response.data.id,
-                ...response.data 
-                }
-                navigation.navigate('ChooseCheck', { carro: selectedCarro, dadosCarro: dadosCarro });
+                const createdChecklistId = response.data.checklist.id;
+                navigation.navigate('ChooseCheck', { carro: selectedCarro, checklistId: createdChecklistId });
                 setModalVisible(false);
             })
             .catch(error => {

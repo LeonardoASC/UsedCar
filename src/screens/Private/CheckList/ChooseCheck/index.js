@@ -1,25 +1,27 @@
 import React, { useState, useEffect } from 'react'
+import { useFocusEffect } from '@react-navigation/native';
 import { Dimensions, FlatList, SafeAreaView, Text, TouchableOpacity, View, } from 'react-native'
 import { Header, Container, ConfigFlat, RenderFlat, IconWrapper, CenteredView, MessageText } from "./styles.js"
-import { MaterialIcons } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import api from '../../../../services/api';
 
 export function ChooseCheck({ navigation, route }) {
-    const { carro, dadosCarro } = route?.params;
+    const { carro, checklistId } = route?.params;
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
     const [columns, setColumns] = useState([]);
     const { width } = Dimensions.get('window');
 
-console.log(dadosCarro);
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await api.get('/checklist');
-                if (response.data.length > 0) {
-                    const firstItem = response.data[0];
+                const response = await api.get(`/checklist/${checklistId}`);
+                if (response.data && typeof response.data === 'object') {
                     const excludedKeys = ['id', 'carro_id', 'created_at', 'updated_at'];
-                    const columnNames = Object.keys(firstItem).filter(key => !excludedKeys.includes(key));
+                    const columnNames = Object.keys(response.data).filter(key => !excludedKeys.includes(key)).map(key => ({
+                        name: key,
+                        value: response.data[key]
+                    }));
                     setColumns(columnNames);
                 }
             } catch (error) {
@@ -29,11 +31,10 @@ console.log(dadosCarro);
         fetchData();
     }, []);
 
+
+
     const handlePress = async (item) => {
-        navigation.navigate('CheckListPart', {
-            selectedItem: item,
-            carro: carro
-        });
+        navigation.navigate('CheckListPart', { selectedPartCar: item, carro: carro });
     };
 
 
@@ -42,17 +43,22 @@ console.log(dadosCarro);
             <TouchableOpacity
                 onPress={() => handlePress(item)}
                 style={{
-                    backgroundColor: '#f9c2ff',
+                    backgroundColor: '#fff',
                     padding: 20,
                     marginVertical: 8,
                     marginHorizontal: 12,
                     borderRadius: 5,
-                    width: width / 2 - 24
+                    width: width / 2 - 24,
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    justifyContent: 'space-between'
                 }}>
-                <Text>{item}</Text>
+                <Text>{item.name}</Text>
+                <MaterialCommunityIcons name={item.value === 0 ?  "checkbox-blank-outline" : "checkbox-marked" } size={24} color="black" />
             </TouchableOpacity>
         );
     };
+
 
     if (loading) return <CenteredView><MessageText>Carregando...</MessageText></CenteredView>;
     if (error) return <CenteredView><MessageText>Erro: {error}</MessageText></CenteredView>;
@@ -70,7 +76,7 @@ console.log(dadosCarro);
                 <FlatList
                     data={columns}
                     numColumns={2}
-                    keyExtractor={item => item}
+                    keyExtractor={item => item.name + item.value}
                     renderItem={renderItem}
                 />
             </Container>

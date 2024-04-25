@@ -5,17 +5,17 @@ import api from '../../../../services/api';
 import { ca } from "date-fns/locale";
 
 export function CheckListPart({ navigation, route }) {
-    const { selectedItem, carro } = route.params;
+    const { selectedPartCar, carro } = route.params;
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
     const [items, setItems] = useState([]);
-
+    
     useEffect(() => {
         const fetchCarro = async () => {
             try {
                 setLoading(true);
                 const response = await api.get(`/carros/${carro.id}`);
-                setItems(response.data[selectedItem] || []);
+                setItems(response.data[selectedPartCar.name] || []);
             } catch (error) {
                 setError(error.message);
                 // Alert.alert("Erro", error.message);
@@ -24,7 +24,7 @@ export function CheckListPart({ navigation, route }) {
             }
         };
         fetchCarro();
-    }, [carro.id, selectedItem]);
+    }, [carro.id, selectedPartCar]);
 
     if (loading) return <CenteredView><MessageText>Carregando...</MessageText></CenteredView>;
     if (error) return <CenteredView><MessageText>Erro: {error}</MessageText></CenteredView>;
@@ -36,12 +36,12 @@ export function CheckListPart({ navigation, route }) {
                 <Text>CheckList Part</Text>
                 <Text>Marca do Carro: {carro.marca}</Text>
                 <Text>Modelo do Carro: {carro.modelo}</Text>
-                <Text>Categoria: {selectedItem}</Text>
+                <Text>Categoria: {selectedPartCar.name}</Text>
             </Header>
             <ScrollView>
                 {items.map((item, index) => (
                     <Container key={index}>
-                        <Image source={{ uri: item.foto }} style={{backgroundColor:'black', width: 150, height: 150 }} />
+                        <Image source={{ uri: item.foto }} style={{ backgroundColor: 'black', width: 150, height: 150 }} />
                         <Text>Descrição: {item.descricao}</Text>
                     </Container>
                 ))}
