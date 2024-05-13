@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { FlatList, SafeAreaView, Text, TouchableOpacity, View, Modal, Button } from "react-native";
 import { Header, Container, InputSearch, ItemSearch, CenteredView, MessageText, CenteredViewModal } from "./styles.js";
 import api from "../../../../services/api.js";
+import { CheckListContext } from "../../../../context/CheckListContext.js";
 
 export function CheckListOne({ navigation }) {
     const [carros, setCarros] = useState([]);
@@ -10,7 +11,9 @@ export function CheckListOne({ navigation }) {
     const [query, setQuery] = useState('');
     const [filteredData, setFilteredData] = useState(carros);
     const [modalVisible, setModalVisible] = useState(false);
-    const [selectedCarro, setSelectedCarro] = useState(null);
+
+    const [] = useState(null);
+    const { createCheckList, selectedCar, setSelectedCar } = useContext(CheckListContext);
 
     useEffect(() => {
         const fetchCarros = async () => {
@@ -24,7 +27,6 @@ export function CheckListOne({ navigation }) {
                 setLoading(false);
             }
         };
-
         fetchCarros();
     }, []);
 
@@ -44,41 +46,13 @@ export function CheckListOne({ navigation }) {
     };
 
     const handlePressItem = (carro) => {
-        setSelectedCarro(carro);
+        setSelectedCar(carro);
         setModalVisible(true);
     };
 
-    const confirmSelection = () => {
-        // Dados do carro para enviar
-        const carroData = {
-            carro_id: selectedCarro.id,
-            acessorio: 0,
-            arcondicionado: 0,
-            assento: 0,
-            cambio: 0,
-            documento: 0,
-            embreagem: 0,
-            espelho: 0,
-            farol: 0,
-            freio: 0,
-            lataria: 0,
-            motor: 0,
-            pedal: 0,
-            pneu: 0,
-            radio: 0,
-            sistema_eletrico: 0,
-            suspensao: 0,
-            vidro: 0
-        };
-        api.post('/checklist', carroData)
-            .then(response => {
-                const createdChecklistId = response.data.checklist.id;
-                navigation.navigate('ChooseCheck', { carro: selectedCarro, checklistId: createdChecklistId });
-                setModalVisible(false);
-            })
-            .catch(error => {
-                console.error('Erro ao salvar o carro:', error);
-            });
+    const navigateToCheckList = (selectedCar) => {
+        createCheckList(selectedCar);
+        navigation.navigate('ChooseCheck');
     };
 
     if (loading) return <CenteredView><MessageText>Carregando...</MessageText></CenteredView>;
@@ -104,8 +78,7 @@ export function CheckListOne({ navigation }) {
                     )}
                     keyExtractor={item => item.id}
                     renderItem={({ item }) => (
-                        <TouchableOpacity
-                            onPress={() => handlePressItem(item)}>
+                        <TouchableOpacity onPress={() => handlePressItem(item)}>
                             <ItemSearch>{`${item.marca} ${item.modelo} - ${item.ano} - ${item.tipo_carroceria} - ${item.numero_portas}`}</ItemSearch>
                         </TouchableOpacity>
                     )}
@@ -133,14 +106,14 @@ export function CheckListOne({ navigation }) {
                             shadowOpacity: 0.25,
                             shadowRadius: 4,
                             elevation: 5,
-                            gap: '5%'
                         }}>
-                            <Text style={{ fontSize: 22 }}>{selectedCarro?.marca} {selectedCarro?.modelo} - {selectedCarro?.ano}</Text>
+                            <Text style={{ fontSize: 22 }}>{selectedCar?.marca} {selectedCar?.modelo} - {selectedCar?.ano}</Text>
                             <Text style={{ textAlign: 'center' }}>Você deseja escolher este veículo para iniciar o checklist?</Text>
 
-                            <View style={{ flexDirection: 'row', gap: '15%', marginTop: '5%', justifyContent: 'center', alignItems: 'center' }}>
-                                <TouchableOpacity onPress={confirmSelection}>
-                                    <Text style={{ color: 'green', fontSize: 20 }}>Iniciar</Text>
+                            <View style={{ marginTop: '5%', justifyContent: 'center', alignItems: 'center' }}>
+                                <TouchableOpacity
+                                    onPress={() => navigateToCheckList(selectedCar)}>
+                                    <Text style={{ color: 'green', fontSize: 20, borderColor: 'green', borderWidth: 1, borderRadius: 5, paddingHorizontal: 5, alignSelf: 'center' }}>Iniciar</Text>
                                 </TouchableOpacity>
                                 <TouchableOpacity onPress={() => setModalVisible(false)}>
                                     <Text style={{ color: 'red', fontSize: 14 }}>Cancelar</Text>

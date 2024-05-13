@@ -1,21 +1,24 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { useFocusEffect } from '@react-navigation/native';
 import { Dimensions, FlatList, SafeAreaView, Text, TouchableOpacity, View, } from 'react-native'
 import { Header, Container, ConfigFlat, RenderFlat, IconWrapper, CenteredView, MessageText } from "./styles.js"
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import api from '../../../../services/api';
+import { CheckListContext } from "../../../../context/CheckListContext.js";
 
-export function ChooseCheck({ navigation, route }) {
-    const { carro, checklistId } = route?.params;
+export function ChooseCheck({ navigation }) {
+    const { checkListId, isLoading, selectedCar } = useContext(CheckListContext);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
     const [columns, setColumns] = useState([]);
     const { width } = Dimensions.get('window');
 
+    
     useEffect(() => {
+        setLoading(true);
         const fetchData = async () => {
             try {
-                const response = await api.get(`/checklist/${checklistId}`);
+                const response = await api.get(`/checklist/${checkListId}`);
                 if (response.data && typeof response.data === 'object') {
                     const excludedKeys = ['id', 'carro_id', 'created_at', 'updated_at'];
                     const columnNames = Object.keys(response.data).filter(key => !excludedKeys.includes(key)).map(key => ({
@@ -27,6 +30,9 @@ export function ChooseCheck({ navigation, route }) {
             } catch (error) {
                 console.error('Erro ao buscar dados:', error);
             }
+            finally {
+                setLoading(false);
+            }
         };
         fetchData();
     }, []);
@@ -34,7 +40,8 @@ export function ChooseCheck({ navigation, route }) {
 
 
     const handlePress = async (item) => {
-        navigation.navigate('CheckListPart', { selectedPartCar: item, carro: carro });
+        console.log('Item selecionado a:', item.name);
+        navigation.navigate('CheckListPart', { itemPart: item.name, checkListId });
     };
 
 
@@ -67,9 +74,9 @@ export function ChooseCheck({ navigation, route }) {
         <SafeAreaView style={{ flex: 1 }}>
             <Header>
                 <Text>ChooseChecklist</Text>
-                <Text>{carro.id}</Text>
-                <Text>{carro.marca}</Text>
-                <Text>{carro.modelo}</Text>
+                <Text>{selectedCar.id}</Text>
+                <Text>{selectedCar.marca}</Text>
+                <Text>{selectedCar.modelo}</Text>
                 <Text>Progresso do checklist...</Text>
             </Header>
             <Container>
