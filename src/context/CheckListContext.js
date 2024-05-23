@@ -6,7 +6,7 @@ export const CheckListContext = createContext({});
 
 export const CheckListProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false);
-  const [checkListId, setCheckListId] = useState(0);
+  const [checkListId, setCheckListId] = useState(null);
   const [selectedCar, setSelectedCar] = useState(null);
 
   const createCheckList = async (selectedCarro) => {
@@ -42,20 +42,6 @@ export const CheckListProvider = ({ children }) => {
     }
   };
 
-
-  // const updateCheckList = (carroId, updates) => {
-  //   setIsLoading(true);
-  //   api.patch(`/checklist/${carroId}`, updates)
-  //     .then(response => {
-  //       setIsLoading(false);
-  //       // Você pode tratar a resposta aqui
-  //     })
-  //     .catch(error => {
-  //       console.error('Erro ao atualizar o carro:', error);
-  //       setIsLoading(false);
-  //     });
-  // };
-
   useEffect(() => {
     // console.log('Atualização do checkListId no contexto:', checkListId);
   }, [checkListId]);
@@ -64,7 +50,6 @@ export const CheckListProvider = ({ children }) => {
     <CheckListContext.Provider value={{
       isLoading,
       createCheckList,
-      // updateCheckList,
       checkListId,
       setCheckListId,
       selectedCar,

@@ -12,7 +12,7 @@ export function CheckListOne({ navigation }) {
     const [filteredData, setFilteredData] = useState(carros);
     const [modalVisible, setModalVisible] = useState(false);
 
-    const [] = useState(null);
+
     const { createCheckList, selectedCar, setSelectedCar } = useContext(CheckListContext);
 
     useEffect(() => {

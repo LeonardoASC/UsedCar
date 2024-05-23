@@ -1,46 +1,53 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { useFocusEffect } from '@react-navigation/native';
-import { Dimensions, FlatList, SafeAreaView, Text, TouchableOpacity, View, } from 'react-native'
-import { Header, Container, ConfigFlat, RenderFlat, IconWrapper, CenteredView, MessageText } from "./styles.js"
+import { Dimensions, FlatList, SafeAreaView, Text, TouchableOpacity } from 'react-native'
+import { Header, Container, CenteredView, MessageText } from "./styles.js"
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import api from '../../../../services/api';
 import { CheckListContext } from "../../../../context/CheckListContext.js";
+import { useFocusEffect } from '@react-navigation/native';
 
 export function ChooseCheck({ navigation }) {
-    const { checkListId, isLoading, selectedCar } = useContext(CheckListContext);
+    const { checkListId, selectedCar } = useContext(CheckListContext);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
     const [columns, setColumns] = useState([]);
     const { width } = Dimensions.get('window');
+    console.log('checkListId:', checkListId);
 
-    
-    useEffect(() => {
-        setLoading(true);
-        const fetchData = async () => {
-            try {
-                const response = await api.get(`/checklist/${checkListId}`);
-                if (response.data && typeof response.data === 'object') {
-                    const excludedKeys = ['id', 'carro_id', 'created_at', 'updated_at'];
-                    const columnNames = Object.keys(response.data).filter(key => !excludedKeys.includes(key)).map(key => ({
-                        name: key,
-                        value: response.data[key]
-                    }));
-                    setColumns(columnNames);
-                }
-            } catch (error) {
-                console.error('Erro ao buscar dados:', error);
+
+    useFocusEffect(
+        React.useCallback(() => {
+            if (checkListId) {
+                setLoading(true);
+                const fetchData = async () => {
+                    try {
+                        const response = await api.get(`/checklist/${checkListId}`);
+                        if (response.data && typeof response.data === 'object') {
+                            const excludedKeys = ['id', 'carro_id', 'created_at', 'updated_at'];
+                            const columnNames = Object.keys(response.data)
+                                .filter(key => !excludedKeys.includes(key))
+                                .map(key => ({
+                                    name: key,
+                                    value: response.data[key]
+                                }));
+                            setColumns(columnNames);
+                        }
+                    } catch (error) {
+                        console.error('Erro ao buscar dados no chooseCheck:', error);
+                        setError('Erro ao buscar dados.');
+                    } finally {
+                        setLoading(false);
+                    }
+                };
+                fetchData();
             }
-            finally {
-                setLoading(false);
-            }
-        };
-        fetchData();
-    }, []);
+        }, [checkListId])
+    );
 
 
 
     const handlePress = async (item) => {
-        console.log('Item selecionado a:', item.name);
+        console.log('Item selecionado aa:', item.name);
         navigation.navigate('CheckListPart', { itemPart: item.name, checkListId });
     };
 
@@ -61,7 +68,7 @@ export function ChooseCheck({ navigation }) {
                     justifyContent: 'space-between'
                 }}>
                 <Text>{item.name}</Text>
-                <MaterialCommunityIcons name={item.value === 0 ?  "checkbox-blank-outline" : "checkbox-marked" } size={24} color="black" />
+                <MaterialCommunityIcons name={item.value === 0 ? "checkbox-blank-outline" : "checkbox-marked"} size={24} color="black" />
             </TouchableOpacity>
         );
     };
