@@ -5,8 +5,8 @@ const { width } = Dimensions.get('window');
 
 export const Header = styled.View`
     width: 100%;
-    height: 10%;
-    justify-content: flex-end;
+    height: 15%;
+    justify-content: center;
     align-items: center;
     
 `;
@@ -28,7 +28,7 @@ export const ProfileImage = styled.Image`
 `;
 export const Container = styled.View`
     width: 100%;
-    height: 90%;
+    height: 85%;
 `;
 export const RenderFlat = styled.TouchableOpacity`
   flex-direction: row;
