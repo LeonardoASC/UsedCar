@@ -42,6 +42,7 @@ export function Login({ navigation }) {
             placeholder="Email ID"
             placeholderTextColor="#a3a3a3"
             color="black"
+            style={{ color: 'black' }}
           />
         </InputField>
 
@@ -53,7 +54,8 @@ export function Login({ navigation }) {
             placeholder="Senha"
             placeholderTextColor="#a3a3a3"
             secureTextEntry={true}
-            color="black"
+            color="white"
+            style={{ color: 'black' }}
           />
           <MaterialCommunityIcons name="eye-outline" size={24} color="#A9A9A9" />
         </InputField>

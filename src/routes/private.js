@@ -1,6 +1,6 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
-import { View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
 import { FontAwesome } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
@@ -8,7 +8,7 @@ import { Entypo } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 //screens
-import { Home } from '../screens/Home';
+import { Home } from '../screens/Private/Home';
 import { CarList } from '../screens/Private/CarList';
 import { CheckList } from '../screens/Private/CheckList';
 import { CheckListPart } from '../screens/Private/CheckList/CheckListPart';
@@ -16,6 +16,7 @@ import { CheckListOne } from '../screens/Private/CheckList/CheckListOne';
 import { ChooseCheck } from '../screens/Private/CheckList/ChooseCheck';
 import { Fuel } from '../screens/Private/Fuel';
 import { Profile } from '../screens/Private/Profile';
+import { BlurView } from 'expo-blur';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -28,6 +29,7 @@ function MyStack() {
       initialRouteName="CheckListOne"
       screenOptions={{
         headerShown: false,
+        cardStyle: { backgroundColor: '#fff' },
       }}
     >
       <Stack.Screen name="CheckList2" component={CheckList} />
@@ -40,22 +42,20 @@ function MyStack() {
 
 export function Private() {
   return (
-    <View style={{ flex: 1, backgroundColor: '#f2f2f2' }}>
+    <View style={{ flex: 1 }}>
       <Tab.Navigator
-        initialRouteName="CheckList"
+        initialRouteName="Home"
         screenOptions={{
           tabBarActiveTintColor: '#e91e63',
           tabBarIconSize: 20,
           headerShown: false,
           tabBarStyle: {
             backgroundColor: '#1a1a1a',
-            // padding: 15,
           },
           tabBarLabelStyle: {
             fontSize: 12,
           },
           tabBarIconStyle: {
-            // marginTop: 5,
             alignSelf: 'center',
 
           },

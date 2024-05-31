@@ -23,7 +23,7 @@ export function ChooseCheck({ navigation }) {
                     try {
                         const response = await api.get(`/checklist/${checkListId}`);
                         if (response.data && typeof response.data === 'object') {
-                            const excludedKeys = ['id', 'carro_id', 'created_at', 'updated_at'];
+                            const excludedKeys = ['id', 'user_id', 'carro_id', 'created_at', 'updated_at'];
                             const columnNames = Object.keys(response.data)
                                 .filter(key => !excludedKeys.includes(key))
                                 .map(key => ({

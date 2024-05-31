@@ -1,6 +1,7 @@
-import React, { createContext, useState, useEffect } from 'react';
+import React, { createContext, useState, useEffect, useContext } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import api from "../services/api";
+import { AuthContext } from './AuthContext';
 
 export const CheckListContext = createContext({});
 
@@ -8,9 +9,11 @@ export const CheckListProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [checkListId, setCheckListId] = useState(null);
   const [selectedCar, setSelectedCar] = useState(null);
+  const { userInfo } = useContext(AuthContext);
 
   const createCheckList = async (selectedCarro) => {
     const carroData = {
+      user_id: userInfo.id,
       carro_id: selectedCarro.id,
       acessorio: 0,
       arcondicionado: 0,

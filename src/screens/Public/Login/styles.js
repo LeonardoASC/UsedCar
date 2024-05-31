@@ -50,6 +50,7 @@ export const InputField = styled.View`
   border-color: #4b5563;
   margin-bottom: 16px;
   border-radius: 10px;
+  color:black;
 `;
 
 export const Input = styled.TextInput`

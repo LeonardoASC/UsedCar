@@ -4,11 +4,11 @@ import { LinearGradient } from 'expo-linear-gradient';
 
 export const Container = styled.SafeAreaView`
   flex: 1;
-  background-color: #FAFAFA; /* Change background color to match login screen */
+  background-color: #FAFAFA;
 `;
 
 export const Header = styled.View`
-  height: 25%; /* Adjust height to match login screen */
+  height: 25%; 
   justify-content: flex-end;
   align-items: center;
 `;
@@ -24,7 +24,7 @@ export const InputRow = styled.View`
   flex-direction: row;
   align-items: center;
   padding: 8px; 
-  border-width: 0.4px; /* Match border width with login screen */
+  border-width: 0.4px; 
   border-color: #4b5563; 
   border-radius: 10px; 
   margin-bottom: 16px; 
@@ -33,13 +33,13 @@ export const InputRow = styled.View`
 export const StyledTextInput = styled.TextInput`
   flex: 1;
   margin-left: 8px; 
-  color: black; /* Change text color to match login screen */
+  color: black;
 `;
 
 export const StyledButton = styled.TouchableOpacity`
   background-color: white;
   width: 90%; 
-  height: 10%; /* Match height with login screen */
+  height: 10%; 
   align-items: center;
   justify-content: center;
   border-radius: 10px;
@@ -60,11 +60,11 @@ export const StyledButton = styled.TouchableOpacity`
 
 export const Footer = styled.View`
   flex-direction: row;
-  margin-top: 15%; /* Adjust margin top to match login screen */
+  margin-top: 15%; 
 `;
 
 export const LinkText = styled.Text`
-  color: black; /* Change text color to match login screen */
+  color: black; 
   text-decoration-line: underline;
   margin-left: 8px;
 `;

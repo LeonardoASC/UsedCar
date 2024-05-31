@@ -4,7 +4,9 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 // Função assíncrona para obter o token do AsyncStorage
 async function getToken() {
     try {
-        return await AsyncStorage.getItem('userToken');
+        const token = await AsyncStorage.getItem('userToken');
+        // console.log('Token obtido do AsyncStorage:', token);
+        return token;
     } catch (error) {
         console.error('Erro ao obter token:', error);
     }
