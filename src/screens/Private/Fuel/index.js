@@ -26,6 +26,24 @@ export function Fuel() {
         fetchCarros();
     }, []);
 
+    const renderItem = ({ item }) => (
+        <View style={{
+            flexDirection: 'row',
+            backgroundColor: 'white',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            paddingHorizontal: 16,
+            paddingVertical: 20,
+        }}>
+            <View style={{ flex: 1, marginLeft: 16 }}>
+                {/* <Image style={{ width: 120, height: 100, resizeMode: 'cover', borderRadius: 5, }} source={{ uri: item.urlToImage }} /> */}
+                <Text style={{ fontSize: 12 }}>{`${item.marca} ${item.modelo} - ${item.ano}`}</Text>
+                <Text style={{ fontSize: 12 }}>{`Media: ${item.km_litro} km/l`}</Text>
+            </View>
+        </View>
+    );
+
+
 
     if (loading) return <CenteredView><MessageText>Carregando...</MessageText></CenteredView>;
     if (error) return <CenteredView><MessageText>Erro: {error}</MessageText></CenteredView>;
@@ -41,16 +59,9 @@ export function Fuel() {
                 </View>
                 <FlatList
                     data={carros}
-                    ItemSeparatorComponent={() => (
-                        <View style={{ height: 10.5 }} />
-                    )}
+                    ItemSeparatorComponent={() => <View style={{ height: 1, backgroundColor: '#ddd' }} />}
                     keyExtractor={item => item.id}
-                    renderItem={({ item }) => (
-                        <View>
-                            <ItemSearch>{`${item.marca} ${item.modelo} - ${item.ano}`}</ItemSearch>
-                            <ItemSearch>{`Media: ${item.km_litro} km/l`}</ItemSearch>
-                        </View>
-                    )}
+                    renderItem={renderItem}
                 />
             </Container>
         </SafeAreaView>

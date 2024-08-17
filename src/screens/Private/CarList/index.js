@@ -1,5 +1,5 @@
 import react, { useEffect, useState } from "react";
-import { FlatList, SafeAreaView, Text, TouchableOpacity, View } from "react-native";
+import { FlatList, Image, SafeAreaView, Text, TouchableOpacity, View } from "react-native";
 import { Header, Container, CenteredView, MessageText, ItemSearch } from "./styles.js";
 import api from '../../../services/api.js'
 import MostPopular from '../../../components/HorizontalList/MostPopular.js'
@@ -26,6 +26,25 @@ export function CarList() {
         fetchCarros();
     }, []);
 
+    const renderItem = ({ item }) => (
+        <View style={{
+            flexDirection: 'row',
+            backgroundColor: 'white',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            paddingHorizontal: 16,
+            paddingVertical: 20,
+        }}>
+            <View style={{ flex: 1, marginLeft: 16 }}>
+                {/* <Image style={{ width: 120, height: 100, resizeMode: 'cover', borderRadius: 5, }} source={{ uri: item.urlToImage }} /> */}
+                <Text style={{ fontSize: 12 }}>{`${item.marca} ${item.modelo} - ${item.ano}`}</Text>
+                <Text style={{ fontSize: 12 }}>{`Preço: ${item.tabela_fipe} R$`}</Text>
+            </View>
+        </View>
+    );
+
+
+
     if (loading) return <CenteredView><MessageText>Carregando...</MessageText></CenteredView>;
     if (error) return <CenteredView><MessageText>Erro: {error}</MessageText></CenteredView>;
     return (
@@ -39,16 +58,9 @@ export function CarList() {
                 </View>
                 <FlatList
                     data={carros}
-                    ItemSeparatorComponent={() => (
-                        <View style={{ height: 10.5 }} />
-                    )}
+                    ItemSeparatorComponent={() => <View style={{ height: 1, backgroundColor: '#ddd' }} />}
                     keyExtractor={item => item.id}
-                    renderItem={({ item }) => (
-                        <View>
-                            <ItemSearch>{`${item.marca} ${item.modelo} - ${item.ano}`}</ItemSearch>
-                            <ItemSearch>{`Preço: ${item.tabela_fipe} R$`}</ItemSearch>
-                        </View>
-                    )}
+                    renderItem={renderItem}
                 />
             </Container>
         </SafeAreaView>

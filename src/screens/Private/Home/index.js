@@ -8,7 +8,7 @@ import {
 import { SafeAreaView, FlatList, Text, Image, View, ActivityIndicator, TouchableOpacity, Linking, TextInput, Button } from 'react-native'
 import axios from 'axios';
 import { FontAwesome } from '@expo/vector-icons';
-import  TopNewsList  from '../../../components/HorizontalList/TopNewsList';
+import TopNewsList from '../../../components/HorizontalList/TopNewsList';
 
 export function Home({ navigation }) {
     const [news, setNews] = useState([]);
@@ -49,7 +49,7 @@ export function Home({ navigation }) {
         }
         getTopNews();
     }, []);
-    
+
     useEffect(() => {
         if (!query) {
             setFilteredData(news);
@@ -70,8 +70,8 @@ export function Home({ navigation }) {
                 justifyContent: 'space-between',
                 paddingHorizontal: 16,
                 paddingVertical: 20,
-                
-                
+
+
             }}>
                 <Image style={{ width: 120, height: 100, resizeMode: 'cover', borderRadius: 5, }} source={{ uri: item.urlToImage }} />
                 <View style={{ flex: 1, marginLeft: 16 }}>
@@ -150,14 +150,19 @@ export function Home({ navigation }) {
             </Header>
 
             <ContentHome>
-                <Text style={{fontWeight: 'bold', marginHorizontal: '5%', fontSize: 18}}>Destaques</Text>
+                <Text style={{ fontWeight: 'bold', marginHorizontal: '5%', fontSize: 18 }}>Destaques</Text>
                 {news.length > 0 ? (
                     <FlatList
-                        ListHeaderComponent={<TopNewsList dicas={topNews}/>}
+                        ListHeaderComponent={<TopNewsList dicas={topNews} />}
                         ItemSeparatorComponent={() => <View style={{ height: 1, backgroundColor: '#ddd' }} />}
                         data={filteredData}
                         keyExtractor={(item, index) => item.url + index}
                         renderItem={renderItem}
+                        maxToRenderPerBatch={10}
+                        initialNumToRender={5}
+                        updateCellsBatchingPeriod={30000}
+                        removeClippedSubviews={true}
+                        onEndReachedThreshold={0.1}
                     />
                 ) : (
                     <ActivityIndicator size="large" color="#000" />

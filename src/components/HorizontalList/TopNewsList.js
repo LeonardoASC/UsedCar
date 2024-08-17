@@ -7,7 +7,7 @@ const TopNewsList = ({ dicas }) => {
     return (
         <FlatList
             data={dicas}
-            keyExtractor={item => item.id}
+            keyExtractor={(item, index) => item.url + index}
             showsHorizontalScrollIndicator={false}
             snapToOffsets={[...Array(dicas.length)].map((x, i) => i * (width * 0.8 - 40) + (i - 1) * 40)}
             horizontal

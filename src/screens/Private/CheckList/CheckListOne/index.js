@@ -61,9 +61,10 @@ export function CheckListOne({ navigation }) {
     return (
         <SafeAreaView style={{ flex: 1 }}>
             <Header>
-                <Text>ChecklistOne</Text>
+                <Text>Iniciar Checklist</Text>
             </Header>
             <Container>
+                <Text>Escolha um carro</Text>
                 <InputSearch
                     onChangeText={handleSearch}
                     value={query}

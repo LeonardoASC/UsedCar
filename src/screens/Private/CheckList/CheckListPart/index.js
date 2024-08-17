@@ -34,7 +34,7 @@ export function CheckListPart({ navigation, route }) {
             const response = await api.patch(`/checklist/${checkListId}`, dataToUpdate);
             if (response.status === 200) {
                 // console.log('Atualização bem-sucedida:', response.data);
-                Alert.alert("Sucesso", "Item atualizado com sucesso!");
+                Alert.alert("Sucesso", "Item Verificado!");
                 navigation.navigate('ChooseCheck');
             } else {
                 // console.error('Falha na atualização:', response.status);

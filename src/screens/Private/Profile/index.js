@@ -33,6 +33,7 @@ export function Profile() {
                 </TouchableOpacity>
             </Header>
             <Container>
+            {userCheckList > 0 ? (
                 <FlatList
                     data={userCheckList}
                     keyExtractor={(item) => item.id.toString()}
@@ -47,6 +48,11 @@ export function Profile() {
                         </View>
                     )}
                 />
+            ) : (
+                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                    <Text>Nenhum checklist encontrado</Text>
+                </View>
+            )}
             </Container>
         </SafeAreaView>
     );

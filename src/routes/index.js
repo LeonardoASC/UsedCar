@@ -12,7 +12,7 @@ export function Routes() {
   return (
     <NavigationContainer>
       {
-        userToken ? (userInfo && userInfo.email === 'admin@adm.br' ? <Private />
+        !userToken ? (userInfo && userInfo.email === 'admin@adm.br' ? <Private />
           :
           <Private />
         )

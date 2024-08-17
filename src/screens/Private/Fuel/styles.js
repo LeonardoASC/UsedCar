@@ -11,10 +11,7 @@ export const Header = styled.View`
 `;
 
 export const Container = styled.View`
-  height: 90%;
-  width: 100%;
-  align-items: center;
-  justify-content: center;
+flex: 1;
 
 `;
 

@@ -102,7 +102,8 @@ export const ButtonText = styled.Text`
 `;
 
 export const ButtonLinear = styled(LinearGradient).attrs({
-  colors: ['#fff7ad', '#ffa9f9'],
+  // colors: ['#fff7ad', '#ffa9f9'],
+   colors: ['#d2f2cd', '#2da92f'],
   start: { x: 0, y: 0 },
   end: { x: 1, y: 1 },
 })`
