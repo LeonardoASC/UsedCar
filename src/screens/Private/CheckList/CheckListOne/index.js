@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
-import { FlatList, SafeAreaView, Text, TouchableOpacity, View, Modal, Button } from "react-native";
-import { Header, Container, InputSearch, ItemSearch, CenteredView, MessageText, CenteredViewModal } from "./styles.js";
+import { FlatList, SafeAreaView, Text, TouchableOpacity, View, Modal, Button, Image } from "react-native";
+import { Header, Container, InputSearch, ItemSearch, CenteredView, MessageText, CenteredViewModal, BtnCar } from "./styles.js";
 import api from "../../../../services/api.js";
 import { CheckListContext } from "../../../../context/CheckListContext.js";
 
@@ -55,6 +55,20 @@ export function CheckListOne({ navigation }) {
         navigation.navigate('ChooseCheck');
     };
 
+    const renderItem = ({ item }) => {  
+        return (
+            <BtnCar onPress={() => handlePressItem(item)}>
+                <Image source={{ uri: item.foto }} style={{ backgroundColor: 'black', width: 150, height: 150,  }} />
+                <ItemSearch>{`${item.marca}`}</ItemSearch>
+                <ItemSearch>{`${item.modelo}`}</ItemSearch>
+                <ItemSearch>{`${item.ano}`}</ItemSearch>
+                <ItemSearch>{`${item.cilindrada}`}</ItemSearch>
+                <ItemSearch>{`${item.tipo_carroceria}`}</ItemSearch>
+                <ItemSearch>{`${item.numero_portas}`}</ItemSearch>
+            </BtnCar>
+        );
+    };
+
     if (loading) return <CenteredView><MessageText>Carregando...</MessageText></CenteredView>;
     if (error) return <CenteredView><MessageText>Erro: {error}</MessageText></CenteredView>;
 
@@ -64,25 +78,22 @@ export function CheckListOne({ navigation }) {
                 <Text>Iniciar Checklist</Text>
             </Header>
             <Container>
-                <Text>Escolha um carro</Text>
+                <Text style={{color: 'white'}}>Escolha um carro</Text>
                 <InputSearch
                     onChangeText={handleSearch}
                     value={query}
                     placeholder="Pesquise o veiculo..."
-                    placeholderTextColor="#999"
+                    placeholderTextColor="#000"
+                    backgroundColor="white"
+                    
                 />
 
                 <FlatList
-                    data={filteredData}
-                    ItemSeparatorComponent={() => (
-                        <View style={{ height: 10.5 }} />
-                    )}
+                    data={filteredData}             
                     keyExtractor={item => item.id}
-                    renderItem={({ item }) => (
-                        <TouchableOpacity onPress={() => handlePressItem(item)}>
-                            <ItemSearch>{`${item.marca} ${item.modelo} - ${item.ano} - ${item.tipo_carroceria} - ${item.numero_portas}`}</ItemSearch>
-                        </TouchableOpacity>
-                    )}
+                    renderItem={renderItem}
+                    numColumns={2}
+
                 />
                 <Modal
                     animationType="fade"

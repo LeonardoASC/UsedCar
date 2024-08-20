@@ -26,11 +26,6 @@ export const InputSearch = styled.TextInput`
   border: 1px solid #ddd;
 `;
 
-export const ItemSearch = styled.Text`
-  padding: 10px;
-  background-color: #f9f9f9;
-  border-radius: 5px;
-`;
 
 export const CenteredView = styled.View`
 flex: 1;
@@ -46,4 +41,16 @@ flex: 1;
 align-items: center;
 justify-content: center;
 background-color: 'rgba(0,0,0,0.5)';
+`;
+
+export const BtnCar = styled.TouchableOpacity`
+  width: 45%;
+  background-color: #39BF61;
+  border-radius: 5px;
+  margin-top: 10px;
+  margin: 10px;
+`;
+export const ItemSearch = styled.Text`
+  color: #fff;
+  font-weight: bold;
 `;
