@@ -94,16 +94,17 @@ export function Home({ navigation }) {
             <TouchableOpacity
                 onPress={() => filterNewsBySource(item)}
                 style={{
+                    backgroundColor: '#39BF61',
                     marginHorizontal: 5,
                     alignItems: 'center',
                     justifyContent: 'center',
                     paddingHorizontal: 8,
-                    borderWidth: 0.5,
+                    // borderWidth: 0.5,
                     borderRadius: 10,
                     height: '50%',
                     alignSelf: 'center',
                 }}>
-                <Text style={{ color: 'black' }}>{item}</Text>
+                <Text style={{ color: 'white' }}>{item}</Text>
             </TouchableOpacity>
         )
     }

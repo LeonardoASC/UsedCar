@@ -46,7 +46,8 @@ export function Private() {
       <Tab.Navigator
         initialRouteName="CheckList"
         screenOptions={{
-          tabBarActiveTintColor: '#e91e63',
+          tabBarActiveTintColor: '#39BF61',
+          tabBarInactiveTintColor: 'white',
           tabBarIconSize: 20,
           headerShown: false,
           tabBarStyle: {

@@ -58,13 +58,13 @@ export function CheckListOne({ navigation }) {
     const renderItem = ({ item }) => {  
         return (
             <BtnCar onPress={() => handlePressItem(item)}>
-                <Image source={{ uri: item.foto }} style={{ backgroundColor: 'black', width: 150, height: 150,  }} />
-                <ItemSearch>{`${item.marca}`}</ItemSearch>
-                <ItemSearch>{`${item.modelo}`}</ItemSearch>
-                <ItemSearch>{`${item.ano}`}</ItemSearch>
-                <ItemSearch>{`${item.cilindrada}`}</ItemSearch>
-                <ItemSearch>{`${item.tipo_carroceria}`}</ItemSearch>
-                <ItemSearch>{`${item.numero_portas}`}</ItemSearch>
+                <Image source={{ uri: item.foto }} style={{ width: 185, height: 150, resizeMode: 'cover' }} />
+                <View style={{marginLeft: 12}}>
+                    <ItemSearch>{`${item.marca} ${item.modelo} - ${item.cilindrada}`}</ItemSearch>
+                    <ItemSearch>{`${item.ano}`}</ItemSearch>
+                    <ItemSearch>{`${item.tipo_carroceria}`}</ItemSearch>
+                    <ItemSearch>{`${item.numero_portas} portas`}</ItemSearch>
+                </View>
             </BtnCar>
         );
     };
