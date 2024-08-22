@@ -55,11 +55,16 @@ export function CheckListOne({ navigation }) {
         navigation.navigate('ChooseCheck');
     };
 
-    const renderItem = ({ item }) => {  
+    const renderItem = ({ item }) => {
         return (
             <BtnCar onPress={() => handlePressItem(item)}>
-                <Image source={{ uri: item.foto }} style={{ width: 185, height: 150, resizeMode: 'cover' }} />
-                <View style={{marginLeft: 12}}>
+                <Image source={{ uri: item.foto }} style={{
+                    width: '100%',
+                    height: 150,
+                    resizeMode: 'cover',
+                    borderRadius: 5,
+                }} />
+                <View style={{ marginLeft: 12 }}>
                     <ItemSearch>{`${item.marca} ${item.modelo} - ${item.cilindrada}`}</ItemSearch>
                     <ItemSearch>{`${item.ano}`}</ItemSearch>
                     <ItemSearch>{`${item.tipo_carroceria}`}</ItemSearch>
@@ -78,18 +83,18 @@ export function CheckListOne({ navigation }) {
                 <Text>Iniciar Checklist</Text>
             </Header>
             <Container>
-                <Text style={{color: 'white'}}>Escolha um carro</Text>
+                <Text style={{ color: 'white' }}>Escolha um carro</Text>
                 <InputSearch
                     onChangeText={handleSearch}
                     value={query}
                     placeholder="Pesquise o veiculo..."
                     placeholderTextColor="#000"
                     backgroundColor="white"
-                    
+
                 />
 
                 <FlatList
-                    data={filteredData}             
+                    data={filteredData}
                     keyExtractor={item => item.id}
                     renderItem={renderItem}
                     numColumns={2}

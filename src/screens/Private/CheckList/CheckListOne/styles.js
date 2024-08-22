@@ -49,6 +49,7 @@ export const BtnCar = styled.TouchableOpacity`
   border-radius: 5px;
   margin-top: 10px;
   margin: 10px;
+  border: 2px solid #39BF61;
 `;
 export const ItemSearch = styled.Text`
   color: #fff;
