@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { Dimensions, FlatList, SafeAreaView, Text, TouchableOpacity } from 'react-native'
+import { Dimensions, FlatList, Image, SafeAreaView, Text, TouchableOpacity, View } from 'react-native'
 import { Header, Container, CenteredView, MessageText } from "./styles.js"
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import api from '../../../../services/api';
@@ -57,7 +57,7 @@ export function ChooseCheck({ navigation }) {
             <TouchableOpacity
                 onPress={() => handlePress(item)}
                 style={{
-                    backgroundColor: '#fff',
+                    backgroundColor: '#39BF61',
                     padding: 20,
                     marginVertical: 8,
                     marginHorizontal: 12,
@@ -67,8 +67,8 @@ export function ChooseCheck({ navigation }) {
                     alignItems: 'center',
                     justifyContent: 'space-between'
                 }}>
-                <Text>{item.name}</Text>
-                <MaterialCommunityIcons name={item.value === 0 ? "checkbox-blank-outline" : "checkbox-marked"} size={24} color="black" />
+                <Text style={{ color: 'white' }}>{item.name}</Text>
+                <MaterialCommunityIcons name={item.value === 0 ? "checkbox-blank-outline" : "checkbox-marked"} size={24} color="white" />
             </TouchableOpacity>
         );
     };
@@ -80,11 +80,13 @@ export function ChooseCheck({ navigation }) {
     return (
         <SafeAreaView style={{ flex: 1 }}>
             <Header>
-                <Text>ChooseChecklist</Text>
-                <Text>{selectedCar.id}</Text>
-                <Text>{selectedCar.marca}</Text>
-                <Text>{selectedCar.modelo}</Text>
-                <Text>Progresso do checklist...</Text>
+                <View style={{flexDirection: 'row'}}>
+                    <View>
+                        <Text style={{}}>{selectedCar.marca} {selectedCar.modelo}</Text>
+                    </View>
+                    <Image source={{ uri: selectedCar.foto }} style={{ width: 120, height: 100, resizeMode: 'cover', borderRadius: 5, }} />
+                </View>
+                <Text>Escolha um item para verificar</Text>
             </Header>
             <Container>
                 <FlatList

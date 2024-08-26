@@ -37,8 +37,8 @@ export function CarList() {
         }}>
             <View style={{ flex: 1, marginLeft: 16 }}>
                 {/* <Image style={{ width: 120, height: 100, resizeMode: 'cover', borderRadius: 5, }} source={{ uri: item.urlToImage }} /> */}
-                <Text style={{ fontSize: 12 }}>{`${item.marca} ${item.modelo} - ${item.ano}`}</Text>
-                <Text style={{ fontSize: 12 }}>{`Preço: ${item.tabela_fipe} R$`}</Text>
+                <Text style={{ fontSize: 16, fontWeight: 'bold' }}>{`${item.marca} ${item.modelo} - ${item.ano}`}</Text>
+                <Text style={{ fontSize: 14 }}>{`Preço: ${item.tabela_fipe} R$`}</Text>
             </View>
         </View>
     );

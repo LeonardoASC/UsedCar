@@ -19,7 +19,7 @@ const MostEconomical = ({ dicas }) => {
                 <ImageBackground
                     source={item.imagem}
                     style={{
-                        backgroundColor: 'white',
+                        backgroundColor: '#39BF61',
                         height: width / 2.2,
                         width: width * 0.8 - 20,
                         marginHorizontal: 10,
@@ -39,10 +39,9 @@ const MostEconomical = ({ dicas }) => {
                     }}
                 // imageStyle={{ borderRadius: 10 }}
                 >
-                    <Text style={{ color: 'black' }}>{item.marca}</Text>
-                    <Text style={{ color: 'black' }}>{item.modelo}</Text>
-                    <Text style={{ color: 'black' }}>{item.ano}</Text>
-                    <Text style={{ color: 'black' }}>{item.km_litro} km/l</Text>
+                    <Text style={{ color: 'white', fontSize: 24 }}>{item.marca} {item.modelo}</Text>
+                    <Text style={{ color: 'white' }}>{item.ano}</Text>
+                    <Text style={{ color: 'white' }}>{item.km_litro} km/l</Text>
                 </ImageBackground>
             )}
         />
