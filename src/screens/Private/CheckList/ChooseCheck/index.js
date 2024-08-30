@@ -67,10 +67,20 @@ export function ChooseCheck({ navigation }) {
                     justifyContent: 'space-between'
                 }}>
                 <Text style={{ color: 'white', fontSize: 16, fontWeight: 'bold' }}>{item.name}</Text>
-                <View style={{flexDirection: 'row'}}>
-                <MaterialCommunityIcons name={item.value === 'Bom' ? "checkbox-marked":"checkbox-blank-outline"} size={24} color="white" />
-                <MaterialCommunityIcons name={item.value === 'Regular' ? "checkbox-marked":"checkbox-blank-outline"} size={24} color="white" />
-                <MaterialCommunityIcons name={item.value === 'Ruim' ? "checkbox-marked":"checkbox-blank-outline"} size={24} color="white" />
+                <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
+                    {['Bom', 'Regular', 'Ruim'].includes(item.value) && (
+                        <Text style={{ color: 'white' }}>{item.value}</Text>
+                    )}
+                    <MaterialCommunityIcons
+                        name={
+                            item.value === 'Bom' ? "checkbox-marked" :
+                            item.value === 'Regular' ? "alert-circle-outline" :
+                            item.value === 'Ruim' ? "close-box" : "checkbox-blank-outline"}
+                        size={24}
+                        color={item.value === 'Bom' ? "green" :
+                            item.value === 'Regular' ? "yellow" :
+                            item.value === 'Ruim' ? "red" : "white"}
+                    />
                 </View>
             </TouchableOpacity>
         );
@@ -83,7 +93,7 @@ export function ChooseCheck({ navigation }) {
     return (
         <SafeAreaView style={{ flex: 1 }}>
             <Header>
-                <View style={{flexDirection: 'row'}}>
+                <View style={{ flexDirection: 'row' }}>
                     <View>
                         <Text style={{}}>{selectedCar.marca} {selectedCar.modelo}</Text>
                     </View>
