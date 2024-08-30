@@ -7,7 +7,14 @@ export const Header = styled.View`
     height: 10%;
     flex-direction: row;
     align-items: center;
-    justify-content:center;
+    /* justify-content:center; */
+`;
+
+export const HeaderTitle = styled.Text`
+    font-size: 20px;
+    font-weight: bold;
+    margin-left: 5%;
+    margin-top: 10%;
 `;
 
 export const Container = styled.View`

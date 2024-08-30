@@ -1,6 +1,6 @@
 import react, { useEffect, useState } from "react";
 import { FlatList, Image, SafeAreaView, Text, TouchableOpacity, View } from "react-native";
-import { Header, Container, CenteredView, MessageText, ItemSearch } from "./styles.js";
+import { Header, Container, CenteredView, MessageText, ItemSearch, HeaderTitle } from "./styles.js";
 import api from '../../../services/api.js'
 import MostPopular from '../../../components/HorizontalList/MostPopular.js'
 
@@ -35,10 +35,12 @@ export function CarList() {
             paddingHorizontal: 16,
             paddingVertical: 20,
         }}>
-            <View style={{ flex: 1, marginLeft: 16 }}>
-                {/* <Image style={{ width: 120, height: 100, resizeMode: 'cover', borderRadius: 5, }} source={{ uri: item.urlToImage }} /> */}
+            <View style={{ flex: 1, flexDirection: 'row' }}>
+                <Image style={{ width: 70, height: 50, resizeMode: 'cover', borderRadius: 5, backgroundColor: '#39BF61' }} source={{ uri: item.foto }} />
+               <View style={{ justifyContent: 'center'}}>
                 <Text style={{ fontSize: 16, fontWeight: 'bold' }}>{`${item.marca} ${item.modelo} - ${item.ano}`}</Text>
                 <Text style={{ fontSize: 14 }}>{`Preço: ${item.tabela_fipe} R$`}</Text>
+               </View>
             </View>
         </View>
     );
@@ -50,7 +52,7 @@ export function CarList() {
     return (
         <SafeAreaView style={{ flex: 1 }}>
             <Header>
-                <Text>Ranking de Carros Mais Baratos</Text>
+                <HeaderTitle>Ranking de Carros Mais Baratos</HeaderTitle>
             </Header>
             <Container>
                 <View style={{ height: '35%' }}>

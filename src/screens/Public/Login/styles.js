@@ -5,13 +5,14 @@ import { Platform } from 'react-native';
 export const Container = styled.SafeAreaView`
   flex: 1;
   background-color: #FAFAFA;
+  
 `;
 
-export const Header =  styled.View`
-  height: 25%;
-  justify-content: flex-end;
-  align-items: center;
-`;
+// export const Header =  styled.View`
+//   height: 30%;
+//   /* justify-content: flex-start; */
+//   align-items: center;
+// `;
 
 export const HeaderText = styled.Text`
   color: #06b6d4;
@@ -24,7 +25,7 @@ export const MainContent =  styled.View`
   flex: 1;
   padding: 20px;
   align-items: center;
-  margin-top: 5%;
+  justify-content: center;
 `;
 
 export const Title = styled.Text`
@@ -124,7 +125,7 @@ export const SocialButton =  styled.View`
 export const Footer =  styled.View`
   flex-direction: row;
   /* justify-content: center; */
-  margin-top: 15%;
+  /* margin-top: 15%; */
 `;
 
 export const FooterText = styled.Text`
@@ -171,14 +172,14 @@ export const ButtonContainer = styled.TouchableOpacity`
 `;
 
 export const ButtonText = styled.Text`
-  font-size: 17px;
+  font-size: 20px;
   font-weight: bold;
   color: white;
 `;
 
 export const ButtonLinear = styled(LinearGradient).attrs({
   // colors: ['#fff7ad', '#ffa9f9'],
-   colors: ['#d2f2cd', '#2da92f'],
+   colors: ['#83c183', '#2da92f'],
   start: { x: 0, y: 0 },
   end: { x: 1, y: 1 },
 })`
