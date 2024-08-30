@@ -60,15 +60,18 @@ export function ChooseCheck({ navigation }) {
                     backgroundColor: '#39BF61',
                     padding: 20,
                     marginVertical: 8,
-                    marginHorizontal: 12,
+                    // marginHorizontal: 12,
                     borderRadius: 5,
-                    width: width / 2 - 24,
                     flexDirection: 'row',
                     alignItems: 'center',
                     justifyContent: 'space-between'
                 }}>
-                <Text style={{ color: 'white' }}>{item.name}</Text>
-                <MaterialCommunityIcons name={item.value === 0 ? "checkbox-blank-outline" : "checkbox-marked"} size={24} color="white" />
+                <Text style={{ color: 'white', fontSize: 16, fontWeight: 'bold' }}>{item.name}</Text>
+                <View style={{flexDirection: 'row'}}>
+                <MaterialCommunityIcons name={item.value === 'Bom' ? "checkbox-marked":"checkbox-blank-outline"} size={24} color="white" />
+                <MaterialCommunityIcons name={item.value === 'Regular' ? "checkbox-marked":"checkbox-blank-outline"} size={24} color="white" />
+                <MaterialCommunityIcons name={item.value === 'Ruim' ? "checkbox-marked":"checkbox-blank-outline"} size={24} color="white" />
+                </View>
             </TouchableOpacity>
         );
     };
@@ -91,9 +94,9 @@ export function ChooseCheck({ navigation }) {
             <Container>
                 <FlatList
                     data={columns}
-                    numColumns={2}
                     keyExtractor={item => item.name + item.value}
                     renderItem={renderItem}
+                    contentContainerStyle={{ width: '100%', padding: 10 }}
                 />
             </Container>
 

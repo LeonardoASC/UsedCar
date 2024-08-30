@@ -15,13 +15,12 @@ async function getToken() {
 // Criando a instância Axios
 const api = axios.create({
     // baseURL: 'http://192.168.15.6:8000/api/',//casa
-    baseURL: 'http://10.55.0.220:8000/api/',//trabalho
+    baseURL: 'http://10.55.0.170:8000/api/',//trabalho
     // timeout: 1000,
     headers: {
         'Content-Type': 'Application/json',
         'Accept': 'Application/json'
     },
-
 });
 
 // Adicionando um interceptor para inserir o token no cabeçalho de cada requisição
