@@ -69,13 +69,13 @@ export function ChooseCheck({ navigation }) {
                 <Text style={{ color: 'white', fontSize: 16, fontWeight: 'bold' }}>{item.name}</Text>
                 <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
                     {['Bom', 'Regular', 'Ruim'].includes(item.value) && (
-                        <Text style={{ color: 'white' }}>{item.value}</Text>
+                        <Text style={{ color: 'white', marginRight: 15 }}>{item.value}</Text>
                     )}
                     <MaterialCommunityIcons
                         name={
                             item.value === 'Bom' ? "checkbox-marked" :
                             item.value === 'Regular' ? "alert-circle-outline" :
-                            item.value === 'Ruim' ? "close-box" : "checkbox-blank-outline"}
+                            item.value === 'Ruim' ? "close-box" : "arrow-right-box"}
                         size={24}
                         color={item.value === 'Bom' ? "green" :
                             item.value === 'Regular' ? "yellow" :
@@ -107,6 +107,12 @@ export function ChooseCheck({ navigation }) {
                     keyExtractor={item => item.name + item.value}
                     renderItem={renderItem}
                     contentContainerStyle={{ width: '100%', padding: 10 }}
+                    ListHeaderComponent={
+                        <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+                            <Text style={{ fontSize: 18, fontWeight: 'bold', marginLeft: 15 }}>Itens</Text>
+                            <Text style={{ fontSize: 18, fontWeight: 'bold', marginRight: 15 }}>Status</Text>
+                        </View>
+                    }
                 />
             </Container>
 
