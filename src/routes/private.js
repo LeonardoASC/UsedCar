@@ -26,7 +26,7 @@ const iconSize = 20;
 function MyStack() {
   return (
     <Stack.Navigator
-      initialRouteName="CheckListOne"
+      initialRouteName="CheckList2"
       screenOptions={{
         headerShown: false,
         cardStyle: { backgroundColor: '#fff' },

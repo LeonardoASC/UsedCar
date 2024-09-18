@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Text, TouchableOpacity, StyleSheet, View, Dimensions, Platform } from "react-native";
 import { Header, Container, ImageHeader, StyledItemContainer, StyledItemText } from "./styles.js";
 import startChecklist from '../../../../assets/startChecklist2.png';
@@ -8,9 +8,15 @@ import mecanicomaos from '../../../../assets/mecanicomaos.png';
 import { Ionicons } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import HorizontalList from '../../../components/HorizontalList';
+// import { CheckListContext } from "../../../../context/CheckListContext.js";
+// const { createCheckList, selectedCar, setSelectedCar } = useContext(CheckListContext);
+import api from '../../../services/api.js';
 
 export function CheckList({ navigation }) {
     const { height } = Dimensions.get('window');
+    const [checkList, setCheckList] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState('');
     const dicas = [
         {
             id: '1',
@@ -31,6 +37,34 @@ export function CheckList({ navigation }) {
             imagem: mecanicomaos
         },
     ];
+    
+    useEffect(() => {
+        const fecthCheckList = async () => {
+            try {
+                setLoading(true);
+                const response = await api.get('/checklist-last');
+                // console.log('response.data:', response.data);
+                setCheckList(response.data);
+            } catch (error) {
+                setError(error.message);
+            } finally {
+                setLoading(false);
+            }
+        };
+        fecthCheckList();
+    }
+    , []);
+
+    const allColumnsNonZero = (checklist) => {
+        // Filtra apenas as propriedades com valores numéricos e verifica se são diferentes de "0"
+        return Object.keys(checklist).every(key => {
+            const value = checklist[key];
+            // Verifica se é um valor numérico e se é diferente de "0"
+            return isNaN(value) || value !== "0";
+        });
+    };
+    
+    
 
     return (
         <View style={{ flex: 1, backgroundColor: 'white' }}>
@@ -55,7 +89,7 @@ export function CheckList({ navigation }) {
                 <View style={{ width: '100%', height: '90%', marginTop: '10%', alignItems: 'center' }}>
                     <View style={{ width: '90%' }}>
                         <Text style={{ fontWeight: 'bold', fontSize: 24 }}>Dicas</Text>
-                        <Text style={{ marginTop: 5, color: 'gray' }}>Pontos importantes</Text>
+                        <Text style={{ marginTop: 5, color: 'gray' }}>Pontos importantess</Text>
                     </View>
                     <HorizontalList dicas={dicas} />
                 </View>
@@ -70,7 +104,13 @@ export function CheckList({ navigation }) {
                 position: 'absolute',
                 alignSelf: 'center',
                 top: height / (Platform.OS === 'ios' ? 2.6 : 2.5),
-            }} onPress={() => navigation.navigate('CheckListOne')}>
+            }} 
+            onPress={() => {
+                const route = allColumnsNonZero(checkList) ? 'CheckListOne' : 'Home';
+                navigation.navigate(route);
+            }}
+            
+            >
                 <View style={{ width: '20%', alignItems: 'center', justifyContent: 'center' }}>
                     <Ionicons name="car" size={24} color="white" />
                 </View>
