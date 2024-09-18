@@ -10,6 +10,26 @@ export const CheckListProvider = ({ children }) => {
   const [checkListId, setCheckListId] = useState(null);
   const [selectedCar, setSelectedCar] = useState(null);
   const { userInfo } = useContext(AuthContext);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  const [checkList, setCheckList] = useState([{}]);
+
+  useEffect(() => {
+    const fecthCheckList = async () => {
+        try {
+            setLoading(true);
+            const response = await api.get('/checklist-last');
+            console.log('response.data:', response.data);
+            setCheckList(response.data);
+        } catch (error) {
+            setError(error.message);
+        } finally {
+            setLoading(false);
+        }
+    };
+    fecthCheckList();
+}
+, []);
 
   const createCheckList = async (selectedCarro) => {
     const carroData = {

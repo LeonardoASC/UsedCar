@@ -43,7 +43,7 @@ export function CheckList({ navigation }) {
             try {
                 setLoading(true);
                 const response = await api.get('/checklist-last');
-                // console.log('response.data:', response.data);
+                console.log('response.data:', response.data);
                 setCheckList(response.data);
             } catch (error) {
                 setError(error.message);
@@ -56,14 +56,13 @@ export function CheckList({ navigation }) {
     , []);
 
     const allColumnsNonZero = (checklist) => {
-        // Filtra apenas as propriedades com valores numéricos e verifica se são diferentes de "0"
+        // Verifica se todos os valores numéricos são diferentes de "0"
         return Object.keys(checklist).every(key => {
             const value = checklist[key];
-            // Verifica se é um valor numérico e se é diferente de "0"
-            return isNaN(value) || value !== "0";
+            // Verifica se o valor é numérico; se for, checa se é diferente de "0"
+            return !(!isNaN(value) && value === "0");
         });
     };
-    
     
 
     return (
@@ -106,10 +105,17 @@ export function CheckList({ navigation }) {
                 top: height / (Platform.OS === 'ios' ? 2.6 : 2.5),
             }} 
             onPress={() => {
-                const route = allColumnsNonZero(checkList) ? 'CheckListOne' : 'Home';
+                const route = allColumnsNonZero(checkList) ? 'CheckListOne' : 'CheckListPart';
                 navigation.navigate(route);
             }}
-            
+            // onPress={() => {
+            //     const route = allColumnsNonZero(checkList) ? 'CheckListOne' : 'ChooseCheck';
+            //     if (route === 'CheckListPart') {
+            //         navigation.navigate(route, { selectedCar: checkList });
+            //     } else {
+            //         navigation.navigate(route);
+            //     }
+            // }}  
             >
                 <View style={{ width: '20%', alignItems: 'center', justifyContent: 'center' }}>
                     <Ionicons name="car" size={24} color="white" />
