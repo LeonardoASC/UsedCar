@@ -16,7 +16,7 @@ export function Profile() {
         try {
             const response = await api.get('/user/checklists');
             setUserCheckList(response.data);
-            console.log(response.data);
+            // console.log(response.data);
         } catch (error) {
             console.error('Erro ao buscar checklists do usuario:', error);
         }

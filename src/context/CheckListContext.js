@@ -13,25 +13,26 @@ export const CheckListProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [checkList, setCheckList] = useState([{}]);
+// console.log('Contexto checkListId:', checkListId);
 
-  useEffect(() => {
-    const fecthCheckList = async () => {
-        try {
-            setLoading(true);
-            const response = await api.get('/checklist-last');
-            console.log('response.data:', response.data);
-            setCheckList(response.data);
-        } catch (error) {
-            setError(error.message);
-        } finally {
-            setLoading(false);
-        }
-    };
-    fecthCheckList();
-}
-, []);
+
+const fetchCarros = async () => {
+  try {
+      
+      const response = await api.get('/carros');
+      // console.log('response.data:', response.data);
+      setCarros(response.data);
+  } catch (error) {
+      setError(error.message);
+  } finally {
+      setLoading(false);
+  }
+};
+
 
   const createCheckList = async (selectedCarro) => {
+    console.log('Carro selecionado:', selectedCarro);
+    
     const carroData = {
       user_id: userInfo.id,
       carro_id: selectedCarro.id,
@@ -65,9 +66,27 @@ export const CheckListProvider = ({ children }) => {
     }
   };
 
+  const resumeCheckList = async () => {
+    setIsLoading(true);
+    try {
+      const responseChecklist = await api.get('/checklist-last');
+      const lastCheckList = responseChecklist.data;
+      const responseCar = await api.get(`/carro/${lastCheckList.carro_id}`);
+      const lastCar = responseCar.data;     
+      setCheckListId(lastCheckList.id);
+      setSelectedCar(lastCar);
+    } catch (error) {
+      console.error('Erro ao buscar o último checklist:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   useEffect(() => {
     // console.log('Atualização do checkListId no contexto:', checkListId);
   }, [checkListId]);
+
+
 
   return (
     <CheckListContext.Provider value={{
@@ -76,7 +95,8 @@ export const CheckListProvider = ({ children }) => {
       checkListId,
       setCheckListId,
       selectedCar,
-      setSelectedCar
+      setSelectedCar,
+      resumeCheckList, 
     }}>
       {children}
     </CheckListContext.Provider>

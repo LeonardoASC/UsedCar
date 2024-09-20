@@ -48,3 +48,10 @@ export const StyledItemText = styled.Text`
     font-size: 16px;
     color: white;
 `;
+
+export const CenteredViewModal = styled.View`
+flex: 1;
+align-items: center;
+justify-content: center;
+background-color: 'rgba(0,0,0,0.5)';
+`;

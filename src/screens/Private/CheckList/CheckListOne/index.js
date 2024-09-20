@@ -53,7 +53,7 @@ export function CheckListOne({ navigation }) {
 
     const navigateToCheckList = (selectedCar) => {
         createCheckList(selectedCar);
-        // console.log('selectedCar:', selectedCar);
+        // console.log('ChecklistOne selectedCar:', selectedCar);
         navigation.navigate('ChooseCheck');
     };
 

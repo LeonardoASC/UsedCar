@@ -11,9 +11,6 @@ export function ChooseCheck({ navigation }) {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
     const [columns, setColumns] = useState([]);
-    const { width } = Dimensions.get('window');
-    console.log('checkListId:', checkListId);
-
 
     useFocusEffect(
         React.useCallback(() => {
@@ -44,13 +41,9 @@ export function ChooseCheck({ navigation }) {
         }, [checkListId])
     );
 
-
-
     const handlePress = async (item) => {
-        console.log('Item selecionado aa:', item.name);
         navigation.navigate('CheckListPart', { itemPart: item.name, checkListId });
     };
-
 
     const renderItem = ({ item }) => {
         return (
@@ -74,20 +67,21 @@ export function ChooseCheck({ navigation }) {
                     <MaterialCommunityIcons
                         name={
                             item.value === 'Bom' ? "checkbox-marked" :
-                            item.value === 'Regular' ? "alert-circle-outline" :
-                            item.value === 'Ruim' ? "close-box" : "arrow-right-box"}
-                        size={24}
-                        color={item.value === 'Bom' ? "green" :
-                            item.value === 'Regular' ? "yellow" :
-                            item.value === 'Ruim' ? "red" : "white"}
+                                item.value === 'Regular' ? "alert-circle-outline" :
+                                    item.value === 'Ruim' ? "close-box" : "arrow-right-box"
+                        }
+                        size={24} color={
+                            item.value === 'Bom' ? "green" :
+                                item.value === 'Regular' ? "yellow" :
+                                    item.value === 'Ruim' ? "red" : "white"
+                        }
                     />
                 </View>
             </TouchableOpacity>
         );
     };
 
-
-    if (loading) return <CenteredView><MessageText>Carregando...</MessageText></CenteredView>;
+    if (loading || !selectedCar || !checkListId) return <CenteredView><MessageText>Carregando...</MessageText></CenteredView>;
     if (error) return <CenteredView><MessageText>Erro: {error}</MessageText></CenteredView>;
 
     return (
@@ -108,14 +102,13 @@ export function ChooseCheck({ navigation }) {
                     renderItem={renderItem}
                     contentContainerStyle={{ width: '100%', padding: 10 }}
                     ListHeaderComponent={
-                        <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                             <Text style={{ fontSize: 18, fontWeight: 'bold', marginLeft: 15 }}>Itens</Text>
                             <Text style={{ fontSize: 18, fontWeight: 'bold', marginRight: 15 }}>Status</Text>
                         </View>
                     }
                 />
             </Container>
-
         </SafeAreaView>
     )
 }
