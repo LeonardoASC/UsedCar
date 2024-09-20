@@ -16,7 +16,7 @@ import { CheckListContext } from "../../../context/CheckListContext.js";
 export function CheckList({ navigation }) {
     const { resumeCheckList } = useContext(CheckListContext);
     const { height } = Dimensions.get('window');
-    const [checkList, setCheckList] = useState([]);
+    const [checkList, setCheckList] = useState(null);
     const [selectedCar, setSelectedCar] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
@@ -62,8 +62,10 @@ export function CheckList({ navigation }) {
 
     const onPressHandler = () => {
         if (checkList) {
+            console.log('checkList if', checkList);
             setModalVisible(true);
         } else {
+            console.log('checkList else', checkList);
             navigation.navigate('CheckListOne');
         }
     };
@@ -154,7 +156,7 @@ export function CheckList({ navigation }) {
                         elevation: 5,
                     }}>
                         {/* <Text style={{ fontSize: 22 }}>{selectedCar?.marca} {selectedCar?.modelo} - {selectedCar?.ano}</Text> */}
-                        <Text style={{ fontSize: 22 }}>Atenção!!! {selectedCar.marca}</Text>
+                        <Text style={{ fontSize: 22 }}>Atenção!!!</Text>
                         <Text style={{ textAlign: 'center' }}>Existe um checklist nao finalizado, deseja continuar?</Text>
                         <Text>{selectedCar.marca} {selectedCar.modelo} {selectedCar.ano}</Text>
                         

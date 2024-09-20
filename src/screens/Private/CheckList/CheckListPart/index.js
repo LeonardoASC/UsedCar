@@ -56,24 +56,34 @@ export function CheckListPart({ navigation, route }) {
     if (!items.length) return <CenteredView><MessageText>Nenhum item encontrado para a categoria selecionada.</MessageText></CenteredView>;
 
     return (
-        <SafeAreaView style={{ flex: 1 }}>
+        <SafeAreaView style={{ flex: 1, backgroundColor: '#f9f9f9' }}>
             <Header>
-                <Text>CheckList Part</Text>
-                <Text>Marca do Carro: {selectedCar.marca}</Text>
-                <Text>Modelo do Carro: {selectedCar.modelo}</Text>
-                <Text>Categoria: {selectedCar.name}</Text>
-            </Header>
-            <ScrollView>
                 {items.map((item, index) => (
-                    <Container key={index}>
+                    <View key={index}>
                         <Image source={{ uri: item.foto }} style={{ backgroundColor: 'black', width: 150, height: 150 }} />
-                        <Text>Descrição: {item.descricao}</Text>
-                    </Container>
+                    </View>
                 ))}
-            </ScrollView>
-            <TouchableOpacity onPress={() => setModalVisible(true)} style={{ backgroundColor: 'green', padding: 20 }}>
-                <Text style={{ color: 'white' }}>Check </Text>
-            </TouchableOpacity>
+            </Header>
+            <Container>
+                <View style={{marginTop: 15, width: '100%'}}>
+                    <Text style={{fontWeight: 'bold', fontSize: 20, textAlign: 'center'}}>Especificação Técnica</Text>
+                    <Text style={{marginLeft: 15}}>Marca do Carro: {selectedCar.marca}</Text>
+                    <Text style={{marginLeft: 15}}>Modelo do Carro: {selectedCar.modelo}</Text>
+                    <Text style={{marginLeft: 15}}>Cilindrada: {selectedCar.cilindrada}</Text>
+                    <Text style={{marginLeft: 15}}>Cor: {selectedCar.cor}</Text>
+                    <Text style={{marginLeft: 15}}>Ano: {selectedCar.ano}</Text>
+                    <Text style={{marginLeft: 15}}>Carroceria: {selectedCar.tipo_carroceria}</Text>
+                    <Text style={{fontWeight: 'bold', fontSize: 20 , textAlign: 'center', marginTop: 15}}>Inspeção Visual</Text>
+                    {items.map((item, index) => (
+                    <View key={index}>
+                        <Text>{item.descricao}</Text>
+                    </View>
+                ))}
+                </View>
+                <TouchableOpacity onPress={() => setModalVisible(true)} style={{ backgroundColor: 'green', padding: 20 }}>
+                    <Text style={{ color: 'white' }}>Check </Text>
+                </TouchableOpacity>
+            </Container>
             <Modal
                 animationType="fade"
                 transparent={true}

@@ -5,15 +5,19 @@ import { LinearGradient } from 'expo-linear-gradient';
 export const Header = styled.View`
     
     width: 100%;
-    height: 20%;
+    height: 30%;
     align-items: center;
     justify-content:center;
 `;
 
 export const Container = styled.View`
-  height: 80%;
+  height: 70%;
   width: 100%;
   align-items: center;
+  background-color: white;
+  /* border-radius: 94px; */
+  border-top-right-radius: 45px;
+  border-top-left-radius: 45px;
 `;
 
 export const InputSearch = styled.TextInput`
