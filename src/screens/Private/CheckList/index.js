@@ -17,6 +17,7 @@ export function CheckList({ navigation }) {
     const { resumeCheckList } = useContext(CheckListContext);
     const { height } = Dimensions.get('window');
     const [checkList, setCheckList] = useState([]);
+    const [selectedCar, setSelectedCar] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
@@ -46,8 +47,10 @@ export function CheckList({ navigation }) {
             try {
                 setLoading(true);
                 const response = await api.get('/checklist-last');
-                // console.log('index response.data:', response.data);
+                //chama a api de carro
+                const responseCar = await api.get(`/carros/${response.data.carro_id}`);
                 setCheckList(response.data);
+                setSelectedCar(responseCar.data);
             } catch (error) {
                 setError(error.message);
             } finally {
@@ -55,52 +58,25 @@ export function CheckList({ navigation }) {
             }
         };
         fecthCheckList();
-    }
-        , []);
+    }, []);
 
-    const allColumnsNonZero = (checklist) => {
-        // Verifica se todos os valores numéricos são diferentes de "0"
-        return Object.keys(checklist).every(key => {
-            const value = checklist[key];
-            // Verifica se o valor é numérico; se for, checa se é diferente de "0"
-            return !(!isNaN(value) && value === "0");
-        });
-    };
-
-    const handlePress = () => {
-        setModalVisible(true);
-        // const route = allColumnsNonZero(checkList) ? 'CheckListOne' : 'ChooseCheck';
-        // if (route === 'CheckListOne') {
-        //     navigation.navigate(route, { selectedCar: checkList });
-        // } else {
-        //     resumeCheckList();
-        //     navigation.navigate(route);
-        // }
-    };
     const onPressHandler = () => {
         if (checkList) {
-            handlePress();
+            setModalVisible(true);
         } else {
             navigation.navigate('CheckListOne');
         }
     };
 
     const handleSim = () => {
+        resumeCheckList();
         setModalVisible(false);
-        if (allColumnsNonZero(checkList)) {
-            navigation.navigate('CheckListOne', { selectedCar: checkList });
-        } else {
-            resumeCheckList();
-            navigation.navigate('ChooseCheck');
-        }
+        navigation.navigate('ChooseCheck');
     };
 
     const handleNao = () => {
         setModalVisible(false);
-        // Defina o que deve acontecer quando o usuário clicar em "Não"
-        // Por exemplo, navegar para outra tela ou reiniciar o checklist
-        // Aqui está um exemplo genérico:
-        navigation.navigate('ChooseCheck');
+        navigation.navigate('CheckListOne');
     };
 
     return (
@@ -178,7 +154,10 @@ export function CheckList({ navigation }) {
                         elevation: 5,
                     }}>
                         {/* <Text style={{ fontSize: 22 }}>{selectedCar?.marca} {selectedCar?.modelo} - {selectedCar?.ano}</Text> */}
+                        <Text style={{ fontSize: 22 }}>Atenção!!! {selectedCar.marca}</Text>
                         <Text style={{ textAlign: 'center' }}>Existe um checklist nao finalizado, deseja continuar?</Text>
+                        <Text>{selectedCar.marca} {selectedCar.modelo} {selectedCar.ano}</Text>
+                        
 
                         <View style={{ marginTop: '5%', justifyContent: 'center', alignItems: 'center' }}>
                             <TouchableOpacity
