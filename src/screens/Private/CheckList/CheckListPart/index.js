@@ -20,6 +20,8 @@ export function CheckListPart({ navigation, route }) {
                 setLoading(true);
                 const response = await api.get(`/carros/${selectedCar.id}`);
                 setItems(response.data[itemPart] || []);
+                // console.log('Itens:', response.data[itemPart]);
+                
             } catch (error) {
                 setError(error.message);
                 Alert.alert("Erro", error.message);
@@ -74,6 +76,7 @@ export function CheckListPart({ navigation, route }) {
                     <Text style={{marginLeft: 15}}>Ano: {selectedCar.ano}</Text>
                     <Text style={{marginLeft: 15}}>Carroceria: {selectedCar.tipo_carroceria}</Text>
                     <Text style={{fontWeight: 'bold', fontSize: 20 , textAlign: 'center', marginTop: 15}}>Inspeção Visual</Text>
+                    <Text>{{}}</Text>
                     {items.map((item, index) => (
                     <View key={index}>
                         <Text>{item.descricao}</Text>

@@ -20,7 +20,6 @@ export function CheckListOne({ navigation }) {
             try {
                 setLoading(true);
                 const response = await api.get('/carros');
-                // console.log('response.data:', response.data);
                 setCarros(response.data);
             } catch (error) {
                 setError(error.message);
@@ -53,7 +52,6 @@ export function CheckListOne({ navigation }) {
 
     const navigateToCheckList = (selectedCar) => {
         createCheckList(selectedCar);
-        // console.log('ChecklistOne selectedCar:', selectedCar);
         navigation.navigate('ChooseCheck');
     };
 

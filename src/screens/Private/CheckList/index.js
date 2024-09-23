@@ -8,8 +8,6 @@ import mecanicomaos from '../../../../assets/mecanicomaos.png';
 import { Ionicons } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import HorizontalList from '../../../components/HorizontalList';
-// import { CheckListContext } from "../../../../context/CheckListContext.js";
-// const { createCheckList, selectedCar, setSelectedCar } = useContext(CheckListContext);
 import api from '../../../services/api.js';
 import { CheckListContext } from "../../../context/CheckListContext.js";
 
@@ -47,7 +45,6 @@ export function CheckList({ navigation }) {
             try {
                 setLoading(true);
                 const response = await api.get('/checklist-last');
-                //chama a api de carro
                 const responseCar = await api.get(`/carros/${response.data.carro_id}`);
                 setCheckList(response.data);
                 setSelectedCar(responseCar.data);
@@ -155,24 +152,16 @@ export function CheckList({ navigation }) {
                         shadowRadius: 4,
                         elevation: 5,
                     }}>
-                        {/* <Text style={{ fontSize: 22 }}>{selectedCar?.marca} {selectedCar?.modelo} - {selectedCar?.ano}</Text> */}
                         <Text style={{ fontSize: 22 }}>Atenção!!!</Text>
                         <Text style={{ textAlign: 'center' }}>Existe um checklist nao finalizado, deseja continuar?</Text>
                         <Text>{selectedCar.marca} {selectedCar.modelo} {selectedCar.ano}</Text>
-                        
-
-                        <View style={{ marginTop: '5%', justifyContent: 'center', alignItems: 'center' }}>
-                            <TouchableOpacity
-                                onPress={handleSim}
-                            >
-                                <Text style={{ color: 'green', fontSize: 20, borderColor: 'green', borderWidth: 1, borderRadius: 5, paddingHorizontal: 5, alignSelf: 'center' }}>Sim</Text>
+                        <View style={{ marginTop: '5%', justifyContent: 'space-evenly', alignItems: 'center', flexDirection: 'row', width: '100%' }}>
+                            <TouchableOpacity onPress={handleNao}>
+                                <Text style={{ color: 'red', fontSize: 16 }}>Não</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity
-                                onPress={handleNao}
-                            >
-                                <Text style={{ color: 'red', fontSize: 14 }}>Não</Text>
+                            <TouchableOpacity onPress={handleSim}>
+                                <Text style={{ color: 'white', fontSize: 20, borderColor: 'white', borderWidth: 1, borderRadius: 5, paddingHorizontal: 15, alignSelf: 'center', backgroundColor: 'green' }}>Sim</Text>
                             </TouchableOpacity>
-
                         </View>
                     </View>
                 </CenteredViewModal>
