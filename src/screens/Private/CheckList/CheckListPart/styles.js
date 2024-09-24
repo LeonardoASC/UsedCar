@@ -44,15 +44,16 @@ export const MessageText = styled.Text`
 font-size: 16px;
 `;
 
-const Section = styled.View`
+export const Section = styled.View`
   margin-bottom: 20px;
 `;
 
-const CarImage = styled.Image`
+export const CarImage = styled.Image`
   width: 150px;
   height: 150px;
   resize-mode: cover;
 `;
+
 export const CenteredViewModal = styled.View`
 flex: 1;
 align-items: center;

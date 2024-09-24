@@ -59,7 +59,7 @@ export function CheckList({ navigation }) {
 
     const onPressHandler = () => {
         if (checkList) {
-            console.log('checkList if', checkList);
+            // console.log('checkList if', checkList);
             setModalVisible(true);
         } else {
             console.log('checkList else', checkList);

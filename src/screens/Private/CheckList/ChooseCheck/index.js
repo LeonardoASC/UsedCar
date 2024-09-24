@@ -40,8 +40,27 @@ export function ChooseCheck({ navigation }) {
             }
         }, [checkListId])
     );
+   
+
+    // useEffect(() => {
+    //     const fetchData = async () => {
+    //         try {
+    //             setLoading(true);
+    //             const response = await api.get('/item');
+    //             // console.log('response.data:', response.data);
+    //             setColumns(response.data);
+    //         } catch (error) {
+    //             setError(error.message);
+    //         } finally {
+    //             setLoading(false);
+    //         }
+    //     };
+    //     fetchData();
+    // }, []);
+
 
     const handlePress = async (item) => {
+        console.log('Item selecionado:', item);
         navigation.navigate('CheckListPart', { itemPart: item.name, checkListId });
     };
 
