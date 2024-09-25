@@ -23,7 +23,8 @@ export function ChooseCheck({ navigation }) {
                             const excludedKeys = ['id', 'user_id', 'carro_id', 'created_at', 'updated_at'];
                             const columnNames = Object.keys(response.data)
                                 .filter(key => !excludedKeys.includes(key))
-                                .map(key => ({
+                                .map((key, index) => ({
+                                    id: index + 1,
                                     name: key,
                                     value: response.data[key]
                                 }));
@@ -40,7 +41,9 @@ export function ChooseCheck({ navigation }) {
             }
         }, [checkListId])
     );
-   
+
+
+
 
     // useEffect(() => {
     //     const fetchData = async () => {

@@ -62,7 +62,7 @@ export function CheckList({ navigation }) {
             // console.log('checkList if', checkList);
             setModalVisible(true);
         } else {
-            console.log('checkList else', checkList);
+            // console.log('checkList else', checkList);
             navigation.navigate('CheckListOne');
         }
     };
