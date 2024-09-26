@@ -11,60 +11,30 @@ export function ChooseCheck({ navigation }) {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
     const [columns, setColumns] = useState([]);
+    // console.log('CheckListId:', checkListId);
 
-    useFocusEffect(
-        React.useCallback(() => {
-            if (checkListId) {
-                setLoading(true);
-                const fetchData = async () => {
-                    try {
-                        const response = await api.get(`/checklist/${checkListId}`);
-                        if (response.data && typeof response.data === 'object') {
-                            const excludedKeys = ['id', 'user_id', 'carro_id', 'created_at', 'updated_at'];
-                            const columnNames = Object.keys(response.data)
-                                .filter(key => !excludedKeys.includes(key))
-                                .map((key, index) => ({
-                                    id: index + 1,
-                                    name: key,
-                                    value: response.data[key]
-                                }));
-                            setColumns(columnNames);
-                        }
-                    } catch (error) {
-                        console.error('Erro ao buscar dados no chooseCheck:', error);
-                        setError('Erro ao buscar dados.');
-                    } finally {
-                        setLoading(false);
-                    }
-                };
-                fetchData();
-            }
-        }, [checkListId])
-    );
-
-
-
-
-    // useEffect(() => {
-    //     const fetchData = async () => {
-    //         try {
-    //             setLoading(true);
-    //             const response = await api.get('/item');
-    //             // console.log('response.data:', response.data);
-    //             setColumns(response.data);
-    //         } catch (error) {
-    //             setError(error.message);
-    //         } finally {
-    //             setLoading(false);
-    //         }
-    //     };
-    //     fetchData();
-    // }, []);
+    useEffect(() => {
+        if (checkListId !== null && checkListId !== undefined) {
+            const fetchData = async () => {
+                try {
+                    setLoading(true);
+                    const response = await api.get(`/checklist/${checkListId}`);
+                    // console.log('response.data:', JSON.stringify(response.data, null, 2));
+                    setColumns(response.data);
+                } catch (error) {
+                    setError('Meu erro: ', error.message);
+                } finally {
+                    setLoading(false);
+                }
+            };
+            fetchData();
+        }
+    }, [checkListId]);
 
 
     const handlePress = async (item) => {
         console.log('Item selecionado:', item);
-        navigation.navigate('CheckListPart', { itemPart: item.name, checkListId });
+        navigation.navigate('CheckListPart', { itemPart: item, checkListId });
     };
 
     const renderItem = ({ item }) => {
@@ -75,33 +45,37 @@ export function ChooseCheck({ navigation }) {
                     backgroundColor: '#39BF61',
                     padding: 20,
                     marginVertical: 8,
-                    // marginHorizontal: 12,
                     borderRadius: 5,
                     flexDirection: 'row',
                     alignItems: 'center',
                     justifyContent: 'space-between'
                 }}>
-                <Text style={{ color: 'white', fontSize: 16, fontWeight: 'bold' }}>{item.name}</Text>
+                {/* Exibir o nome do item */}
+                <Text style={{ color: 'white', fontSize: 16, fontWeight: 'bold' }}>{item.nome}</Text>
+
                 <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
-                    {['Bom', 'Regular', 'Ruim'].includes(item.value) && (
-                        <Text style={{ color: 'white', marginRight: 15 }}>{item.value}</Text>
+                    {['Bom', 'Regular', 'Ruim', 'A verificar'].includes(item.pivot.status) && (
+                        <Text style={{ color: 'white', marginRight: 15 }}>{item.pivot.status}</Text>
                     )}
                     <MaterialCommunityIcons
                         name={
-                            item.value === 'Bom' ? "checkbox-marked" :
-                                item.value === 'Regular' ? "alert-circle-outline" :
-                                    item.value === 'Ruim' ? "close-box" : "arrow-right-box"
+                            item.pivot.status === 'Bom' ? "checkbox-marked" :
+                                item.pivot.status === 'Regular' ? "alert-circle-outline" :
+                                    item.pivot.status === 'Ruim' ? "close-box" : "arrow-right-box"
                         }
-                        size={24} color={
-                            item.value === 'Bom' ? "green" :
-                                item.value === 'Regular' ? "yellow" :
-                                    item.value === 'Ruim' ? "red" : "white"
+                        size={24}
+                        color={
+                            item.pivot.status === 'Bom' ? "green" :
+                                item.pivot.status === 'Regular' ? "yellow" :
+                                    item.pivot.status === 'Ruim' ? "red" : "white"
                         }
                     />
                 </View>
+
             </TouchableOpacity>
         );
     };
+
 
     if (loading || !selectedCar || !checkListId) return <CenteredView><MessageText>Carregando...</MessageText></CenteredView>;
     if (error) return <CenteredView><MessageText>Erro: {error}</MessageText></CenteredView>;
@@ -116,20 +90,23 @@ export function ChooseCheck({ navigation }) {
                     <Image source={{ uri: selectedCar.foto }} style={{ width: 120, height: 100, resizeMode: 'cover', borderRadius: 5, }} />
                 </View>
                 <Text>Escolha um item para verificar</Text>
+                {/* <Text>{columns.data.id}</Text> */}
             </Header>
             <Container>
-                <FlatList
-                    data={columns}
-                    keyExtractor={item => item.name + item.value}
-                    renderItem={renderItem}
-                    contentContainerStyle={{ width: '100%', padding: 10 }}
-                    ListHeaderComponent={
-                        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                            <Text style={{ fontSize: 18, fontWeight: 'bold', marginLeft: 15 }}>Itens</Text>
-                            <Text style={{ fontSize: 18, fontWeight: 'bold', marginRight: 15 }}>Status</Text>
-                        </View>
-                    }
-                />
+                {columns.data === undefined ? (<MessageText>Nenhum item encontrado</MessageText>) : (
+                    <FlatList
+                        data={columns.data.items}
+                        keyExtractor={item => item.id.toString()}
+                        renderItem={renderItem}
+                        contentContainerStyle={{ width: '100%', padding: 10 }}
+                        ListHeaderComponent={
+                            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                                <Text style={{ fontSize: 18, fontWeight: 'bold', marginLeft: 15 }}>Itens</Text>
+                                <Text style={{ fontSize: 18, fontWeight: 'bold', marginRight: 15 }}>Status</Text>
+                            </View>
+                        }
+                    />
+                )}
             </Container>
         </SafeAreaView>
     )

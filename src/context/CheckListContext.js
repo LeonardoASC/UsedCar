@@ -31,36 +31,21 @@ const fetchCarros = async () => {
 
 
   const createCheckList = async (selectedCarro) => {
-    console.log('Carro selecionado:', selectedCarro);
+    // console.log('Carro selecionado:', selectedCarro);
     
     const carroData = {
       user_id: userInfo.id,
       carro_id: selectedCarro.id,
-      acessorio: 0,
-      arcondicionado: 0,
-      assento: 0,
-      cambio: 0,
-      documento: 0,
-      embreagem: 0,
-      espelho: 0,
-      farol: 0,
-      freio: 0,
-      lataria: 0,
-      motor: 0,
-      pedal: 0,
-      pneu: 0,
-      radio: 0,
-      sistema_eletrico: 0,
-      suspensao: 0,
-      vidro: 0
+      status: 0,
     };
     setIsLoading(true);
     try {
       const response = await api.post('/checklist', carroData);
-      const createdItemId = response.data.checklist.id;
+      // console.log('aqui:', response.data.data.id);
+      const createdItemId = response.data.data.id;
       setCheckListId(createdItemId);
     } catch (error) {
-      console.error('Erro ao salvar o carro:', error);
+      console.error('Erro ao criar uma checklist:', error);
     } finally {
       setIsLoading(false);
     }

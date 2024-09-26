@@ -18,6 +18,8 @@ export function CheckListPart({ navigation, route }) {
             try {
                 // Fazendo a requisição para buscar os dados do carro e do item
                 const response = await api.get(`/carro_itens/${selectedCar.id}/${itemPart.id}`);
+                console.log('response.data:', response.data);
+                
                 // Salvando os dados recebidos no estado items
                 setItems(response.data);
             } catch (error) {
@@ -34,6 +36,7 @@ export function CheckListPart({ navigation, route }) {
         <Container>
             <Header>
                 <Text>CheckListPart</Text>
+                <Text>{checkListId}</Text>
             </Header>
 
             {loading ? (
