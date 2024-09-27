@@ -45,9 +45,9 @@ export function CheckList({ navigation }) {
             try {
                 setLoading(true);
                 const response = await api.get('/checklist-last');
-                const responseCar = await api.get(`/carros/${response.data.carro_id}`);
+                console.log('response.data:', response.data);
                 setCheckList(response.data);
-                setSelectedCar(responseCar.data);
+                // setSelectedCar(responseCar.data);
             } catch (error) {
                 setError(error.message);
             } finally {
@@ -58,11 +58,9 @@ export function CheckList({ navigation }) {
     }, []);
 
     const onPressHandler = () => {
-        if (checkList) {
-            // console.log('checkList if', checkList);
+        if (checkList.CheckListStatus !== true && checkList.CheckListItemStatus !== true) {
             setModalVisible(true);
         } else {
-            // console.log('checkList else', checkList);
             navigation.navigate('CheckListOne');
         }
     };

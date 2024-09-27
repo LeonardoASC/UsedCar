@@ -13,26 +13,11 @@ export const CheckListProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [checkList, setCheckList] = useState([{}]);
-// console.log('Contexto checkListId:', checkListId);
 
-
-const fetchCarros = async () => {
-  try {
-      
-      const response = await api.get('/carros');
-      // console.log('response.data:', response.data);
-      setCarros(response.data);
-  } catch (error) {
-      setError(error.message);
-  } finally {
-      setLoading(false);
-  }
-};
 
 
   const createCheckList = async (selectedCarro) => {
     // console.log('Carro selecionado:', selectedCarro);
-    
     const carroData = {
       user_id: userInfo.id,
       carro_id: selectedCarro.id,
@@ -54,10 +39,10 @@ const fetchCarros = async () => {
   const resumeCheckList = async () => {
     setIsLoading(true);
     try {
-      const responseChecklist = await api.get('/checklist-last');
-      const lastCheckList = responseChecklist.data;
+      const responseChecklist = await api.get('/checklist-resume');
+      const lastCheckList = responseChecklist.data.CheckList;
       const responseCar = await api.get(`/carro/${lastCheckList.carro_id}`);
-      const lastCar = responseCar.data;     
+      const lastCar = responseCar.data;
       setCheckListId(lastCheckList.id);
       setSelectedCar(lastCar);
     } catch (error) {
@@ -66,6 +51,7 @@ const fetchCarros = async () => {
       setIsLoading(false);
     }
   };
+  
 
   useEffect(() => {
     // console.log('Atualização do checkListId no contexto:', checkListId);

@@ -5,10 +5,10 @@ const { width } = Dimensions.get('window');
 
 export const Header = styled.View`
     width: 100%;
-    height: 20%;
+    height: 30%;
     justify-content: center;
     align-items: center;
-    
+    padding: 5%;
 `;
 export const ViewWrapper = styled.View`
     width: 50%;
@@ -28,7 +28,7 @@ export const ProfileImage = styled.Image`
 `;
 export const Container = styled.View`
     width: 100%;
-    height: 85%;
+    height: 70%;
 `;
 export const RenderFlat = styled.TouchableOpacity`
   flex-direction: row;

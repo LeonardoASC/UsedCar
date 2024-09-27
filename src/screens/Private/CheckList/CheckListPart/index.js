@@ -17,11 +17,8 @@ export function CheckListPart({ navigation, route }) {
         const fetchCarro = async () => {
             setLoading(true);
             try {
-                // Fazendo a requisição para buscar os dados do carro e do item
                 const response = await api.get(`/carro_itens/${selectedCar.id}/${itemPart.id}`);
-                console.log('response.data:', JSON.stringify(response.data, null, 2));
-
-                // Salvando os dados recebidos no estado items
+                // console.log('response.data:', JSON.stringify(response.data, null, 2));
                 setItems(response.data);
             } catch (error) {
                 setError(error.message);
@@ -33,9 +30,29 @@ export function CheckListPart({ navigation, route }) {
         fetchCarro();
     }, [selectedCar.id, itemPart.id]);
 
+    const handlePress = async (itemPart, checkListId, status) => {
+        try {
+            const response = await api.put(`/checklist/${checkListId}/item/${itemPart.id}`, {
+                status: status,
+              });
+            if (response.status === 200) {
+                // console.log('Atualização bem-sucedida:', response.data);
+                Alert.alert("Sucesso", "Item Verificado!");
+                navigation.navigate('ChooseCheck');
+            } else {
+                // console.error('Falha na atualização:', response.status);
+                Alert.alert("Falha na Atualização", "Não foi possível atualizar o item.");
+            }
+        } catch (error) {
+            // console.error('Erro ao atualizar dados:', error.response?.data || error.message);
+            Alert.alert("Erro", "Erro ao tentar atualizar o item: " + (error.response?.data?.message || error.message));
+        }
+    };
+
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: "#f0f0f0" }}>
             <Header>
+
                 {items.item && (
                     <Text style={{ fontSize: 30, fontWeight: 'bold' }}>{items.item.nome}</Text>
                 )}
