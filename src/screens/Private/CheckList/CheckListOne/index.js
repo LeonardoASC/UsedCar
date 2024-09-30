@@ -4,6 +4,7 @@ import { Header, Container, InputSearch, ItemSearch, CenteredView, MessageText, 
 import api from "../../../../services/api.js";
 import { CheckListContext } from "../../../../context/CheckListContext.js";
 
+
 export function CheckListOne({ navigation }) {
     const [carros, setCarros] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -80,17 +81,16 @@ export function CheckListOne({ navigation }) {
     return (
         <SafeAreaView style={{ flex: 1 }}>
             <Header>
-                <Text>Iniciar Checklist</Text>
+                <Text style={{ fontSize: 24, fontWeight: 'bold' }}>Selecione o Veículo</Text>
             </Header>
             <Container>
-                <Text style={{ color: 'white' }}>Escolha um carro</Text>
+                <Text style={{ color: 'black' }}>Escolha um carro</Text>
                 <InputSearch
                     onChangeText={handleSearch}
                     value={query}
                     placeholder="Pesquise o veiculo..."
                     placeholderTextColor="#000"
                     backgroundColor="white"
-
                 />
 
                 <FlatList
@@ -98,7 +98,9 @@ export function CheckListOne({ navigation }) {
                     keyExtractor={item => item.id}
                     renderItem={renderItem}
                     numColumns={2}
-
+                    style={{
+                        width: '100%',
+                    }}
                 />
                 <Modal
                     animationType="fade"
@@ -127,15 +129,14 @@ export function CheckListOne({ navigation }) {
                             <Text style={{ fontSize: 22 }}>{selectedCar?.marca} {selectedCar?.modelo} - {selectedCar?.ano}</Text>
                             <Text style={{ textAlign: 'center' }}>Você deseja escolher este veículo para iniciar o checklist?</Text>
 
-                            <View style={{ marginTop: '5%', justifyContent: 'center', alignItems: 'center' }}>
-                                <TouchableOpacity
-                                    onPress={() => navigateToCheckList(selectedCar)}>
-                                    <Text style={{ color: 'green', fontSize: 20, borderColor: 'green', borderWidth: 1, borderRadius: 5, paddingHorizontal: 5, alignSelf: 'center' }}>Iniciar</Text>
-                                </TouchableOpacity>
+                            <View style={{ marginTop: '5%', justifyContent: 'space-evenly', alignItems: 'center', flexDirection: 'row', width: '100%' }}>
                                 <TouchableOpacity onPress={() => setModalVisible(false)}>
                                     <Text style={{ color: 'red', fontSize: 14 }}>Cancelar</Text>
                                 </TouchableOpacity>
-
+                                <TouchableOpacity
+                                    onPress={() => navigateToCheckList(selectedCar)}>
+                                    <Text style={{ color: 'white', fontSize: 20, borderColor: 'white', borderWidth: 1, borderRadius: 5, paddingHorizontal: 15, alignSelf: 'center', backgroundColor: 'green' }}>Iniciar</Text>
+                                </TouchableOpacity>
                             </View>
                         </View>
                     </CenteredViewModal>

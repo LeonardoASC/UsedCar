@@ -6,9 +6,10 @@ const { width } = Dimensions.get('window');
 export const Header = styled.View`
     width: 100%;
     height: 30%;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
     padding: 5%;
+    
 `;
 export const ViewWrapper = styled.View`
     width: 50%;
@@ -74,4 +75,10 @@ justify-content: center;
 
 export const MessageText = styled.Text`
 font-size: 16px;
+`;
+export const CenteredViewModal = styled.View`
+flex: 1;
+align-items: center;
+justify-content: center;
+background-color: 'rgba(0,0,0,0.5)';
 `;

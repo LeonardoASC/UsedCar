@@ -57,11 +57,14 @@ export function CheckList({ navigation }) {
         fecthCheckList();
     }, []);
 
-    const onPressHandler = () => {
-        if (checkList.CheckListStatus !== true && checkList.CheckListItemStatus !== true) {
-            setModalVisible(true);
-        } else {
+
+    const onPressHandler= () => {
+        if (checkList.CheckListStatus == true) {
             navigation.navigate('CheckListOne');
+        }else if (checkList.CheckListItemStatus == true) {
+            navigation.navigate('CheckListOne');
+        }else{
+            setModalVisible(true);
         }
     };
 
