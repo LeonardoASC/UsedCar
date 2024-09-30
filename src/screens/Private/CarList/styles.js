@@ -4,10 +4,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 
 export const Header = styled.View`
     width: 100%;
-    height: 10%;
-    flex-direction: row;
-    align-items: center;
-    /* justify-content:center; */
+    height: 15%;
 `;
 
 export const HeaderTitle = styled.Text`
@@ -18,7 +15,8 @@ export const HeaderTitle = styled.Text`
 `;
 
 export const Container = styled.View`
- flex:1;
+ width: 100%;
+ height: 90%;
 `;
 
 export const CenteredView = styled.View`

@@ -3,15 +3,13 @@ import { Platform } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 
 export const Header = styled.View`
-    width: 100%;
-    height: 10%;
-    flex-direction: row;
-    align-items: center;
-    justify-content:center;
+     width: 100%;
+     height: 15%;
 `;
 
 export const Container = styled.View`
-flex: 1;
+    width: 100%;
+    height: 85%;
 
 `;
 

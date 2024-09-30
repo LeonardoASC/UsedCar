@@ -1,5 +1,5 @@
 import react, { useEffect, useState } from "react";
-import { FlatList, SafeAreaView, Text, TouchableOpacity, View } from "react-native";
+import { FlatList, Image, SafeAreaView, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { Header, Container, CenteredView, MessageText, ItemSearch } from "./styles.js";
 import api from '../../../services/api.js'
 import MostEconomical from '../../../components/HorizontalList/MostEconomical.js'
@@ -7,8 +7,26 @@ import MostEconomical from '../../../components/HorizontalList/MostEconomical.js
 export function Fuel() {
     const [topCarros, setTopCarros] = useState([]);
     const [carros, setCarros] = useState([]);
+    const [filteredCarros, setFilteredCarros] = useState([]);
+    const [search, setSearch] = useState('');
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
+
+    // useEffect(() => {
+    //     const fetchCarros = async () => {
+    //         try {
+    //             setLoading(true);
+    //             const response = await api.get('/carrosfuel');
+    //             setTopCarros(response.data.slice(0, 3));
+    //             setCarros(response.data.slice(3));
+    //         } catch (error) {
+    //             setError(error.message);
+    //         } finally {
+    //             setLoading(false);
+    //         }
+    //     };
+    //     fetchCarros();
+    // }, []);
 
     useEffect(() => {
         const fetchCarros = async () => {
@@ -17,6 +35,7 @@ export function Fuel() {
                 const response = await api.get('/carrosfuel');
                 setTopCarros(response.data.slice(0, 3));
                 setCarros(response.data.slice(3));
+                setFilteredCarros(response.data.slice(3)); // inicializa o filtro com todos os carros
             } catch (error) {
                 setError(error.message);
             } finally {
@@ -26,19 +45,40 @@ export function Fuel() {
         fetchCarros();
     }, []);
 
+    useEffect(() => {
+        const filterCarros = () => {
+            if (search === '') {
+                setFilteredCarros(carros);
+            } else {
+                const filtered = carros.filter(carro =>
+                    carro.marca.toLowerCase().includes(search.toLowerCase()) ||
+                    carro.modelo.toLowerCase().includes(search.toLowerCase()));
+                setFilteredCarros(filtered);
+            }
+        };
+        filterCarros();
+    }, [search, carros]);
+
+
     const renderItem = ({ item }) => (
         <View style={{
             flexDirection: 'row',
             backgroundColor: 'white',
             alignItems: 'center',
-            justifyContent: 'space-between',
             paddingHorizontal: 16,
             paddingVertical: 20,
         }}>
-            <View style={{ flex: 1, marginLeft: 16 }}>
-                {/* <Image style={{ width: 120, height: 100, resizeMode: 'cover', borderRadius: 5, }} source={{ uri: item.urlToImage }} /> */}
-                <Text style={{ fontSize: 16, fontWeight: 'bold' }}>{`${item.marca} ${item.modelo} - ${item.ano}`}</Text>
-                <Text style={{ fontSize: 14 }}>{`Media: ${item.km_litro} km/l`}</Text>
+            <View style={{ flexDirection: 'row', alignItems: 'center', width: '20%' }}>
+                <Text style={{ fontSize: 16, fontWeight: 'bold', marginRight: '10%' }}>{`${item.posicao}`}</Text>
+                <Image style={{ width: 70, height: 50, resizeMode: 'cover', borderRadius: 5, backgroundColor: '#39BF61' }} source={{ uri: item.foto }} />
+            </View>
+            <View style={{ alignItems: 'flex-start', width: '60%', paddingHorizontal: '5%' }}>
+                <Text style={{ fontSize: 16, fontWeight: 'bold' }}>{`${item.marca} ${item.modelo}`}</Text>
+                <Text style={{ fontSize: 14 }}>{`${item.km_litro} km/l`}</Text>
+            </View>
+            <View style={{ alignItems: 'flex-end', width: '20%' }}>
+                <Text style={{ fontSize: 16, fontWeight: 'bold' }}>{` ${item.ano}`}</Text>
+                <Text style={{ fontSize: 12 }}>{` ${item.cilindrada}`}</Text>
             </View>
         </View>
     );
@@ -52,13 +92,19 @@ export function Fuel() {
         <SafeAreaView style={{ flex: 1 }}>
             <Header>
                 <Text>Ranking de Carros Mais Economicos</Text>
+                <TextInput
+                    placeholder="Buscar por marca ou modelo"
+                    value={search}
+                    onChangeText={setSearch}
+                    style={{ height: 40, borderColor: 'gray', borderWidth: 1, width: '90%', padding: 10, alignSelf: 'center' }}
+                />
             </Header>
             <Container>
                 <View style={{ height: '35%' }}>
                     <MostEconomical dicas={topCarros} />
                 </View>
                 <FlatList
-                    data={carros}
+                    data={filteredCarros}
                     ItemSeparatorComponent={() => <View style={{ height: 1, backgroundColor: '#ddd' }} />}
                     keyExtractor={item => item.id}
                     renderItem={renderItem}

@@ -87,13 +87,7 @@ export function CheckListPart({ navigation, route }) {
                     </ScrollView>
                 )}
                 <View style={{ position: 'absolute', bottom: '5%', width: '100%', justifyContent: 'center', alignItems: 'center' }}>
-                    <TituloText style={{}}>Status de Inspeção do componente</TituloText>
-                    {/* <Text style={{}}>Condição</Text> 
-                     <Text style={{}}>Avaliação</Text>
-                    <Text style={{}}>Situação Atual</Text>
-                    <Text style={{}}>Nível de Manutenção</Text>
-                    <Text style={{}}>Qualidade</Text>
-                    <Text style={{}}>Resultado da Inspeção</Text> */}
+                    <TituloText style={{}}>Resultado da Inspeção</TituloText> 
                     <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center', marginTop: '5%', width: '100%' }}>
                         <TouchableOpacity
                             style={{ borderWidth: 1, borderColor: 'green', padding: 5, borderRadius: 5, width: '25%', justifyContent: 'center', alignItems: 'center' }}
