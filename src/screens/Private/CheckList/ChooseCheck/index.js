@@ -4,7 +4,7 @@ import { Header, Container, CenteredView, MessageText, CenteredViewModal } from 
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import api from '../../../../services/api';
 import { CheckListContext } from "../../../../context/CheckListContext.js";
-import { useFocusEffect } from '@react-navigation/native';
+import { CommonActions, useFocusEffect } from '@react-navigation/native';
 import Entypo from '@expo/vector-icons/Entypo';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 
@@ -48,17 +48,17 @@ export function ChooseCheck({ navigation }) {
                 carro_id: selectedCar.id,
                 status: 1,
             };
-
-            // Realizar a chamada à API para atualizar a checklist
             const response = await api.put(`/checklist/${checkListId}`, updatedData);
 
-            // Verificar se a atualização foi bem-sucedida
             if (response.status === 200) {
                 Alert.alert('Sucesso', 'Checklist finalizada com sucesso.');
-                navigation.navigate('CheckList2');
-
+                navigation.dispatch(
+                    CommonActions.reset({
+                        index: 0,
+                        routes: [{ name: 'CheckList2' }], 
+                    })
+                );
             } else {
-                // Tratar respostas inesperadas
                 Alert.alert('Erro', 'Não foi possível atualizar a checklist.');
             }
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { FlatList, Image, SafeAreaView, Text, TextInput, TouchableOpacity, View } from "react-native";
-import { Header, Container, CenteredView, MessageText, ItemSearch, HeaderTitle } from "./styles.js";
+import { FlatList, Image, SafeAreaView, Text, TextInput, View, KeyboardAvoidingView, Platform } from "react-native";
+import { Header, Container, CenteredView, MessageText, HeaderTitle } from "./styles.js";
 import api from '../../../services/api.js'
 import MostPopular from '../../../components/HorizontalList/MostPopular.js'
 
@@ -68,29 +68,31 @@ export function CarList() {
 
     if (loading) return <CenteredView><MessageText>Carregando...</MessageText></CenteredView>;
     if (error) return <CenteredView><MessageText>Erro: {error}</MessageText></CenteredView>;
-    
+
     return (
-        <SafeAreaView style={{ flex: 1 }}>
-            <Header>
-                <HeaderTitle>Ranking de Carros Mais Baratos</HeaderTitle>
-                <TextInput
-                    placeholder="Buscar por marca ou modelo"
-                    value={search}
-                    onChangeText={setSearch}
-                    style={{ height: 40, borderColor: 'gray', borderWidth: 1, width: '90%', padding: 10, alignSelf: 'center' }}
-                />
-            </Header>
-            <Container>
-                <View style={{ height: '35%' }}>
-                    <MostPopular dicas={topCarros} />
-                </View>
-                <FlatList
-                    data={filteredCarros}
-                    ItemSeparatorComponent={() => <View style={{ height: 1, backgroundColor: '#ddd' }} />}
-                    keyExtractor={item => item.id}
-                    renderItem={renderItem}
-                />
-            </Container>
-        </SafeAreaView>
+            <SafeAreaView style={{ flex: 1 }}>
+                <Header>
+                    <HeaderTitle>Ranking de Carros Mais Baratos</HeaderTitle>
+                    <TextInput
+                        placeholder="Buscar por marca ou modelo"
+                        value={search}
+                        onChangeText={setSearch}
+                        style={{ height: 40, borderColor: 'gray', borderWidth: 1, width: '90%', padding: 10, alignSelf: 'center' }}
+                    />
+                </Header>
+                <Container>
+                    <View style={{ marginBottom: '2%' }}>
+                        <MostPopular dicas={topCarros} />
+                    </View>
+                    <FlatList
+                        data={filteredCarros}
+                        ItemSeparatorComponent={() => <View style={{ height: 1, backgroundColor: '#39BF61' }} />}
+                        keyExtractor={item => item.id}
+                        renderItem={renderItem}
+                        keyboardShouldPersistTaps="always"
+                    />
+                </Container>
+            </SafeAreaView>
+
     )
 }

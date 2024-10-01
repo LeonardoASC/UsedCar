@@ -49,6 +49,7 @@ const MostPopular = ({ dicas }) => {
             decelerationRate="fast"
             style={{ marginTop: 20 }}
             renderItem={renderItem}
+            keyboardShouldPersistTaps="always"
         />
 
     )

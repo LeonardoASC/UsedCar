@@ -7,10 +7,16 @@ export const Header = styled.View`
      height: 15%;
 `;
 
+export const HeaderTitle = styled.Text`
+    font-size: 20px;
+    font-weight: bold;
+    margin-left: 5%;
+    margin-top: 10%;
+`;
+
 export const Container = styled.View`
     width: 100%;
     height: 85%;
-
 `;
 
 export const CenteredView = styled.View`
@@ -22,6 +28,7 @@ justify-content: center;
 export const MessageText = styled.Text`
 font-size: 16px;
 `;
+
 export const ItemSearch = styled.Text`
   padding: 10px;
   background-color: #f9f9f9;
