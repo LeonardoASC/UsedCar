@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Text, TouchableOpacity, StyleSheet, View, Dimensions, Platform, Modal } from "react-native";
+import { Text, TouchableOpacity, StyleSheet, View, Dimensions, Platform, Modal, Alert } from "react-native";
 import { Header, Container, ImageHeader, CenteredViewModal } from "./styles.js";
 import startChecklist from '../../../../assets/startChecklist2.png';
 import capoAberto from '../../../../assets/capoAberto.png';
@@ -59,6 +59,14 @@ export function CheckList({ navigation }) {
 
 
     const onPressHandler= () => {
+        if (!checkList) {
+            Alert.alert(
+                'Erro',
+                'Não foi possível carregar o checklist. Verifique sua conexão e tente novamente.',
+                [{ text: 'Ok' }]
+            );
+            return;
+        }
         if (checkList.CheckListStatus == true) {
             navigation.navigate('CheckListOne');
         }else if (checkList.CheckListItemStatus == true) {
