@@ -47,7 +47,6 @@ const MostEconomical = ({ dicas }) => {
             snapToAlignment="start"
             scrollEventThrottle={16}
             decelerationRate="fast"
-            style={{ marginTop: 20 }}
             renderItem={renderItem}
         />
     )

@@ -27,7 +27,11 @@ export function Login({ navigation }) {
   return (
     <Container>
       <MainContent>
-        <Image source={UsedCarVerde} style={{ width: 350, height: 350, marginBottom: 20 }} />
+        <Image source={UsedCarVerde} style={{
+          width: '60%',
+          height: '40%',
+          marginBottom: 20
+        }} />
         <Subtitle>Informe suas credenciais para continuar.</Subtitle>
         <InputField>
           <Ionicons name="at" size={19} color="black" />

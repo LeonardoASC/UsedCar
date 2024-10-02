@@ -81,7 +81,10 @@ export function Fuel() {
                 />
             </Header>
             <Container>
-                <View style={{ marginBottom: '2%' }}>
+                <View style={{
+                    marginBottom: '2%',
+                    height: '35%',
+                }}>
                     <MostEconomical dicas={topCarros} />
                 </View>
                 <FlatList

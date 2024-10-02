@@ -47,7 +47,7 @@ const MostPopular = ({ dicas }) => {
             snapToAlignment="start"
             scrollEventThrottle={16}
             decelerationRate="fast"
-            style={{ marginTop: 20 }}
+            // style={{ marginTop: 20 }}
             renderItem={renderItem}
             keyboardShouldPersistTaps="always"
         />
