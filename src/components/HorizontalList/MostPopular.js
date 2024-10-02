@@ -30,7 +30,7 @@ const renderItem = ({ item }) => {
             </ImageBackground>
             <View style={{ paddingHorizontal: 20 }}>
                 <Text style={{ color: 'black', fontSize: 24, fontWeight: 'bold' }}>{item.marca} {item.modelo} - {item.ano}</Text>
-                <Text style={{ color: 'gray', fontWeight: 'bold' }}>R$ {item.tabela_fipe}</Text>
+                <Text style={{ color: 'gray', fontWeight: 'bold' }}>{`R$ ${item.tabela_fipe}`}</Text>
             </View>
         </View>
     )
@@ -49,7 +49,7 @@ const MostPopular = ({ dicas }) => {
             decelerationRate="fast"
             // style={{ marginTop: 20 }}
             renderItem={renderItem}
-            keyboardShouldPersistTaps="always"
+            keyboardShouldPersistTaps="never"
         />
 
     )

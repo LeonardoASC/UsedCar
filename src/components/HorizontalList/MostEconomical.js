@@ -48,6 +48,7 @@ const MostEconomical = ({ dicas }) => {
             scrollEventThrottle={16}
             decelerationRate="fast"
             renderItem={renderItem}
+            keyboardShouldPersistTaps="never"
         />
     )
 };

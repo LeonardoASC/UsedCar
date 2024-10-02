@@ -77,7 +77,7 @@ export function CarList() {
                     placeholder="Buscar por marca ou modelo"
                     value={search}
                     onChangeText={setSearch}
-                    style={{ height: '30%', borderColor: 'gray', borderWidth: 1, width: '90%', padding: 10, alignSelf: 'center' }}
+                    style={{ height: 40, borderColor: 'gray', borderWidth: 1, width: '90%', padding: 10, alignSelf: 'center' }}
                 />
             </Header>
             <Container>
