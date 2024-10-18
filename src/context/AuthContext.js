@@ -1,6 +1,7 @@
 import React, { createContext, useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import api from "../services/api"
+import { Alert } from 'react-native';
 
 export const AuthContext = createContext({});
 
@@ -29,8 +30,21 @@ export const AuthProvider = ({ children }) => {
       await AsyncStorage.setItem('userInfo', JSON.stringify(userInfo));
 
     } catch (error) {
-      console.error("Erro durante o registro:", error);
-      throw error;
+      if (error.response && error.response.data) {
+        // A API retornou erros de validação
+        const errors = error.response.data;
+        let errorMessages = '';
+
+        // Itera sobre os erros e cria uma string com as mensagens
+        Object.keys(errors).forEach((field) => {
+          errorMessages += `${errors[field].join(' ')}\n`;
+        });
+
+        Alert.alert('Atenção', '\n' + errorMessages);
+      } else {
+        // Outro erro ocorreu (não relacionado a validação)
+        Alert.alert('Atenção', 'Ocorreu um erro ao tentar registrar. Tente novamente mais tarde.');
+      }
     } finally {
       setIsLoading(false);
     }
@@ -54,12 +68,15 @@ export const AuthProvider = ({ children }) => {
       .catch(e => {
         if (e.response && e.response.status === 401) {
           // console.log("ERRO da API:", e);
-          alert("Credenciais inválidas. Tente novamente.");
+          // alert("Credenciais inválidas. Tente novamente.");
+          Alert.alert('Atenção', 'Credenciais inválidas. Tente novamente.');
         } else {
-          alert("Ocorreu um erro ao tentar fazer login. Tente novamente mais tarde.");
+         Alert.alert('Atenção', "Ocorreu um erro ao tentar fazer login. Tente novamente mais tarde.");
         }
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
-    setIsLoading(false);
   }
 
   const logout = async () => {

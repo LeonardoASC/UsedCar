@@ -1,10 +1,10 @@
 import React, { useContext, useState } from 'react';
-import { Text, View } from 'react-native';
+import { Image, Text, View } from 'react-native';
 import { Ionicons, EvilIcons } from '@expo/vector-icons';
 import { Container, Header, MainContent, InputRow, StyledTextInput, StyledButton, Footer, LogoGym, LinkText, ButtonContainer, ButtonLinear, ButtonText } from './styles'
 import { CGT } from '../../../components/TextGradient';
 import { AuthContext } from '../../../context/AuthContext';
-
+import UsedCarVerde from '../../../../assets/UsedCarVerde.png';
 export function Register({ navigation }) {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
@@ -15,10 +15,14 @@ export function Register({ navigation }) {
     return (
         <Container>
             <Header>
-                <CGT style={{ color: 'white', fontSize: 24, fontWeight: 'bold', textAlign: 'center' }}>Registrar...</CGT>
-                <Text style={{ color: 'black', textAlign: 'center', marginTop: 4 }}>Por favor, insira suas informações para registrar no sistema</Text>
+                <Image source={UsedCarVerde} style={{
+                    width: '30%',
+                    height: '80%',
+                }} />
             </Header>
             <MainContent>
+                <CGT style={{ color: 'white', fontSize: 24, fontWeight: 'bold', textAlign: 'center' }}>Registrar...</CGT>
+                <Text style={{ color: 'black', textAlign: 'center', marginTop: 4 }}>Por favor, insira suas informações para registrar no sistema</Text>
                 <View style={{ marginTop: 5, width: '100%' }}>
                     <InputRow>
                         <Ionicons name="person-add-outline" size={20} color="black" />

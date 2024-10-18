@@ -39,7 +39,19 @@ const HorizontalList = ({ dicas }) => {
                     }}
                 // imageStyle={{ borderRadius: 10 }}
                 >
-                    <Text style={{ color: 'white' }}>{item.title}</Text>
+                    <Text style={{
+                        color: 'white',
+                        fontSize: 24,
+                        textAlign: 'center',
+                        textShadowColor: 'rgba(0, 0, 0, 1)', // Cor da sombra
+                        textShadowOffset: { width: -2, height: 2 }, // Direção da sombra
+                        textShadowRadius: 5, // Difusão da sombra
+                        backgroundColor: 'rgba(0, 0, 0, 0.1)', // Fundo semi-transparente para aumentar a visibilidade
+                        paddingHorizontal: 10,
+                        paddingVertical: 5,
+                    }}>{item.title}</Text>
+                 
+
                 </ImageBackground>
             )}
         />

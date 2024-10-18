@@ -8,24 +8,24 @@ export const Container = styled.SafeAreaView`
 `;
 
 export const Header = styled.View`
-  height: 25%; 
+  height: 30%; 
   justify-content: flex-end;
   align-items: center;
 `;
 
 export const MainContent = styled.View`
-  flex: 1;
+  height: 70%;
   padding: 20px; 
   align-items: center;
-  margin-top: 5%;
+  background-color: #FAFAFA;
 `;
 
 export const InputRow = styled.View`
   flex-direction: row;
   align-items: center;
   padding: 8px; 
-  border-width: 0.4px; 
-  border-color: #4b5563; 
+  border-width: 0.7px; 
+  border-color: #000; 
   border-radius: 10px; 
   margin-bottom: 16px; 
 `;
@@ -103,7 +103,7 @@ export const ButtonText = styled.Text`
 
 export const ButtonLinear = styled(LinearGradient).attrs({
   // colors: ['#fff7ad', '#ffa9f9'],
-   colors: ['#d2f2cd', '#2da92f'],
+  colors: ['#83c183', '#2da92f'],
   start: { x: 0, y: 0 },
   end: { x: 1, y: 1 },
 })`

@@ -10,8 +10,9 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import HorizontalList from '../../../components/HorizontalList';
 import api from '../../../services/api.js';
 import { CheckListContext } from "../../../context/CheckListContext.js";
-
+import { AuthContext } from "../../../context/AuthContext.js";
 export function CheckList({ navigation }) {
+    const { userInfo } = useContext(AuthContext);
     const { resumeCheckList } = useContext(CheckListContext);
     const { height } = Dimensions.get('window');
     const [checkList, setCheckList] = useState(null);
@@ -19,23 +20,24 @@ export function CheckList({ navigation }) {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
+    
     const dicas = [
         {
             id: '1',
-            title: 'Dica 1',
-            description: 'Para utilizar o aplicativo',
+            title: 'Verifique o estado do motor',
+            description: 'Abra o capô e inspecione visualmente o motor. Procure sinais de vazamentos de óleo ou ruídos incomuns ao ligar o carro. O estado do motor é essencial para garantir que o veículo está em boas condições.',
             imagem: capoAberto
         },
         {
             id: '2',
-            title: 'Dica 2',
-            description: 'Para utilizar o aplicativo',
+            title: 'Inspecione a carroceria',
+            description: 'Verifique se a carroceria do veículo apresenta amassados, arranhões ou sinais de ferrugem. Observe também se há alguma diferença de cor nas partes pintadas, o que pode indicar reparos mal feitos.',
             imagem: capoabertoestrada
         },
         {
             id: '3',
-            title: 'Dica 3',
-            description: 'Para utilizar o aplicativo',
+            title: 'Cheque os documentos do veículo',
+            description: 'Certifique-se de que a documentação do veículo está em ordem, incluindo o histórico de revisões e possíveis sinistros. Essa verificação é crucial para garantir que o carro está legal e seguro para compra.',
             imagem: mecanicomaos
         },
     ];
@@ -98,7 +100,8 @@ export function CheckList({ navigation }) {
                         fontSize: 24,
                         fontWeight: 'bold',
                         textAlign: 'center',
-                    }}>Olá Usuário,</Text>
+                        textShadowColor: 'rgba(0, 0, 0, 1)', textShadowOffset: { width: 6, height: 4 }, textShadowRadius: 15
+                    }}>Olá {userInfo.name},</Text>
                     <Text style={{
                         color: 'white',
                         textAlign: 'center',
