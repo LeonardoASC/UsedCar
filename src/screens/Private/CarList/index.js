@@ -93,6 +93,7 @@ export function CarList() {
                     keyExtractor={item => item.id}
                     renderItem={renderItem}
                     keyboardShouldPersistTaps="always"
+                    style={{width: '90%'}}
                 />
             </Container>
         </SafeAreaView>

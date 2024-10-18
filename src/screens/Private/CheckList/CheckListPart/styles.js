@@ -6,7 +6,7 @@ export const Header = styled.View`
   width: 100%;
   height: 35%;
   padding: 5%;
-  justify-content: center;
+  justify-content: flex-end;
 `;
 
 export const Container = styled.View`

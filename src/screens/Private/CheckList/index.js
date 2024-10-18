@@ -20,7 +20,7 @@ export function CheckList({ navigation }) {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
-    
+
     const dicas = [
         {
             id: '1',
@@ -60,7 +60,7 @@ export function CheckList({ navigation }) {
     }, []);
 
 
-    const onPressHandler= () => {
+    const onPressHandler = () => {
         if (!checkList) {
             Alert.alert(
                 'Erro',
@@ -71,9 +71,9 @@ export function CheckList({ navigation }) {
         }
         if (checkList.CheckListStatus == true) {
             navigation.navigate('CheckListOne');
-        }else if (checkList.CheckListItemStatus == true) {
+        } else if (checkList.CheckListItemStatus == true) {
             navigation.navigate('CheckListOne');
-        }else{
+        } else {
             setModalVisible(true);
         }
     };
@@ -93,27 +93,28 @@ export function CheckList({ navigation }) {
         <View style={{ flex: 1, backgroundColor: 'white' }}>
             <Header>
                 <ImageHeader source={startChecklist} style={StyleSheet.absoluteFill} />
-                <View style={{ width: '90%', height: '25%', alignItems: 'center', justifyContent: 'center' }}>
-                    <MaterialCommunityIcons name="hand-wave" size={24} color="#DEAC38" />
-                    <Text style={{
-                        color: 'white',
-                        fontSize: 24,
-                        fontWeight: 'bold',
-                        textAlign: 'center',
-                        textShadowColor: 'rgba(0, 0, 0, 1)', textShadowOffset: { width: 6, height: 4 }, textShadowRadius: 15
-                    }}>Olá {userInfo.name},</Text>
-                    <Text style={{
-                        color: 'white',
-                        textAlign: 'center',
-                        textShadowColor: 'rgba(0, 0, 0, 1)', textShadowOffset: { width: 8, height: 4 }, textShadowRadius: 15
-                    }}>aqui você poderá realizar um checklist do carro escolhido!</Text>
+                <View style={{ width: '100%', height: '100%', alignItems: 'center', justifyContent: 'center' }}>
+                    <View style={{ padding: 10, backgroundColor: 'rgba(0, 0, 0, 0.5)', borderRadius: 10, alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%' }}>
+                        <MaterialCommunityIcons name="hand-wave" size={24} color="#DEAC38" />
+                        <Text style={{
+                            color: 'white',
+                            fontSize: 24,
+                            fontWeight: 'bold',
+                            textAlign: 'center',
+                        }}>Olá {userInfo.name},</Text>
+                        <Text style={{
+                            color: 'white',
+                            textAlign: 'center',
+                        }}>aqui você poderá realizar um checklist do carro escolhido!</Text>
+                    </View>
                 </View>
+
             </Header>
             <Container>
                 <View style={{ width: '100%', height: '90%', marginTop: '10%', alignItems: 'center' }}>
                     <View style={{ width: '90%' }}>
                         <Text style={{ fontWeight: 'bold', fontSize: 24 }}>Dicas</Text>
-                        <Text style={{ marginTop: 5, color: 'gray' }}>Pontos importantess</Text>
+                        <Text style={{ marginTop: 5, color: 'gray' }}>Pontos importantes</Text>
                     </View>
                     <HorizontalList dicas={dicas} />
                 </View>

@@ -18,7 +18,6 @@ export const Container = styled.View`
   background-color: #fff;
 `;
 
-
 export const ImageHeader = styled.Image`
   width: 100%;
   height: 100%;

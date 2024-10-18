@@ -11,6 +11,7 @@ export const Header = styled.View`
 export const Container = styled.View`
   width: 100%;
   flex: 0.85;
+
 `;
 
 export const HeaderTitle = styled.Text`

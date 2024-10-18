@@ -59,7 +59,7 @@ export function CheckListPart({ navigation, route }) {
                 {items.foto && (
                     <Image
                         source={{ uri: items.foto }}
-                        style={{ width: 200, height: 200, alignSelf: 'center' }}
+                        style={{ width: 250, height: 200, alignSelf: 'center' }}
                     />
                 )}
             </Header>
@@ -82,7 +82,8 @@ export function CheckListPart({ navigation, route }) {
                                 </View>
                             )}
                             <TituloText>Inspeção Visual</TituloText>
-                            <SubText>Descrição: {items.descricao}</SubText>
+                            <SubText>{items.descricao}</SubText>
+                            <SubText>Ruídos anormais: Ligue o carro e ouça atentamente o som do motor. Ruídos de "batidas", estalos ou rangidos podem indicar problemas mecânicos. O motor deve funcionar de forma suave, sem barulhos fora do normal.</SubText>
                         </View>
                     </ScrollView>
                 )}
