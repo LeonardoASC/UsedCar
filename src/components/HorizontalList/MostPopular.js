@@ -26,7 +26,7 @@ const renderItem = ({ item }) => {
                 }}
             >
                 <Image style={{ width: '100%', height: '100%', resizeMode: 'cover', borderRadius: 5, backgroundColor: '#39BF61' }} source={{ uri: item.foto }} />
-                <Text style={{ color: 'black', fontSize: 24, position: 'absolute', top: 10, left: 10 }}>{item.posicao}</Text>
+                <Text style={{ color: 'gray', fontWeight : 'bold', fontSize: 24, position: 'absolute', top: 10, left: 10 }}>{item.posicao}</Text>
             </ImageBackground>
             <View style={{ paddingHorizontal: 20 }}>
                 <Text style={{ color: 'black', fontSize: 24, fontWeight: 'bold' }}>{item.marca} {item.modelo} - {item.ano}</Text>
