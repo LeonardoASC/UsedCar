@@ -55,6 +55,16 @@ export function CarList() {
             marginVertical: 5,
             borderBottomRightRadius: 30,
             borderTopRightRadius: 5,
+            // sombra
+            shadowColor: "#000",
+            shadowOffset: {
+                width: 0,
+                height: 2,
+            },
+            shadowOpacity: 0.25,
+            shadowRadius: 3.84,
+            elevation: 2,
+            
         }}>
             <View style={{ flexDirection: 'row', alignItems: 'center', width: '25%', justifyContent: 'space-between' }}>
                 <Text style={{ fontSize: 16, color: 'gray' }}>{`${item.posicao}`}</Text>

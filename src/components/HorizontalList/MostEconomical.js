@@ -23,9 +23,10 @@ const renderItem = ({ item }) => {
                     shadowOpacity: 0.25,
                     shadowRadius: 3.84,
                     elevation: 10,
+                    padding: 2,
                 }}
             >
-                <Image style={{ width: '100%', height: '100%', resizeMode: 'cover', borderRadius: 5, backgroundColor: '#39BF61' }} source={{ uri: item.foto }} />
+                <Image style={{ width: '100%', height: '100%', resizeMode: 'cover', borderRadius: 15, backgroundColor: '#39BF61' }} source={{ uri: item.foto }} />
                 <Text style={{ color: 'black', fontSize: 24, position: 'absolute', top: 10, left: 10 }}>{item.posicao}</Text>
             </ImageBackground>
             <View style={{ paddingHorizontal: 20 }}>

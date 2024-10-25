@@ -14,8 +14,8 @@ async function getToken() {
 
 // Criando a instância Axios
 const api = axios.create({
-    baseURL: 'http://192.168.56.1:8000/api/',//casa
-    // baseURL: 'http://10.66.0.16:8000/api/',//trabalho
+    // baseURL: 'http://192.168.56.1:8000/api/',//casa
+    baseURL: 'http://10.66.0.18:8000/api/',//trabalho
     // timeout: 1000,
     headers: {
         'Content-Type': 'Application/json',
