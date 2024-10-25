@@ -11,6 +11,7 @@ import HorizontalList from '../../../components/HorizontalList';
 import api from '../../../services/api.js';
 import { CheckListContext } from "../../../context/CheckListContext.js";
 import { AuthContext } from "../../../context/AuthContext.js";
+
 export function CheckList({ navigation }) {
     const { userInfo } = useContext(AuthContext);
     const { resumeCheckList } = useContext(CheckListContext);

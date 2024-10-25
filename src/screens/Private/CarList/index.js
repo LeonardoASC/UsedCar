@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { FlatList, Image, SafeAreaView, Text, TextInput, View, KeyboardAvoidingView, Platform } from "react-native";
-import { Header, Container, CenteredView, MessageText, HeaderTitle, HeaderContent } from "./styles.js";
+import { FlatList, Image, SafeAreaView, Text, TextInput, View, KeyboardAvoidingView, Platform, Modal } from "react-native";
+import { Header, Container, CenteredView, MessageText, HeaderTitle, HeaderContent, CenteredViewModal } from "./styles.js";
 import api from '../../../services/api.js';
 import MostPopular from '../../../components/HorizontalList/MostPopular.js';
 import logo from '../../../../assets/UsedCarVerde.png';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
+import { TouchableOpacity } from "react-native";
 export function CarList() {
     const [topCarros, setTopCarros] = useState([]);
     const [carros, setCarros] = useState([]);
@@ -13,6 +14,7 @@ export function CarList() {
     const [search, setSearch] = useState('');
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
+    const [modalVisible, setModalVisible] = useState(false);
 
     useEffect(() => {
         const fetchCarros = async () => {
@@ -81,6 +83,14 @@ export function CarList() {
         </View>
     );
 
+    const onPressHandler = () => {
+        setModalVisible(true);
+    }
+    const onPressEntendi = () => {
+        setModalVisible(false);
+    }
+
+
     if (loading) return <CenteredView><MessageText>Carregando...</MessageText></CenteredView>;
     if (error) return <CenteredView><MessageText>Erro: {error}</MessageText></CenteredView>;
 
@@ -90,7 +100,9 @@ export function CarList() {
                 <HeaderContent>
                     <Image source={logo} style={{ width: 50, height: 50 }} />
                     <HeaderTitle>Ranking de Carros Mais Baratos</HeaderTitle>
-                    <MaterialCommunityIcons name="comment-question" size={30} color="#39BF61" />
+                    <TouchableOpacity onPress={onPressHandler}>
+                        <MaterialCommunityIcons name="comment-question" size={30} color="#39BF61" />
+                    </TouchableOpacity>
                 </HeaderContent>
                 <View style={{
                     flexDirection: 'row',
@@ -123,6 +135,40 @@ export function CarList() {
                     contentContainerStyle={{ paddingHorizontal: 10 }}
                 />
             </Container>
+            <Modal
+                animationType="fade"
+                transparent={true}
+                visible={modalVisible}
+                onRequestClose={() => {
+                    setModalVisible(!modalVisible);
+                }}
+            >
+                <CenteredViewModal>
+                    <View style={{
+                        margin: 20,
+                        backgroundColor: "white",
+                        borderRadius: 15,
+                        padding: 35,
+                        alignItems: "center",
+                        shadowColor: "#000",
+                        shadowOffset: {
+                            width: 0,
+                            height: 2
+                        },
+                        shadowOpacity: 0.25,
+                        shadowRadius: 4,
+                        elevation: 5,
+                    }}>
+                        <Text style={{ fontSize: 22 }}>Dicas!!!</Text>
+                        <Text style={{ textAlign: 'center' }}>UsedCar exibe uma lista de veículos ordenados pelo preço, ajudando os usuários a identificar os carros com melhor preço de mercado.</Text>
+                        <View style={{ marginTop: '5%', justifyContent: 'space-evenly', alignItems: 'center', flexDirection: 'row', width: '100%' }}>
+                            <TouchableOpacity onPress={onPressEntendi}>
+                                <Text style={{ color: 'white', fontSize: 20, borderColor: 'white', borderWidth: 1, borderRadius: 5, paddingHorizontal: 15, alignSelf: 'center', backgroundColor: 'green' }}>Entendi 😁</Text>
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+                </CenteredViewModal>
+            </Modal>
         </SafeAreaView>
 
     )

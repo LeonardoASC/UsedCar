@@ -43,3 +43,10 @@ export const HeaderContent = styled.View`
   padding: 10px;
   margin-bottom: 10px;
 `;
+
+export const CenteredViewModal = styled.View`
+flex: 1;
+align-items: center;
+justify-content: center;
+background-color: 'rgba(0,0,0,0.5)';
+`;
