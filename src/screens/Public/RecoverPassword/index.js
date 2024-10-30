@@ -17,9 +17,8 @@ import { AuthContext } from '../../../context/AuthContext';
 import { Image, Text, View } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import UsedCarVerde from '../../../../assets/UsedCarVerde.png';
-import { TouchableOpacity } from 'react-native';
 
-export function Login({ navigation }) {
+export function RecoverPassword({ navigation }) {
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
   const { login } = useContext(AuthContext);
@@ -33,19 +32,7 @@ export function Login({ navigation }) {
           height: '40%',
           marginBottom: 20
         }} />
-        <Subtitle>Informe suas credenciais para continuar.</Subtitle>
-        <InputField>
-          <Ionicons name="at" size={19} color="black" />
-          <Input
-            value={email}
-            onChangeText={setEmail}
-            placeholder="Email ID"
-            placeholderTextColor="#a3a3a3"
-            color="black"
-            style={{ color: 'black' }}
-          />
-        </InputField>
-
+        <Subtitle>Insira sua nova senha e confirme para redefinir o acesso à sua conta</Subtitle>
         <InputField>
           <EvilIcons name="lock" size={26} color="black" />
           <Input
@@ -60,11 +47,27 @@ export function Login({ navigation }) {
           <MaterialCommunityIcons name="eye-outline" size={24} color="#A9A9A9" />
         </InputField>
 
+        <InputField>
+          <EvilIcons name="lock" size={26} color="black" />
+          <Input
+            value={password}
+            onChangeText={setPassword}
+            placeholder="Confirmar senha"
+            placeholderTextColor="#a3a3a3"
+            secureTextEntry={true}
+            color="white"
+            style={{ color: 'black' }}
+          />
+          <MaterialCommunityIcons name="eye-outline" size={24} color="#A9A9A9" />
+        </InputField>
+
+ 
+
         <ButtonContainer
           onPress={() => login(email, password)}
         >
           <ButtonLinear >
-            <ButtonText>Entrar</ButtonText>
+            <ButtonText>Redefinir</ButtonText>
           </ButtonLinear>
         </ButtonContainer>
 
@@ -78,14 +81,7 @@ export function Login({ navigation }) {
             width: '100%',
           }}
         >
-          <TouchableOpacity onPress={() => navigation.navigate('RecoverPassword')}>
-            <CGT style={{ textAlign: 'center' }}>Esqueceu a senha ?</CGT>
-          </TouchableOpacity>
-          {/* <CGT style={{ textAlign: 'center', marginTop: '20%', }}>Esqueceu a senha ?</CGT> */}
-          <Footer>
-            <CGT>Novo no aplicativo?</CGT>
-            <LinkText onPress={() => navigation.navigate('Register')}>Registre-se</LinkText>
-          </Footer>
+          
         </View>
       </MainContent>
     </Container>
