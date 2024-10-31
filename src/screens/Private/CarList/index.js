@@ -7,7 +7,7 @@ import logo from '../../../../assets/UsedCarVerde.png';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import { TouchableOpacity } from "react-native";
-export function CarList() {
+export function CarList({ navigation }) {
     const [topCarros, setTopCarros] = useState([]);
     const [carros, setCarros] = useState([]);
     const [filteredCarros, setFilteredCarros] = useState([]);
@@ -48,6 +48,7 @@ export function CarList() {
     }, [search, carros]);
 
     const renderItem = ({ item }) => (
+       <TouchableOpacity onPress={() => navigation.navigate('CarDetails', { item })}>
         <View style={{
             flexDirection: 'row',
             backgroundColor: 'white',
@@ -57,7 +58,6 @@ export function CarList() {
             marginVertical: 5,
             borderBottomRightRadius: 30,
             borderTopRightRadius: 5,
-            // sombra
             shadowColor: "#000",
             shadowOffset: {
                 width: 0,
@@ -81,6 +81,7 @@ export function CarList() {
                 <Text style={{ fontSize: 12 }}>{` ${item.cilindrada}`}</Text>
             </View>
         </View>
+        </TouchableOpacity>
     );
 
     const onPressHandler = () => {

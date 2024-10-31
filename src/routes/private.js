@@ -16,7 +16,7 @@ import { CheckListOne } from '../screens/Private/CheckList/CheckListOne';
 import { ChooseCheck } from '../screens/Private/CheckList/ChooseCheck';
 import { Fuel } from '../screens/Private/Fuel';
 import { Profile } from '../screens/Private/Profile';
-import { BlurView } from 'expo-blur';
+import { CarDetails } from '../screens/Private/CarList/CarDetails';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -40,11 +40,26 @@ function MyStack() {
   );
 }
 
+function MyStackCar() {
+  return (
+    <Stack.Navigator
+      initialRouteName="CarList"
+      screenOptions={{
+        headerShown: false,
+        cardStyle: { backgroundColor: '#fff' },
+      }}
+    >
+      <Stack.Screen name="CarList" component={CarList} />
+      <Stack.Screen name="CarDetails" component={CarDetails} />
+    </Stack.Navigator>
+  );
+}
+
 export function Private() {
   return (
     <View style={{ flex: 1 }}>
       <Tab.Navigator
-        initialRouteName="CheckList"
+        initialRouteName="MyStackCar"
         screenOptions={{
           tabBarActiveTintColor: '#39BF61',
           tabBarInactiveTintColor: 'white',
@@ -74,8 +89,8 @@ export function Private() {
           }}
         />
         <Tab.Screen
-          name="CarList"
-          component={CarList}
+          name="MyStackCar"
+          component={MyStackCar}
           options={{
             tabBarLabel: 'Carros',
             tabBarIcon: ({ color }) => (
