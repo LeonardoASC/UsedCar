@@ -4,15 +4,18 @@ import { LinearGradient } from 'expo-linear-gradient';
 
 export const Header = styled.View`
   width: 100%;
-  flex: 0.25;
+  flex: 0.5;
   justify-content: center;
-`;
+  padding-left: 20px;
+
+  `;
 
 export const Container = styled.View`
   width: 100%;
-  flex: 0.75;
+  flex: 0.5;
   padding-left: 20px;
   padding-right: 20px;
+
 
 `;
 
@@ -54,18 +57,17 @@ export const CenteredViewModal = styled.View`
 `;
 
 export const CarImage = styled.Image` 
-  width: '100%';
+  width: '80%';
   height: 200px;
   border-radius: 15px;
   background-color: #39BF61;  
 `;
 export const DetailsCar = styled.View` 
-
   margin-bottom: 20px; 
 `;
 
 export const DetailText = styled.Text`
-  font-size: 16px;
+  font-size: 14px;
   margin-bottom: 5px;
   color: #333;
 `;
@@ -73,9 +75,9 @@ export const DetailText = styled.Text`
 export const CommentsTitle = styled.Text` 
   font-size: 18px;
   font-weight: bold;
-  padding-right: 20px;
-  padding-left: 20px;
   margin-bottom: 10px;
+  margin-top: 20px;
+
 `;
 
 export const CommentContainer = styled.View` 

@@ -48,19 +48,24 @@ export function CarDetails({ route }) {
 
     const renderItem = ({ item }) => (
         <CommentContainer>
-            <View style={{flexDirection: 'row'}}>
-                <Image
-                    style={{ width: 50, height: 50, borderRadius: 25, backgroundColor: '#fff', marginRight: 10 }}
-                    source={{ uri: 'https://png.pngtree.com/png-vector/20220611/ourmid/pngtree-person-gray-photo-placeholder-man-silhouette-on-white-background-png-image_4826258.png' }}
+            <View style={{ flexDirection: 'row' }}>
+                <View style={{}}>
+                    <Image
+                        style={{ width: 50, height: 50, borderRadius: 25, backgroundColor: '#fff', marginRight: 10 }}
+                        source={{ uri: 'https://png.pngtree.com/png-vector/20220611/ourmid/pngtree-person-gray-photo-placeholder-man-silhouette-on-white-background-png-image_4826258.png' }}
                     />
+                    <View style={{ flexDirection: 'row', gap: 5, top: 5 }}>
+                        <MaterialIcons name="thumb-up" size={18} color="#39BF61" />
+                        <Text>220</Text>
+                    </View>
+                </View>
                 <View style={{ width: '80%' }}>
                     <CommentName>{item.user.name}</CommentName>
                     <CommentText>{item.comentario}</CommentText>
+
                 </View>
             </View>
-
             <MaterialIcons name="more-vert" size={24} color="#555" />
-
         </CommentContainer>
     );
 
@@ -71,20 +76,19 @@ export function CarDetails({ route }) {
         <SafeAreaView style={{ flex: 1 }}>
             <Header>
                 <CarImage source={{ uri: item.foto }} />
-            </Header>
-            <Container>
                 <DetailsCar>
-                    <DetailText>Marca: {item.marca}</DetailText>
-                    <DetailText>Modelo: {item.modelo}</DetailText>
+                    <DetailText style={{fontWeight: 'bold', fontSize: 20}}>{item.marca} {item.modelo}</DetailText>
                     <DetailText>Ano: {item.ano}</DetailText>
                     <DetailText>Cilindrada: {item.cilindrada}</DetailText>
                     <DetailText>Tipo Carroceria: {item.tipo_carroceria}</DetailText>
                     <DetailText>Número de Portas: {item.numero_portas}</DetailText>
                     <DetailText>Cor: {item.cor}</DetailText>
-                    <DetailText>Tabela FIPE: {item.tabela_fipe}</DetailText>
+                    <DetailText>Tabela FIPE: R$ {item.tabela_fipe}</DetailText>
                     <DetailText>KM/Litro: {item.km_litro}</DetailText>
                     <DetailText>Média Avaliação: {item.media_avaliacao}</DetailText>
                 </DetailsCar>
+            </Header>
+            <Container>
                 <CommentsTitle>Comentários</CommentsTitle>
                 <View style={{
                     marginBottom: 10,
