@@ -11,7 +11,9 @@ export const Header = styled.View`
 export const Container = styled.View`
   width: 100%;
   flex: 0.75;
-  padding: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+
 `;
 
 export const HeaderTitle = styled.Text`
@@ -80,12 +82,25 @@ export const CommentContainer = styled.View`
   background-color: #f2f2f2;  
   flex-direction: row;
   padding: 15px;
+  border-bottom-color: #ccc;
+  border-radius: 10px;
+  justify-content: space-between;
   border-bottom-width: 1px;
-  border-bottom-color: '#ccc';
+  margin-bottom: 10px;
+  
 `;
+
 
 export const CommentText = styled.Text` 
   font-size: 14px;
+  color: #555;
+  max-width: '60%';
+  margin-left: 10px;
+  flex-wrap: wrap;
+
+`;
+export const CommentName = styled.Text` 
+  font-size: 16px;
   color: #555;
   max-width: '80%';
 `;

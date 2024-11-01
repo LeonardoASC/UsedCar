@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import { FlatList, Image, SafeAreaView, Text, View, StyleSheet, TextInput } from "react-native";
-import { Header, Container, CenteredView, MessageText, CarImage, DetailsCar, DetailText, CommentsTitle, CommentContainer, CommentText } from "./styles.js";
+import { Header, Container, CenteredView, MessageText, CarImage, DetailsCar, DetailText, CommentsTitle, CommentContainer, CommentText, CommentName } from "./styles.js";
 import api from "../../../../services/api.js";
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { TouchableOpacity } from "react-native";
@@ -48,16 +48,18 @@ export function CarDetails({ route }) {
 
     const renderItem = ({ item }) => (
         <CommentContainer>
-            <Image
-                style={{ width: 50, height: 50, borderRadius: 25, backgroundColor: '#fff', marginRight: 10 }}
-                source={{ uri: 'https://png.pngtree.com/png-vector/20220611/ourmid/pngtree-person-gray-photo-placeholder-man-silhouette-on-white-background-png-image_4826258.png' }}
-            />
-            <View>
-                <CommentText>{item.user.name}</CommentText>
-                <CommentText>{item.comentario}</CommentText>
+            <View style={{flexDirection: 'row'}}>
+                <Image
+                    style={{ width: 50, height: 50, borderRadius: 25, backgroundColor: '#fff', marginRight: 10 }}
+                    source={{ uri: 'https://png.pngtree.com/png-vector/20220611/ourmid/pngtree-person-gray-photo-placeholder-man-silhouette-on-white-background-png-image_4826258.png' }}
+                    />
+                <View style={{ width: '80%' }}>
+                    <CommentName>{item.user.name}</CommentName>
+                    <CommentText>{item.comentario}</CommentText>
+                </View>
             </View>
 
-            <MaterialIcons name="more-vert" size={24} color="#ccc" />
+            <MaterialIcons name="more-vert" size={24} color="#555" />
 
         </CommentContainer>
     );
@@ -112,7 +114,6 @@ export function CarDetails({ route }) {
                         data={comentarios}
                         keyExtractor={item => item.id.toString()}
                         renderItem={renderItem}
-                        contentContainerStyle={{ padding: 10 }}
                     />
                 ) : (
                     <View>
