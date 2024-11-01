@@ -11,8 +11,7 @@ export const Header = styled.View`
 export const Container = styled.View`
   width: 100%;
   flex: 0.75;
-  align-items: 'center';
-  justify-content: 'center';
+  padding: 20px;
 `;
 
 export const HeaderTitle = styled.Text`
@@ -46,8 +45,47 @@ export const HeaderContent = styled.View`
 `;
 
 export const CenteredViewModal = styled.View`
-flex: 1;
-align-items: center;
-justify-content: center;
-background-color: 'rgba(0,0,0,0.5)';
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  /* background-color: 'rgba(0,0,0,0.5)'; */
+`;
+
+export const CarImage = styled.Image` 
+  width: '100%';
+  height: 200px;
+  border-radius: 15px;
+  background-color: #39BF61;  
+`;
+export const DetailsCar = styled.View` 
+
+  margin-bottom: 20px; 
+`;
+
+export const DetailText = styled.Text`
+  font-size: 16px;
+  margin-bottom: 5px;
+  color: #333;
+`;
+
+export const CommentsTitle = styled.Text` 
+  font-size: 18px;
+  font-weight: bold;
+  padding-right: 20px;
+  padding-left: 20px;
+  margin-bottom: 10px;
+`;
+
+export const CommentContainer = styled.View` 
+  background-color: #f2f2f2;  
+  flex-direction: row;
+  padding: 15px;
+  border-bottom-width: 1px;
+  border-bottom-color: '#ccc';
+`;
+
+export const CommentText = styled.Text` 
+  font-size: 14px;
+  color: #555;
+  max-width: '80%';
 `;

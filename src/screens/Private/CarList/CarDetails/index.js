@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { FlatList, Image, SafeAreaView, Text, View, StyleSheet, TextInput } from "react-native";
-import { Header, Container, CenteredView, MessageText, HeaderTitle } from "./styles.js";
+import { Header, Container, CenteredView, MessageText, CarImage, DetailsCar, DetailText, CommentsTitle, CommentContainer, CommentText } from "./styles.js";
 import api from "../../../../services/api.js";
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 
@@ -27,20 +27,19 @@ export function CarDetails({ route }) {
     }, []);
 
     const renderItem = ({ item }) => (
-        <View style={styles.commentContainer}>
-
+        <CommentContainer>
             <Image
                 style={{ width: 50, height: 50, borderRadius: 25, backgroundColor: '#fff', marginRight: 10 }}
                 source={{ uri: 'https://png.pngtree.com/png-vector/20220611/ourmid/pngtree-person-gray-photo-placeholder-man-silhouette-on-white-background-png-image_4826258.png' }}
             />
             <View>
-                <Text style={styles.commentText}>{item.user.name}</Text>
-                <Text style={styles.commentText}>{item.comentario}</Text>
+                <CommentText>{item.user.name}</CommentText>
+                <CommentText>{item.comentario}</CommentText>
             </View>
 
             <MaterialIcons name="more-vert" size={24} color="#ccc" />
 
-        </View>
+        </CommentContainer>
     );
 
     if (loading) return <CenteredView><MessageText>Carregando...</MessageText></CenteredView>;
@@ -49,94 +48,54 @@ export function CarDetails({ route }) {
     return (
         <SafeAreaView style={{ flex: 1 }}>
             <Header>
-                <Image
-                    style={styles.carImage}
-                    source={{ uri: item.foto }}
-                />
+                <CarImage source={{ uri: item.foto }} />
             </Header>
             <Container>
-                <View style={styles.carDetails}>
-                    <Text style={styles.detailText}>Marca: {item.marca}</Text>
-                    <Text style={styles.detailText}>Modelo: {item.modelo}</Text>
-                    <Text style={styles.detailText}>Ano: {item.ano}</Text>
-                    <Text style={styles.detailText}>Cilindrada: {item.cilindrada}</Text>
-                    <Text style={styles.detailText}>Tipo Carroceria: {item.tipo_carroceria}</Text>
-                    <Text style={styles.detailText}>Número de Portas: {item.numero_portas}</Text>
-                    <Text style={styles.detailText}>Cor: {item.cor}</Text>
-                    <Text style={styles.detailText}>Tabela FIPE: {item.tabela_fipe}</Text>
-                    <Text style={styles.detailText}>KM/Litro: {item.km_litro}</Text>
-                    <Text style={styles.detailText}>Média Avaliação: {item.media_avaliacao}</Text>
+                <DetailsCar>
+                    <DetailText>Marca: {item.marca}</DetailText>
+                    <DetailText>Modelo: {item.modelo}</DetailText>
+                    <DetailText>Ano: {item.ano}</DetailText>
+                    <DetailText>Cilindrada: {item.cilindrada}</DetailText>
+                    <DetailText>Tipo Carroceria: {item.tipo_carroceria}</DetailText>
+                    <DetailText>Número de Portas: {item.numero_portas}</DetailText>
+                    <DetailText>Cor: {item.cor}</DetailText>
+                    <DetailText>Tabela FIPE: {item.tabela_fipe}</DetailText>
+                    <DetailText>KM/Litro: {item.km_litro}</DetailText>
+                    <DetailText>Média Avaliação: {item.media_avaliacao}</DetailText>
+                </DetailsCar>
+                <CommentsTitle>Comentários</CommentsTitle>
+                <View style={{
+                    marginBottom: 10,
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    width: '100%',
+                    borderBottomWidth: 2,
+                    borderBottomColor: '#ccc',
+                    // backgroundColor: '#000',
+
+                }}>
+                    <TextInput
+                        placeholder="Adicionar comentários"
+                        value={search}
+                        onChangeText={setSearch}
+                        multiline
+                    />
+                    <MaterialIcons name="subdirectory-arrow-right" size={24} color="#ccc" />
                 </View>
-                <Text style={styles.commentsTitle}>Comentários</Text>
-
-                <FlatList
-                    data={comentarios}
-                    keyExtractor={item => item.id.toString()}
-                    renderItem={renderItem}
-                    ListHeaderComponent={
-                        <View style={{
-                            marginBottom: 10,
-                            flexDirection: 'row',
-                            alignItems: 'center',
-                            width: '100%',
-                            borderBottomWidth: 2,
-                            borderBottomColor: '#ccc',
-                            justifyContent: 'space-between'
-
-                        }}>
-                            <TextInput
-                                placeholder="Adicionar comentários"
-                                value={search}
-                                onChangeText={setSearch}
-                                multiline
-                            />
-                            <MaterialIcons name="subdirectory-arrow-right" size={24} color="#ccc" />
-                        </View>
-                    }
-                    contentContainerStyle={styles.commentsList}
-                />
+                {comentarios.length > 0 ? (
+                    <FlatList
+                        data={comentarios}
+                        keyExtractor={item => item.id.toString()}
+                        renderItem={renderItem}
+                        contentContainerStyle={{ padding: 10 }}
+                    />
+                ) : (
+                    <View>
+                        <Text style={{ textAlign: 'center', marginTop: 10 }}>Nenhum comentário encontrado</Text>
+                    </View>
+                )}
             </Container>
         </SafeAreaView>
     );
 }
-
-const styles = StyleSheet.create({
-    carImage: {
-        width: '100%',
-        height: 200,
-        resizeMode: 'cover',
-        borderRadius: 15,
-        backgroundColor: '#39BF61',
-        // marginBottom: 15,
-    },
-    carDetails: {
-        paddingHorizontal: 20,
-        marginBottom: 20,
-    },
-    detailText: {
-        fontSize: 16,
-        marginBottom: 5,
-        color: '#333',
-    },
-    commentsTitle: {
-        fontSize: 18,
-        fontWeight: 'bold',
-        paddingHorizontal: 20,
-        marginBottom: 10,
-    },
-    commentsList: {
-        paddingHorizontal: 20,
-    },
-    commentContainer: {
-        backgroundColor: '#f2f2f2',
-        padding: 15,
-        borderRadius: 10,
-        marginBottom: 10,
-        flexDirection: 'row',
-    },
-    commentText: {
-        fontSize: 14,
-        color: '#555',
-        maxWidth: '90%',
-    },
-});
