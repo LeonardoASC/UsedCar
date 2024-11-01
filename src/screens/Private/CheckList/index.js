@@ -48,7 +48,7 @@ export function CheckList({ navigation }) {
             try {
                 setLoading(true);
                 const response = await api.get('/checklist-last');
-                console.log('response.data:', response.data);
+                // console.log('response.data:', response.data);
                 setCheckList(response.data);
                 // setSelectedCar(responseCar.data);
             } catch (error) {

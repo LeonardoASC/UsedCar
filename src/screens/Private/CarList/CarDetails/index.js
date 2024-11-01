@@ -1,15 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { FlatList, Image, SafeAreaView, Text, View, StyleSheet, TextInput } from "react-native";
 import { Header, Container, CenteredView, MessageText, CarImage, DetailsCar, DetailText, CommentsTitle, CommentContainer, CommentText } from "./styles.js";
 import api from "../../../../services/api.js";
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import { TouchableOpacity } from "react-native";
+import { AuthContext } from "../../../../context/AuthContext.js";
+
 
 export function CarDetails({ route }) {
     const { item } = route.params;
     const [comentarios, setComentarios] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
-    const [search, setSearch] = useState('');
+    const [addComentario, setAddComentario] = useState('');
+    const { userInfo } = useContext(AuthContext);
 
     useEffect(() => {
         const fetchComentariosCarro = async () => {
@@ -25,6 +29,22 @@ export function CarDetails({ route }) {
         };
         fetchComentariosCarro();
     }, []);
+
+
+    const handleAddComentario = async () => {
+        try {
+            const response = await api.post(`carros/${item.id}/comentarios`, {
+                user_id: userInfo.id,
+                carro_id: item.id,
+                comentario: addComentario
+            });
+            setComentarios([...comentarios, response.data]);
+            setAddComentario('');
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
 
     const renderItem = ({ item }) => (
         <CommentContainer>
@@ -72,16 +92,20 @@ export function CarDetails({ route }) {
                     width: '100%',
                     borderBottomWidth: 2,
                     borderBottomColor: '#ccc',
-                    // backgroundColor: '#000',
-
                 }}>
                     <TextInput
                         placeholder="Adicionar comentários"
-                        value={search}
-                        onChangeText={setSearch}
+                        value={addComentario}
+                        onChangeText={setAddComentario}
                         multiline
                     />
-                    <MaterialIcons name="subdirectory-arrow-right" size={24} color="#ccc" />
+                    <TouchableOpacity onPress={handleAddComentario} disabled={!addComentario}>
+                        <MaterialIcons
+                            name="subdirectory-arrow-right"
+                            size={24}
+                            color={addComentario ? '#39BF61' : '#ccc'}
+                        />
+                    </TouchableOpacity>
                 </View>
                 {comentarios.length > 0 ? (
                     <FlatList
